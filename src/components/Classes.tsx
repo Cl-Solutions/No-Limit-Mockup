@@ -105,8 +105,8 @@ export default function Classes() {
   const filtered = active === 'Alle' ? classes : classes.filter((c) => c.category === active);
 
   return (
-    <section id="fuehrerscheine" className="py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
+    <section id="fuehrerscheine" className="py-16 md:py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}

@@ -57,7 +57,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-24 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
         <div className="max-w-4xl">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -76,7 +76,7 @@ export default function Hero() {
               initial={{ y: 120, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
+              className="text-[clamp(2rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
             >
               Dein
             </motion.h1>
@@ -86,7 +86,7 @@ export default function Hero() {
               initial={{ y: 120, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3rem,9vw,8rem)] font-black text-[#E31E2D] leading-[0.9] tracking-tighter"
+              className="text-[clamp(2rem,9vw,8rem)] font-black text-[#E31E2D] leading-[0.9] tracking-tighter"
             >
               Führerschein.
             </motion.h1>
@@ -96,7 +96,7 @@ export default function Hero() {
               initial={{ y: 120, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
+              className="text-[clamp(2rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
             >
               Deine Freiheit.
             </motion.h1>
@@ -106,7 +106,7 @@ export default function Hero() {
               initial={{ y: 120, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3rem,9vw,8rem)] font-black text-black/20 dark:text-white/30 leading-[0.9] tracking-tighter"
+              className="text-[clamp(2rem,9vw,8rem)] font-black text-black/20 dark:text-white/30 leading-[0.9] tracking-tighter"
             >
               Keine Grenzen.
             </motion.h1>
@@ -116,7 +116,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.85 }}
-            className="text-[#444444] dark:text-white/60 text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
+            className="text-[#444444] dark:text-white/60 text-base md:text-xl max-w-xl mb-8 md:mb-10 leading-relaxed"
           >
             Fahrschule NoLimit — Mühlacker &amp; Knittlingen seit 2008
           </motion.p>

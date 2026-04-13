@@ -59,10 +59,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="kontakt" className="py-32 pb-28 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
+    <section id="kontakt" className="py-16 pb-16 md:py-32 md:pb-28 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}
@@ -78,13 +78,13 @@ export default function Contact() {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <p className="text-[#444444] dark:text-gray-300 text-lg leading-relaxed mb-12">
+            <p className="text-[#444444] dark:text-gray-300 text-base md:text-lg leading-relaxed mb-8 md:mb-12">
               Fragen, Anmeldung oder einfach Infos gewünscht?
               Ruf an oder schreib uns — wir antworten schnell.
             </p>
@@ -142,7 +142,7 @@ export default function Contact() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             {submitted ? (
-              <div className="bg-[#F0F0F0] dark:bg-[#1a1a1a] border border-[#E31E2D]/30 rounded-md p-12 text-center">
+              <div className="bg-[#F0F0F0] dark:bg-[#1a1a1a] border border-[#E31E2D]/30 rounded-md p-6 md:p-12 text-center">
                 <div className="w-16 h-16 bg-[#E31E2D]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Send size={28} className="text-[#E31E2D]" />
                 </div>

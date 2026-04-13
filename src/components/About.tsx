@@ -43,14 +43,14 @@ export default function About() {
   const inView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300" ref={sectionRef}>
+    <section id="about" className="py-16 md:py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300" ref={sectionRef}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-1/2 h-px bg-gradient-to-l from-transparent via-[#E31E2D]/30 to-transparent" />
         <div className="absolute bottom-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-[#E31E2D]/30 to-transparent" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -90,17 +90,17 @@ export default function About() {
             </ul>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 gap-4">
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
-                className="bg-black/3 dark:bg-white/3 border border-black/8 dark:border-white/8 p-8 rounded-sm group hover:border-[#E31E2D]/50 hover:bg-[#E31E2D]/5 transition-all duration-500 relative overflow-hidden"
+                className="bg-black/3 dark:bg-white/3 border border-black/8 dark:border-white/8 p-4 sm:p-6 md:p-8 rounded-sm group hover:border-[#E31E2D]/50 hover:bg-[#E31E2D]/5 transition-all duration-500 relative overflow-hidden"
                 initial={{ opacity: 0, y: 40 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
               >
                 <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#E31E2D] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="text-[clamp(2.5rem,5vw,3.5rem)] font-black text-[#E31E2D] leading-none mb-2 tabular-nums">
+                <div className="text-[clamp(1.75rem,5vw,3.5rem)] font-black text-[#E31E2D] leading-none mb-2 tabular-nums">
                   <CountUp end={stat.value} suffix={stat.suffix} />
                 </div>
                 <div className="text-[#111111] dark:text-white font-bold text-base mb-1">{stat.label}</div>

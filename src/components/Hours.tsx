@@ -24,8 +24,8 @@ export default function Hours() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="oeffnungszeiten" className="py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
+    <section id="oeffnungszeiten" className="py-16 md:py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}
@@ -45,7 +45,7 @@ export default function Hours() {
           {locations.map((loc, i) => (
             <motion.div
               key={i}
-              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm p-10 relative overflow-hidden group hover:border-[#E31E2D]/50 transition-all duration-500"
+              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm p-6 md:p-10 relative overflow-hidden group hover:border-[#E31E2D]/50 transition-all duration-500"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 + i * 0.15 }}
@@ -106,7 +106,7 @@ export default function Hours() {
             href="http://fs-nolimit.de/Anmeldeformular.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-[#E31E2D] text-white px-7 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-all duration-300 rounded-sm hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] whitespace-nowrap shrink-0 active:scale-95"
+            className="flex items-center gap-3 bg-[#E31E2D] text-white px-5 sm:px-7 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-all duration-300 rounded-sm hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] sm:whitespace-nowrap shrink-0 active:scale-95 w-full sm:w-auto justify-center"
           >
             <Download size={16} />
             Anmeldeformular (PDF)

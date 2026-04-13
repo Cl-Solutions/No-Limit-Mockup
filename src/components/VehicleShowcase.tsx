@@ -204,7 +204,7 @@ export default function VehicleShowcase() {
       </AnimatePresence>
 
       <section className="py-20 bg-white dark:bg-[#0A0A0A] relative transition-colors duration-300" ref={ref}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 40 }}
@@ -251,11 +251,11 @@ export default function VehicleShowcase() {
                 aria-label={`Führerscheinklasse für ${spot.label} anzeigen`}
               >
                 <span className="absolute inset-0 rounded-full bg-[#E31E2D]/30 animate-ping" />
-                <span className="relative flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-[#E31E2D] shadow-[0_0_14px_rgba(227,30,45,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_22px_rgba(227,30,45,1)] transition-all duration-200">
-                  <span className="w-2 h-2 rounded-full bg-white" />
+                <span className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#E31E2D] shadow-[0_0_14px_rgba(227,30,45,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_22px_rgba(227,30,45,1)] transition-all duration-200">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white" />
                 </span>
 
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 whitespace-nowrap bg-white dark:bg-[#1a1a1a] text-[#111111] dark:text-white text-[10px] sm:text-xs font-bold px-2.5 py-1.5 rounded-sm border border-[#E31E2D]/30 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 translate-y-1 group-hover:translate-y-0 shadow-lg">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 whitespace-nowrap bg-white dark:bg-[#1a1a1a] text-[#111111] dark:text-white text-xs sm:text-sm font-bold px-2.5 py-1.5 rounded-sm border border-[#E31E2D]/30 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 translate-y-1 group-hover:translate-y-0 shadow-lg">
                   {spot.label}
                   <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white dark:border-t-[#1a1a1a]" />
                 </span>
@@ -264,7 +264,7 @@ export default function VehicleShowcase() {
           </motion.div>
 
           <motion.div
-            className="flex flex-wrap justify-center gap-4 mt-6"
+            className="flex flex-wrap justify-center gap-3 mt-6"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}

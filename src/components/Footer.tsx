@@ -126,8 +126,8 @@ export default function Footer() {
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
 
       <footer className="bg-[#F0F0F0] dark:bg-[#080808] border-t border-black/5 dark:border-white/5 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
             <div>
               <div className="flex flex-col items-start mb-4">
                 <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.2em]">Fahrschule</span>
@@ -156,7 +156,7 @@ export default function Footer() {
 
             <div>
               <h4 className="text-[#111111] dark:text-white font-bold text-xs uppercase tracking-[0.2em] mb-5">Kontakt</h4>
-              <div className="space-y-2 text-sm text-[#666666] dark:text-gray-400">
+              <div className="space-y-3 text-sm text-[#666666] dark:text-gray-400">
                 <p>0176 247 246 35</p>
                 <p>info@fahrschule-nolimit.de</p>
                 <p>Bahnhofstr. 71, Mühlacker</p>

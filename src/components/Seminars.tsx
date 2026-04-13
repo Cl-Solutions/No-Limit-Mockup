@@ -31,10 +31,10 @@ export default function Seminars() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="seminare" className="py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none" />
+    <section id="seminare" className="py-16 md:py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-96 md:h-96 rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}
@@ -59,7 +59,7 @@ export default function Seminars() {
             return (
               <motion.div
                 key={i}
-                className="group relative bg-white dark:bg-white/2 border border-black/8 dark:border-white/8 p-10 rounded-sm hover:border-[#E31E2D]/40 transition-all duration-500 overflow-hidden"
+                className="group relative bg-white dark:bg-white/2 border border-black/8 dark:border-white/8 p-6 md:p-10 rounded-sm hover:border-[#E31E2D]/40 transition-all duration-500 overflow-hidden"
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
