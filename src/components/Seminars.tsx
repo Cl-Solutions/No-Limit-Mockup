@@ -59,7 +59,7 @@ export default function Seminars() {
             return (
               <motion.div
                 key={i}
-                className="group relative bg-white dark:bg-white/2 border border-black/8 dark:border-white/8 p-6 md:p-10 rounded-sm hover:border-[#E31E2D]/40 transition-all duration-500 overflow-hidden"
+                className="group relative bg-white dark:bg-[#141414] border border-black/8 dark:border-white/8 p-6 md:p-10 rounded-sm hover:border-[#E31E2D]/40 transition-all duration-500 overflow-hidden"
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
