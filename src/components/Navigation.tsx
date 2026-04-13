@@ -60,7 +60,7 @@ export default function Navigation() {
           ))}
           <button
             onClick={() => handleNav('#kontakt')}
-            className="bg-[#E31E2D] text-white px-5 py-2 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-colors rounded-sm"
+            className="anmelden-btn bg-[#E31E2D] text-white px-5 py-2 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-colors"
           >
             Anmelden
           </button>
