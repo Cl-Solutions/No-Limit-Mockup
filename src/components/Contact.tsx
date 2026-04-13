@@ -19,10 +19,10 @@ interface Errors {
 }
 
 const baseInput =
-  'w-full bg-[#1a1a1a] border rounded-md text-white text-[15px] px-4 py-[14px] outline-none transition-colors duration-300 placeholder-[#666666]';
+  'w-full bg-[#F0F0F0] dark:bg-[#1a1a1a] border rounded-md text-[#111111] dark:text-white text-[15px] px-4 py-[14px] outline-none transition-colors duration-300 placeholder-[#999999] dark:placeholder-[#666666]';
 
 const inputClass = (hasError?: string) =>
-  `${baseInput} ${hasError ? 'border-[#E31E2D]' : 'border-[#444444] focus:border-[#E31E2D]'}`;
+  `${baseInput} ${hasError ? 'border-[#E31E2D]' : 'border-black/10 dark:border-[#444444] focus:border-[#E31E2D]'}`;
 
 export default function Contact() {
   const ref = useRef(null);
@@ -59,7 +59,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="kontakt" className="py-32 pb-28 bg-[#0A0A0A] relative overflow-hidden">
+    <section id="kontakt" className="py-32 pb-28 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
@@ -73,7 +73,7 @@ export default function Contact() {
             <div className="h-px w-8 bg-[#E31E2D]" />
             <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Kontakt</span>
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-tight tracking-tight">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight">
             Meld dich bei uns
           </h2>
         </motion.div>
@@ -84,7 +84,7 @@ export default function Contact() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <p className="text-gray-300 text-lg leading-relaxed mb-12">
+            <p className="text-[#444444] dark:text-gray-300 text-lg leading-relaxed mb-12">
               Fragen, Anmeldung oder einfach Infos gewünscht?
               Ruf an oder schreib uns — wir antworten schnell.
             </p>
@@ -109,13 +109,13 @@ export default function Contact() {
                       <Icon size={18} className="text-[#E31E2D]" />
                     </div>
                     <div>
-                      <div className="text-gray-400 text-xs uppercase tracking-wider mb-0.5">{item.label}</div>
+                      <div className="text-[#666666] dark:text-gray-400 text-xs uppercase tracking-wider mb-0.5">{item.label}</div>
                       {item.href ? (
-                        <a href={item.href} className="text-white font-medium hover:text-[#E31E2D] transition-colors">
+                        <a href={item.href} className="text-[#111111] dark:text-white font-medium hover:text-[#E31E2D] transition-colors">
                           {item.value}
                         </a>
                       ) : (
-                        <span className="text-white font-medium">{item.value}</span>
+                        <span className="text-[#111111] dark:text-white font-medium">{item.value}</span>
                       )}
                     </div>
                   </motion.div>
@@ -123,12 +123,12 @@ export default function Contact() {
               })}
             </div>
 
-            <div className="mt-10 pt-10 border-t border-white/5 space-y-3">
+            <div className="mt-10 pt-10 border-t border-black/5 dark:border-white/5 space-y-3">
               {[
                 'Bahnhofstr. 71, Mühlacker',
                 'Bahnhofstr. 4, Knittlingen',
               ].map((addr, i) => (
-                <div key={i} className="flex items-center gap-4 text-gray-300">
+                <div key={i} className="flex items-center gap-4 text-[#444444] dark:text-gray-300">
                   <MapPin size={16} className="text-[#E31E2D] shrink-0" />
                   <span className="text-sm">{addr}</span>
                 </div>
@@ -142,19 +142,19 @@ export default function Contact() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             {submitted ? (
-              <div className="bg-[#1a1a1a] border border-[#E31E2D]/30 rounded-md p-12 text-center">
+              <div className="bg-[#F0F0F0] dark:bg-[#1a1a1a] border border-[#E31E2D]/30 rounded-md p-12 text-center">
                 <div className="w-16 h-16 bg-[#E31E2D]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Send size={28} className="text-[#E31E2D]" />
                 </div>
-                <h3 className="text-white font-black text-2xl mb-3">Nachricht gesendet!</h3>
-                <p className="text-gray-300">
+                <h3 className="text-[#111111] dark:text-white font-black text-2xl mb-3">Nachricht gesendet!</h3>
+                <p className="text-[#444444] dark:text-gray-300">
                   Danke für deine Nachricht. Wir melden uns innerhalb weniger Stunden.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-5">
                 <div>
-                  <label className="block text-gray-300 text-[13px] mb-1.5">Name *</label>
+                  <label className="block text-[#444444] dark:text-gray-300 text-[13px] mb-1.5">Name *</label>
                   <input
                     type="text"
                     placeholder="Dein vollständiger Name"
@@ -166,7 +166,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-[13px] mb-1.5">Telefonnummer</label>
+                  <label className="block text-[#444444] dark:text-gray-300 text-[13px] mb-1.5">Telefonnummer</label>
                   <input
                     type="tel"
                     placeholder="z. B. 0176 123 456 78"
@@ -177,7 +177,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-[13px] mb-1.5">E-Mail *</label>
+                  <label className="block text-[#444444] dark:text-gray-300 text-[13px] mb-1.5">E-Mail *</label>
                   <input
                     type="email"
                     placeholder="deine@email.de"
@@ -189,20 +189,20 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-[13px] mb-1.5">Betreff</label>
+                  <label className="block text-[#444444] dark:text-gray-300 text-[13px] mb-1.5">Betreff</label>
                   <select
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
                     className={`${inputClass()} appearance-none cursor-pointer`}
                   >
                     {subjects.map((s) => (
-                      <option key={s} value={s} className="bg-[#1a1a1a]">{s}</option>
+                      <option key={s} value={s} className="bg-[#F0F0F0] dark:bg-[#1a1a1a]">{s}</option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 text-[13px] mb-1.5">Nachricht *</label>
+                  <label className="block text-[#444444] dark:text-gray-300 text-[13px] mb-1.5">Nachricht *</label>
                   <textarea
                     placeholder="Deine Nachricht an uns..."
                     value={form.message}
@@ -220,7 +220,7 @@ export default function Contact() {
                   Nachricht senden
                 </button>
 
-                <p className="text-gray-300 text-xs text-center">
+                <p className="text-[#666666] dark:text-gray-300 text-xs text-center">
                   Wir antworten innerhalb weniger Stunden.
                 </p>
               </form>

@@ -43,7 +43,7 @@ export default function About() {
   const inView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-32 bg-[#0A0A0A] relative overflow-hidden" ref={sectionRef}>
+    <section id="about" className="py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300" ref={sectionRef}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-1/2 h-px bg-gradient-to-l from-transparent via-[#E31E2D]/30 to-transparent" />
         <div className="absolute bottom-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-[#E31E2D]/30 to-transparent" />
@@ -60,17 +60,17 @@ export default function About() {
               <div className="h-px w-8 bg-[#E31E2D]" />
               <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Über uns</span>
             </div>
-            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-tight tracking-tight mb-8">
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-8">
               Erfahrung, die dich
               <span className="text-[#E31E2D]"> weiterbringt.</span>
             </h2>
-            <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              Die Fahrschule NoLimit besteht in Mühlacker seit <strong className="text-white">2008</strong> und
-              in Knittlingen seit <strong className="text-white">2011</strong>. Inhaber{' '}
-              <strong className="text-white">Etem Bardakcioglu</strong> ist seit 2005 als Fahrlehrer tätig —
+            <p className="text-[#444444] dark:text-gray-300 text-lg leading-relaxed mb-6">
+              Die Fahrschule NoLimit besteht in Mühlacker seit <strong className="text-[#111111] dark:text-white">2008</strong> und
+              in Knittlingen seit <strong className="text-[#111111] dark:text-white">2011</strong>. Inhaber{' '}
+              <strong className="text-[#111111] dark:text-white">Etem Bardakcioglu</strong> ist seit 2005 als Fahrlehrer tätig —
               mit dem Ziel, jeden Fahrschüler sicher, effizient und erfolgreich zum Führerschein zu begleiten.
             </p>
-            <p className="text-gray-300 text-base leading-relaxed mb-10 italic border-l-2 border-[#E31E2D] pl-4">
+            <p className="text-[#444444] dark:text-gray-300 text-base leading-relaxed mb-10 italic border-l-2 border-[#E31E2D] pl-4">
               "Ob talentiert oder nicht — am Ende wirst auch Du den Führerschein glücklich in den Händen halten."
             </p>
 
@@ -78,7 +78,7 @@ export default function About() {
               {highlights.map((item, i) => (
                 <motion.li
                   key={i}
-                  className="flex items-start gap-3 text-gray-300"
+                  className="flex items-start gap-3 text-[#444444] dark:text-gray-300"
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
@@ -94,7 +94,7 @@ export default function About() {
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
-                className="bg-white/3 border border-white/8 p-8 rounded-sm group hover:border-[#E31E2D]/50 hover:bg-[#E31E2D]/5 transition-all duration-500 relative overflow-hidden"
+                className="bg-black/3 dark:bg-white/3 border border-black/8 dark:border-white/8 p-8 rounded-sm group hover:border-[#E31E2D]/50 hover:bg-[#E31E2D]/5 transition-all duration-500 relative overflow-hidden"
                 initial={{ opacity: 0, y: 40 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
@@ -103,8 +103,8 @@ export default function About() {
                 <div className="text-[clamp(2.5rem,5vw,3.5rem)] font-black text-[#E31E2D] leading-none mb-2 tabular-nums">
                   <CountUp end={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-white font-bold text-base mb-1">{stat.label}</div>
-                <div className="text-gray-400 text-xs">{stat.desc}</div>
+                <div className="text-[#111111] dark:text-white font-bold text-base mb-1">{stat.label}</div>
+                <div className="text-[#666666] dark:text-gray-400 text-xs">{stat.desc}</div>
               </motion.div>
             ))}
           </div>

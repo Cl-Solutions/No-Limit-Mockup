@@ -105,7 +105,7 @@ export default function Classes() {
   const filtered = active === 'Alle' ? classes : classes.filter((c) => c.category === active);
 
   return (
-    <section id="fuehrerscheine" className="py-32 bg-[#0A0A0A] relative overflow-hidden">
+    <section id="fuehrerscheine" className="py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
@@ -119,10 +119,10 @@ export default function Classes() {
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
             <div>
-              <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-tight tracking-tight mb-3">
+              <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-3">
                 Deine Führerscheinklasse
               </h2>
-              <p className="text-gray-300 text-lg">Von Mofa bis Lkw — wir bilden alle Klassen aus.</p>
+              <p className="text-[#444444] dark:text-gray-300 text-lg">Von Mofa bis Lkw — wir bilden alle Klassen aus.</p>
             </div>
 
             <div className="flex gap-2 flex-wrap">
@@ -133,7 +133,7 @@ export default function Classes() {
                   className={`px-5 py-2 text-sm font-bold uppercase tracking-wider rounded-sm transition-all duration-300 ${
                     active === f
                       ? 'bg-[#E31E2D] text-white shadow-[0_0_20px_rgba(227,30,45,0.4)]'
-                      : 'border border-white/15 text-white/60 hover:border-white/40 hover:text-white'
+                      : 'border border-black/15 dark:border-white/15 text-[#444444] dark:text-white/60 hover:border-black/40 dark:hover:border-white/40 hover:text-[#111111] dark:hover:text-white'
                   }`}
                 >
                   {f}
@@ -153,7 +153,7 @@ export default function Classes() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4, delay: i * 0.04 }}
-                className="group bg-white/3 border border-white/8 rounded-sm p-7 hover:border-[#E31E2D]/40 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-400 cursor-pointer relative overflow-hidden flex flex-col"
+                className="group bg-black/3 dark:bg-white/3 border border-black/8 dark:border-white/8 rounded-sm p-7 hover:border-[#E31E2D]/40 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-400 cursor-pointer relative overflow-hidden flex flex-col"
               >
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-[#E31E2D] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
 
@@ -162,18 +162,18 @@ export default function Classes() {
                     <div className="text-[clamp(2rem,4vw,3rem)] font-black text-[#E31E2D] leading-none tracking-tighter">
                       {cls.name}
                     </div>
-                    <div className="text-gray-300 text-sm font-medium mt-1">{cls.title}</div>
+                    <div className="text-[#444444] dark:text-gray-300 text-sm font-medium mt-1">{cls.title}</div>
                   </div>
                   <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm shrink-0 ${
                     cls.badge === 'NEU'
                       ? 'bg-[#E31E2D] text-white'
-                      : 'border border-white/15 text-gray-300'
+                      : 'border border-black/15 dark:border-white/15 text-[#444444] dark:text-gray-300'
                   }`}>
                     {cls.badge}
                   </span>
                 </div>
 
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 flex-1">{cls.desc}</p>
+                <p className="text-[#444444] dark:text-gray-300 text-sm leading-relaxed mb-6 flex-1">{cls.desc}</p>
 
                 <div className="flex items-center gap-2 text-[#E31E2D] text-xs font-bold uppercase tracking-wider mt-auto">
                   <span>Mehr erfahren</span>

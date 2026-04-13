@@ -7,7 +7,7 @@ export default function Team() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="team" className="py-32 bg-[#0A0A0A] relative overflow-hidden">
+    <section id="team" className="py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-[#E31E2D]/5 pointer-events-none" />
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-[#E31E2D]/5 pointer-events-none" />
 
@@ -23,7 +23,7 @@ export default function Team() {
             <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Team</span>
             <div className="h-px w-8 bg-[#E31E2D]" />
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-tight tracking-tight">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight">
             Dein Fahrlehrer
           </h2>
         </motion.div>
@@ -34,9 +34,9 @@ export default function Team() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="bg-white/2 border border-white/8 rounded-sm overflow-hidden">
+          <div className="bg-black/2 dark:bg-white/2 border border-black/8 dark:border-white/8 rounded-sm overflow-hidden">
             <div className="grid lg:grid-cols-2">
-              <div className="relative bg-gradient-to-br from-[#1a1a1a] to-[#0D0D0D] flex items-center justify-center p-16 min-h-[360px]">
+              <div className="relative bg-gradient-to-br from-[#F0F0F0] to-[#E8E8E8] dark:from-[#1a1a1a] dark:to-[#0D0D0D] flex items-center justify-center p-16 min-h-[360px]">
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-8 right-8 w-24 h-24 rounded-full border-2 border-[#E31E2D]" />
                   <div className="absolute bottom-8 left-8 w-16 h-16 rounded-full border border-[#E31E2D]" />
@@ -58,26 +58,26 @@ export default function Team() {
                   <Award size={16} className="text-[#E31E2D]" />
                   <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Inhaber</span>
                 </div>
-                <h3 className="text-white font-black text-3xl tracking-tight mb-1">Etem</h3>
-                <h3 className="text-white font-black text-3xl tracking-tight mb-2">Bardakcioglu</h3>
-                <p className="text-white/40 text-sm font-medium uppercase tracking-wider mb-6">
+                <h3 className="text-[#111111] dark:text-white font-black text-3xl tracking-tight mb-1">Etem</h3>
+                <h3 className="text-[#111111] dark:text-white font-black text-3xl tracking-tight mb-2">Bardakcioglu</h3>
+                <p className="text-[#666666] dark:text-white/40 text-sm font-medium uppercase tracking-wider mb-6">
                   Inhaber &amp; Fahrschullehrer
                 </p>
 
                 <blockquote className="border-l-2 border-[#E31E2D] pl-5 mb-8">
-                  <p className="text-white/70 text-base leading-relaxed italic">
+                  <p className="text-[#444444] dark:text-white/70 text-base leading-relaxed italic">
                     "Ich freue mich, dich sicher, spaßig und mit Erfolg zum Führerschein zu begleiten."
                   </p>
                 </blockquote>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/3 rounded-sm p-4">
+                  <div className="bg-black/3 dark:bg-white/3 rounded-sm p-4">
                     <div className="text-[#E31E2D] font-black text-2xl">2005</div>
-                    <div className="text-white/40 text-xs mt-1">Als Fahrlehrer tätig</div>
+                    <div className="text-[#666666] dark:text-white/40 text-xs mt-1">Als Fahrlehrer tätig</div>
                   </div>
-                  <div className="bg-white/3 rounded-sm p-4">
+                  <div className="bg-black/3 dark:bg-white/3 rounded-sm p-4">
                     <div className="text-[#E31E2D] font-black text-2xl">2008</div>
-                    <div className="text-white/40 text-xs mt-1">Fahrschule gegründet</div>
+                    <div className="text-[#666666] dark:text-white/40 text-xs mt-1">Fahrschule gegründet</div>
                   </div>
                 </div>
               </div>

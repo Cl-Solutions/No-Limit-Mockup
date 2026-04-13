@@ -19,9 +19,9 @@ export default function Process() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-32 bg-[#0D0D0D] relative overflow-hidden">
+    <section className="py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
@@ -36,10 +36,10 @@ export default function Process() {
             <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Ausbildungsablauf</span>
             <div className="h-px w-8 bg-[#E31E2D]" />
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-tight tracking-tight">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight">
             Was dich erwartet
           </h2>
-          <p className="text-white/50 mt-4 max-w-xl mx-auto">
+          <p className="text-[#444444] dark:text-white/50 mt-4 max-w-xl mx-auto">
             Von der Anmeldung bis zur bestandenen Prüfung — ein klarer Weg zum Ziel.
           </p>
         </motion.div>
@@ -59,18 +59,18 @@ export default function Process() {
                   transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="relative mb-5">
-                    <div className="w-16 h-16 lg:w-14 lg:h-14 rounded-full bg-[#111] border-2 border-white/10 flex items-center justify-center group-hover:border-[#E31E2D] group-hover:bg-[#E31E2D]/10 transition-all duration-400 relative z-10">
-                      <Icon size={20} className="text-white/50 group-hover:text-[#E31E2D] transition-colors duration-300" />
+                    <div className="w-16 h-16 lg:w-14 lg:h-14 rounded-full bg-white dark:bg-[#111] border-2 border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-[#E31E2D] group-hover:bg-[#E31E2D]/10 transition-all duration-400 relative z-10">
+                      <Icon size={20} className="text-black/30 dark:text-white/50 group-hover:text-[#E31E2D] transition-colors duration-300" />
                     </div>
                     <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[#E31E2D] flex items-center justify-center z-20">
                       <span className="text-white text-[9px] font-black">{step.num}</span>
                     </div>
                   </div>
 
-                  <h3 className="text-white font-bold text-xs lg:text-[11px] uppercase tracking-wider mb-2 px-1">
+                  <h3 className="text-[#111111] dark:text-white font-bold text-xs lg:text-[11px] uppercase tracking-wider mb-2 px-1">
                     {step.title}
                   </h3>
-                  <p className="text-white/35 text-[11px] lg:text-[10px] leading-relaxed px-1 hidden md:block">
+                  <p className="text-[#666666] dark:text-white/35 text-[11px] lg:text-[10px] leading-relaxed px-1 hidden md:block">
                     {step.desc}
                   </p>
                 </motion.div>

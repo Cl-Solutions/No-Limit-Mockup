@@ -24,7 +24,7 @@ export default function Hours() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="oeffnungszeiten" className="py-32 bg-[#0D0D0D] relative overflow-hidden">
+    <section id="oeffnungszeiten" className="py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
@@ -36,7 +36,7 @@ export default function Hours() {
             <div className="h-px w-8 bg-[#E31E2D]" />
             <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Öffnungszeiten</span>
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-tight tracking-tight">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight">
             Wann Du uns findest
           </h2>
         </motion.div>
@@ -45,7 +45,7 @@ export default function Hours() {
           {locations.map((loc, i) => (
             <motion.div
               key={i}
-              className="bg-[#111] border border-[#E31E2D]/20 rounded-sm p-10 relative overflow-hidden group hover:border-[#E31E2D]/50 transition-all duration-500"
+              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm p-10 relative overflow-hidden group hover:border-[#E31E2D]/50 transition-all duration-500"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 + i * 0.15 }}
@@ -60,12 +60,12 @@ export default function Hours() {
                     <MapPin size={18} className="text-[#E31E2D]" />
                   </div>
                   <div>
-                    <h3 className="text-white font-black text-2xl tracking-tight">{loc.city}</h3>
-                    <p className="text-gray-400 text-sm mt-0.5">{loc.address}</p>
+                    <h3 className="text-[#111111] dark:text-white font-black text-2xl tracking-tight">{loc.city}</h3>
+                    <p className="text-[#666666] dark:text-gray-400 text-sm mt-0.5">{loc.address}</p>
                   </div>
                 </div>
 
-                <div className="space-y-4 border-t border-white/5 pt-7">
+                <div className="space-y-4 border-t border-black/5 dark:border-white/5 pt-7">
                   <div className="flex items-start gap-4">
                     <div className="flex gap-2 flex-wrap flex-1">
                       {loc.days.map((day) => (
@@ -77,12 +77,12 @@ export default function Hours() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Clock size={16} className="text-white/30 shrink-0" />
-                    <span className="text-white font-bold text-lg">{loc.hours}</span>
+                    <Clock size={16} className="text-black/20 dark:text-white/30 shrink-0" />
+                    <span className="text-[#111111] dark:text-white font-bold text-lg">{loc.hours}</span>
                   </div>
 
-                  <div className="bg-white/3 rounded-sm px-4 py-3">
-                    <p className="text-gray-300 text-sm">{loc.registration}</p>
+                  <div className="bg-black/3 dark:bg-white/3 rounded-sm px-4 py-3">
+                    <p className="text-[#444444] dark:text-gray-300 text-sm">{loc.registration}</p>
                   </div>
                 </div>
               </div>
@@ -97,8 +97,8 @@ export default function Hours() {
           transition={{ duration: 0.7, delay: 0.4 }}
         >
           <div>
-            <h3 className="text-white font-bold text-xl mb-2">Vorab anmelden?</h3>
-            <p className="text-gray-300 text-sm max-w-lg">
+            <h3 className="text-[#111111] dark:text-white font-bold text-xl mb-2">Vorab anmelden?</h3>
+            <p className="text-[#444444] dark:text-gray-300 text-sm max-w-lg">
               Füll das Anmeldeformular aus und bring es direkt mit in die Fahrschule.
             </p>
           </div>

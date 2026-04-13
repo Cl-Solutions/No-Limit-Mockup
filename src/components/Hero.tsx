@@ -8,7 +8,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A0A0A]">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-[#0A0A0A] transition-colors duration-300">
       <div className="absolute inset-0 overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full opacity-10"
@@ -76,7 +76,7 @@ export default function Hero() {
               initial={{ y: 120, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3rem,9vw,8rem)] font-black text-white leading-[0.9] tracking-tighter"
+              className="text-[clamp(3rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
             >
               Dein
             </motion.h1>
@@ -96,7 +96,7 @@ export default function Hero() {
               initial={{ y: 120, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3rem,9vw,8rem)] font-black text-white leading-[0.9] tracking-tighter"
+              className="text-[clamp(3rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
             >
               Deine Freiheit.
             </motion.h1>
@@ -106,7 +106,7 @@ export default function Hero() {
               initial={{ y: 120, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3rem,9vw,8rem)] font-black text-white/30 leading-[0.9] tracking-tighter"
+              className="text-[clamp(3rem,9vw,8rem)] font-black text-black/20 dark:text-white/30 leading-[0.9] tracking-tighter"
             >
               Keine Grenzen.
             </motion.h1>
@@ -116,7 +116,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.85 }}
-            className="text-white/60 text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
+            className="text-[#444444] dark:text-white/60 text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
           >
             Fahrschule NoLimit — Mühlacker &amp; Knittlingen seit 2008
           </motion.p>
@@ -135,7 +135,7 @@ export default function Hero() {
             </button>
             <button
               onClick={() => handleScroll('#fuehrerscheine')}
-              className="border-2 border-white/30 text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:border-white hover:bg-white/5 transition-all duration-300 active:scale-95 rounded-sm"
+              className="border-2 border-black/20 dark:border-white/30 text-[#111111] dark:text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 active:scale-95 rounded-sm"
             >
               Führerscheine entdecken
             </button>
@@ -145,7 +145,7 @@ export default function Hero() {
 
       <motion.button
         onClick={() => handleScroll('#about')}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors flex flex-col items-center gap-2 group"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-black/40 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors flex flex-col items-center gap-2 group"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}

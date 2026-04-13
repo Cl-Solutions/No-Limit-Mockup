@@ -31,7 +31,7 @@ export default function Seminars() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="seminare" className="py-32 bg-[#0D0D0D] relative overflow-hidden">
+    <section id="seminare" className="py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8" ref={ref}>
@@ -45,10 +45,10 @@ export default function Seminars() {
             <div className="h-px w-8 bg-[#E31E2D]" />
             <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Seminare</span>
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-tight tracking-tight mb-3">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-3">
             Mehr als nur der Führerschein
           </h2>
-          <p className="text-gray-300 text-lg max-w-xl">
+          <p className="text-[#444444] dark:text-gray-300 text-lg max-w-xl">
             Professionelle Weiterbildungen und Pflichtmaßnahmen aus einer Hand.
           </p>
         </motion.div>
@@ -59,7 +59,7 @@ export default function Seminars() {
             return (
               <motion.div
                 key={i}
-                className="group relative bg-white/2 border border-white/8 p-10 rounded-sm hover:border-[#E31E2D]/40 transition-all duration-500 overflow-hidden"
+                className="group relative bg-white dark:bg-white/2 border border-black/8 dark:border-white/8 p-10 rounded-sm hover:border-[#E31E2D]/40 transition-all duration-500 overflow-hidden"
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
@@ -75,19 +75,19 @@ export default function Seminars() {
                     {s.tag}
                   </span>
 
-                  <h3 className="text-white font-black text-xl leading-tight tracking-tight mb-3">
+                  <h3 className="text-[#111111] dark:text-white font-black text-xl leading-tight tracking-tight mb-3">
                     {s.title}
                   </h3>
 
-                  <div className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-5">
+                  <div className="text-[#666666] dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-5">
                     {s.duration}
                   </div>
 
-                  <p className="text-gray-300 text-sm leading-relaxed">
+                  <p className="text-[#444444] dark:text-gray-300 text-sm leading-relaxed">
                     {s.desc}
                   </p>
 
-                  <div className="mt-8 pt-6 border-t border-white/5">
+                  <div className="mt-8 pt-6 border-t border-black/5 dark:border-white/5">
                     <button
                       onClick={() => {
                         const el = document.querySelector('#kontakt');

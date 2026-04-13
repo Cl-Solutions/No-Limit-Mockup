@@ -122,7 +122,7 @@ function Modal({ spot, onClose }: { spot: HotspotInfo; onClose: () => void }) {
       <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
 
       <motion.div
-        className="relative z-10 w-full max-w-lg bg-[#1a1a1a] rounded-sm overflow-hidden shadow-2xl"
+        className="relative z-10 w-full max-w-lg bg-white dark:bg-[#1a1a1a] rounded-sm overflow-hidden shadow-2xl"
         initial={{ opacity: 0, scale: 0.92, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.92, y: 20 }}
@@ -141,14 +141,14 @@ function Modal({ spot, onClose }: { spot: HotspotInfo; onClose: () => void }) {
                     {spot.badge}
                   </span>
                 )}
-                <h3 className="text-white font-black text-xl leading-tight tracking-tight">
+                <h3 className="text-[#111111] dark:text-white font-black text-xl leading-tight tracking-tight">
                   {spot.title}
                 </h3>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 rounded-sm transition-colors shrink-0 ml-4 mt-0.5"
+              className="w-8 h-8 flex items-center justify-center text-black/30 dark:text-white/40 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-sm transition-colors shrink-0 ml-4 mt-0.5"
             >
               <X size={18} />
             </button>
@@ -162,7 +162,7 @@ function Modal({ spot, onClose }: { spot: HotspotInfo; onClose: () => void }) {
                 </h4>
                 <ul className="space-y-2">
                   {cls.items.map((item, j) => (
-                    <li key={j} className="flex items-start gap-2.5 text-white/70 text-sm leading-relaxed">
+                    <li key={j} className="flex items-start gap-2.5 text-[#444444] dark:text-white/70 text-sm leading-relaxed">
                       <ChevronRight size={14} className="text-[#E31E2D] mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>
@@ -172,7 +172,7 @@ function Modal({ spot, onClose }: { spot: HotspotInfo; onClose: () => void }) {
             ))}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/8">
+          <div className="mt-8 pt-6 border-t border-black/8 dark:border-white/8">
             <button
               onClick={() => {
                 onClose();
@@ -203,7 +203,7 @@ export default function VehicleShowcase() {
         {active && <Modal spot={active} onClose={() => setActive(null)} />}
       </AnimatePresence>
 
-      <section className="py-20 bg-[#0A0A0A] relative" ref={ref}>
+      <section className="py-20 bg-white dark:bg-[#0A0A0A] relative transition-colors duration-300" ref={ref}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
@@ -216,16 +216,16 @@ export default function VehicleShowcase() {
               <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Interaktiv</span>
               <div className="h-px w-8 bg-[#E31E2D]" />
             </div>
-            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-black text-white leading-tight tracking-tight mb-3">
+            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-3">
               Klick auf dein Fahrzeug
             </h2>
-            <p className="text-gray-300 text-base max-w-md mx-auto">
+            <p className="text-[#444444] dark:text-gray-300 text-base max-w-md mx-auto">
               Tippe auf ein Fahrzeug und entdecke die passenden Führerscheinklassen.
             </p>
           </motion.div>
 
           <motion.div
-            className="relative rounded-sm overflow-hidden border border-white/8"
+            className="relative rounded-sm overflow-hidden border border-black/8 dark:border-white/8"
             initial={{ opacity: 0, y: 50 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
@@ -255,9 +255,9 @@ export default function VehicleShowcase() {
                   <span className="w-2 h-2 rounded-full bg-white" />
                 </span>
 
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 whitespace-nowrap bg-[#1a1a1a] text-white text-[10px] sm:text-xs font-bold px-2.5 py-1.5 rounded-sm border border-[#E31E2D]/30 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 translate-y-1 group-hover:translate-y-0 shadow-lg">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 whitespace-nowrap bg-white dark:bg-[#1a1a1a] text-[#111111] dark:text-white text-[10px] sm:text-xs font-bold px-2.5 py-1.5 rounded-sm border border-[#E31E2D]/30 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 translate-y-1 group-hover:translate-y-0 shadow-lg">
                   {spot.label}
-                  <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#1a1a1a]" />
+                  <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white dark:border-t-[#1a1a1a]" />
                 </span>
               </button>
             ))}
@@ -273,7 +273,7 @@ export default function VehicleShowcase() {
               <button
                 key={spot.id}
                 onClick={() => setActive(spot)}
-                className="flex items-center gap-2.5 bg-transparent border border-[#E31E2D] hover:bg-[#E31E2D] text-white px-6 py-3 rounded-sm transition-all duration-300 text-sm font-semibold group"
+                className="flex items-center gap-2.5 bg-transparent border border-[#E31E2D] hover:bg-[#E31E2D] text-[#111111] dark:text-white hover:text-white px-6 py-3 rounded-sm transition-all duration-300 text-sm font-semibold group"
               >
                 <span className="text-base">{spot.icon}</span>
                 <span>{spot.label}</span>
