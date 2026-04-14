@@ -97,6 +97,98 @@ const classes = [
 
 const filters: Category[] = ['Alle', 'Zweirad', 'Auto', 'Lkw'];
 
+interface GlowCardProps {
+  cls: typeof classes[0];
+  index: number;
+}
+
+function GlowCard({ cls, index }: GlowCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.92 }}
+      transition={{ duration: 0.4, delay: index * 0.04 }}
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative rounded-sm overflow-hidden cursor-pointer flex flex-col"
+      style={{
+        background: 'transparent',
+      }}
+    >
+      {/* Outer glow border layer */}
+      <div
+        className="absolute inset-0 rounded-sm transition-opacity duration-500 pointer-events-none"
+        style={{
+          opacity: hovered ? 1 : 0,
+          background: `radial-gradient(350px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.5), transparent 60%)`,
+        }}
+      />
+
+      {/* Card body */}
+      <div className="relative m-[1px] rounded-sm bg-[#f5f5f5] dark:bg-[#0e0e0e] flex flex-col flex-1 p-7 overflow-hidden">
+
+        {/* Inner spotlight */}
+        <div
+          className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+          style={{
+            opacity: hovered ? 1 : 0,
+            background: `radial-gradient(400px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.08), transparent 55%)`,
+          }}
+        />
+
+        {/* Top edge glow line */}
+        <div
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-500"
+          style={{
+            opacity: hovered ? 1 : 0,
+            background: `radial-gradient(200px circle at ${mouse.x}px 0px, rgba(227,30,45,0.8), transparent 70%)`,
+          }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col flex-1">
+          <div className="flex items-start justify-between mb-5">
+            <div>
+              <div className="text-[clamp(2rem,4vw,3rem)] font-black text-[#E31E2D] leading-none tracking-tighter">
+                {cls.name}
+              </div>
+              <div className="text-[#444444] dark:text-gray-300 text-sm font-medium mt-1">{cls.title}</div>
+            </div>
+            <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm shrink-0 ${
+              cls.badge === 'NEU'
+                ? 'bg-[#E31E2D] text-white'
+                : 'border border-black/15 dark:border-white/15 text-[#444444] dark:text-gray-300'
+            }`}>
+              {cls.badge}
+            </span>
+          </div>
+
+          <p className="text-[#444444] dark:text-gray-300 text-sm leading-relaxed mb-6 flex-1">{cls.desc}</p>
+
+          <div className="flex items-center gap-2 text-[#E31E2D] text-xs font-bold uppercase tracking-wider mt-auto">
+            <span>Mehr erfahren</span>
+            <ArrowRight size={14} className={`transition-transform duration-300 ${hovered ? 'translate-x-1' : ''}`} />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Classes() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
@@ -146,40 +238,7 @@ export default function Classes() {
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           <AnimatePresence mode="popLayout">
             {filtered.map((cls, i) => (
-              <motion.div
-                key={cls.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4, delay: i * 0.04 }}
-                className="group bg-black/3 dark:bg-white/3 border border-black/8 dark:border-white/8 rounded-sm p-7 hover:border-[#E31E2D]/40 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-400 cursor-pointer relative overflow-hidden flex flex-col"
-              >
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-[#E31E2D] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
-
-                <div className="flex items-start justify-between mb-5">
-                  <div>
-                    <div className="text-[clamp(2rem,4vw,3rem)] font-black text-[#E31E2D] leading-none tracking-tighter">
-                      {cls.name}
-                    </div>
-                    <div className="text-[#444444] dark:text-gray-300 text-sm font-medium mt-1">{cls.title}</div>
-                  </div>
-                  <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm shrink-0 ${
-                    cls.badge === 'NEU'
-                      ? 'bg-[#E31E2D] text-white'
-                      : 'border border-black/15 dark:border-white/15 text-[#444444] dark:text-gray-300'
-                  }`}>
-                    {cls.badge}
-                  </span>
-                </div>
-
-                <p className="text-[#444444] dark:text-gray-300 text-sm leading-relaxed mb-6 flex-1">{cls.desc}</p>
-
-                <div className="flex items-center gap-2 text-[#E31E2D] text-xs font-bold uppercase tracking-wider mt-auto">
-                  <span>Mehr erfahren</span>
-                  <ArrowRight size={14} />
-                </div>
-              </motion.div>
+              <GlowCard key={cls.id} cls={cls} index={i} />
             ))}
           </AnimatePresence>
         </motion.div>
