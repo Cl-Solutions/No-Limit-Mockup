@@ -1,6 +1,36 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
+interface WordRevealProps {
+  text: string;
+  className?: string;
+  baseDelay?: number;
+  stagger?: number;
+}
+
+function WordReveal({ text, className = '', baseDelay = 0, stagger = 0.12 }: WordRevealProps) {
+  const words = text.split(' ');
+  return (
+    <span className={`inline-flex flex-wrap gap-x-[0.25em] ${className}`}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, filter: 'blur(12px)', y: 20 }}
+          animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+          transition={{
+            duration: 0.7,
+            delay: baseDelay + i * stagger,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="inline-block"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
 export default function Hero() {
   const handleScroll = (href: string) => {
     const el = document.querySelector(href);
@@ -62,7 +92,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             className="flex items-center gap-3 mb-8"
           >
             <div className="h-px w-12 bg-[#E31E2D]" />
@@ -71,60 +101,50 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <div className="overflow-hidden mb-2">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
-            >
-              Dein
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden mb-2">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2rem,9vw,8rem)] font-black text-[#E31E2D] leading-[0.9] tracking-tighter"
-            >
-              Führerschein.
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden mb-2">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2rem,9vw,8rem)] font-black text-[#111111] dark:text-white leading-[0.9] tracking-tighter"
-            >
-              Deine Freiheit.
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden mb-10">
-            <motion.h1
-              initial={{ y: 120, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2rem,9vw,8rem)] font-black text-black/20 dark:text-white/30 leading-[0.9] tracking-tighter"
-            >
-              Keine Grenzen.
-            </motion.h1>
-          </div>
+          <h1 className="text-[clamp(2rem,9vw,8rem)] font-black leading-[0.95] tracking-tighter mb-10">
+            <div className="mb-1">
+              <WordReveal
+                text="Dein"
+                className="text-[#111111] dark:text-white"
+                baseDelay={0.25}
+              />
+            </div>
+            <div className="mb-1">
+              <WordReveal
+                text="Führerschein."
+                className="text-[#E31E2D]"
+                baseDelay={0.4}
+              />
+            </div>
+            <div className="mb-1">
+              <WordReveal
+                text="Deine Freiheit."
+                className="text-[#111111] dark:text-white"
+                baseDelay={0.55}
+              />
+            </div>
+            <div>
+              <WordReveal
+                text="Keine Grenzen."
+                className="text-black/20 dark:text-white/30"
+                baseDelay={0.75}
+              />
+            </div>
+          </h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.85 }}
+            transition={{ duration: 0.7, delay: 1.05 }}
             className="text-[#444444] dark:text-white/60 text-base md:text-xl max-w-xl mb-8 md:mb-10 leading-relaxed"
           >
             Fahrschule NoLimit — Mühlacker &amp; Knittlingen seit 2008
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.0 }}
+            transition={{ duration: 0.7, delay: 1.2 }}
             className="flex flex-col sm:flex-row gap-4"
           >
             <button
@@ -148,7 +168,7 @@ export default function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-black/40 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors flex flex-col items-center gap-2 group"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 1.6 }}
       >
         <span className="text-xs uppercase tracking-[0.2em] font-medium">Scroll</span>
         <motion.div
