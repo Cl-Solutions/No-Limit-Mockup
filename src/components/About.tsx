@@ -38,6 +38,76 @@ const highlights = [
   'Alle Führerscheinklassen unter einem Dach',
 ];
 
+interface StatCardProps {
+  stat: typeof stats[0];
+  animDelay: number;
+  inView: boolean;
+}
+
+function StatCard({ stat, animDelay, inView }: StatCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: animDelay }}
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative rounded-sm overflow-hidden cursor-default"
+    >
+      {/* Outer glow border */}
+      <div
+        className="absolute inset-0 rounded-sm pointer-events-none transition-opacity duration-500"
+        style={{
+          opacity: hovered ? 1 : 0,
+          background: `radial-gradient(300px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.5), transparent 60%)`,
+        }}
+      />
+
+      {/* Card body */}
+      <div className="relative m-[1px] rounded-sm bg-[#f5f5f5] dark:bg-[#0e0e0e] p-4 sm:p-6 md:p-8 overflow-hidden">
+
+        {/* Inner spotlight */}
+        <div
+          className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+          style={{
+            opacity: hovered ? 1 : 0,
+            background: `radial-gradient(250px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.08), transparent 60%)`,
+          }}
+        />
+
+        {/* Top edge glow */}
+        <div
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-500"
+          style={{
+            opacity: hovered ? 1 : 0,
+            background: `radial-gradient(150px circle at ${mouse.x}px 0px, rgba(227,30,45,0.9), transparent 70%)`,
+          }}
+        />
+
+        <div className="relative z-10">
+          <div className="text-[clamp(1.75rem,5vw,3.5rem)] font-black text-[#E31E2D] leading-none mb-2 tabular-nums">
+            <CountUp end={stat.value} suffix={stat.suffix} />
+          </div>
+          <div className="text-[#111111] dark:text-white font-bold text-base mb-1">{stat.label}</div>
+          <div className="text-[#666666] dark:text-gray-400 text-xs">{stat.desc}</div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function About() {
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, margin: '-100px' });
@@ -92,20 +162,7 @@ export default function About() {
 
           <div className="grid grid-cols-2 gap-4">
             {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                className="bg-black/3 dark:bg-white/3 border border-black/8 dark:border-white/8 p-4 sm:p-6 md:p-8 rounded-sm group hover:border-[#E31E2D]/50 hover:bg-[#E31E2D]/5 transition-all duration-500 relative overflow-hidden"
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              >
-                <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#E31E2D] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="text-[clamp(1.75rem,5vw,3.5rem)] font-black text-[#E31E2D] leading-none mb-2 tabular-nums">
-                  <CountUp end={stat.value} suffix={stat.suffix} />
-                </div>
-                <div className="text-[#111111] dark:text-white font-bold text-base mb-1">{stat.label}</div>
-                <div className="text-[#666666] dark:text-gray-400 text-xs">{stat.desc}</div>
-              </motion.div>
+              <StatCard key={i} stat={stat} animDelay={0.2 + i * 0.1} inView={inView} />
             ))}
           </div>
         </div>
