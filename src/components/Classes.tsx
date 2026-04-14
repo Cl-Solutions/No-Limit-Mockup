@@ -95,7 +95,7 @@ const classes = [
   },
 ];
 
-const filters: Category[] = ['Alle', 'Zweirad', 'Auto', 'Lkw'];
+const filters: Category[] = ['Zweirad', 'Auto', 'Lkw'];
 
 interface GlowCardProps {
   cls: typeof classes[0];
@@ -192,9 +192,9 @@ function GlowCard({ cls, index }: GlowCardProps) {
 export default function Classes() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-  const [active, setActive] = useState<Category>('Alle');
+  const [active, setActive] = useState<Category>('Zweirad');
 
-  const filtered = active === 'Alle' ? classes : classes.filter((c) => c.category === active);
+  const filtered = classes.filter((c) => c.category === active);
 
   return (
     <section id="fuehrerscheine" className="py-16 md:py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
