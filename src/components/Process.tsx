@@ -67,10 +67,10 @@ export default function Process() {
                     </div>
                   </div>
 
-                  <h3 className="text-[#111111] dark:text-white font-bold text-xs lg:text-[11px] uppercase tracking-wider mb-2 px-1">
+                  <h3 className="text-[#111111] dark:text-white font-bold text-xs lg:text-[10px] uppercase tracking-wide lg:tracking-normal mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-[#666666] dark:text-white/35 text-[11px] lg:text-[10px] leading-relaxed px-1 hidden md:block">
+                  <p className="text-[#666666] dark:text-white/35 text-[11px] lg:text-[9px] leading-relaxed hidden md:block">
                     {step.desc}
                   </p>
                 </motion.div>
