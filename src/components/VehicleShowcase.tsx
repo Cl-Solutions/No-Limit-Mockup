@@ -181,7 +181,7 @@ function Modal({ spot, onClose }: { spot: HotspotInfo; onClose: () => void }) {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }, 250);
               }}
-              className="w-full bg-[#E31E2D] text-white py-3.5 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-all duration-300 rounded-sm hover:shadow-[0_0_25px_rgba(227,30,45,0.4)] active:scale-[0.99]"
+              className="w-full bg-[#E31E2D] text-white py-3.5 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_25px_rgba(227,30,45,0.4)] active:scale-[0.97]"
             >
               Jetzt anmelden
             </button>
@@ -251,11 +251,11 @@ export default function VehicleShowcase() {
                 aria-label={`Führerscheinklasse für ${spot.label} anzeigen`}
               >
                 <span className="absolute inset-0 rounded-full bg-[#E31E2D]/30 animate-ping" />
-                <span className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#E31E2D] shadow-[0_0_14px_rgba(227,30,45,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_22px_rgba(227,30,45,1)] transition-all duration-200">
+                <span className="hotspot-inner relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#E31E2D] shadow-[0_0_14px_rgba(227,30,45,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_22px_rgba(227,30,45,1)] transition-[transform,box-shadow] duration-150 ease-out">
                   <span className="w-2.5 h-2.5 rounded-full bg-white" />
                 </span>
 
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 whitespace-nowrap bg-white dark:bg-[#1a1a1a] text-[#111111] dark:text-white text-xs sm:text-sm font-bold px-2.5 py-1.5 rounded-sm border border-[#E31E2D]/30 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 translate-y-1 group-hover:translate-y-0 shadow-lg">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 whitespace-nowrap bg-white dark:bg-[#1a1a1a] text-[#111111] dark:text-white text-xs sm:text-sm font-bold px-2.5 py-1.5 rounded-sm border border-[#E31E2D]/30 opacity-0 group-hover:opacity-100 pointer-events-none transition-[opacity,transform] duration-150 ease-out translate-y-1 group-hover:translate-y-0 shadow-lg">
                   {spot.label}
                   <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white dark:border-t-[#1a1a1a]" />
                 </span>
@@ -273,7 +273,7 @@ export default function VehicleShowcase() {
               <button
                 key={spot.id}
                 onClick={() => setActive(spot)}
-                className="flex items-center gap-2.5 bg-transparent border border-[#E31E2D] hover:bg-[#E31E2D] text-[#111111] dark:text-white hover:text-white px-6 py-3 rounded-sm transition-all duration-300 text-sm font-semibold group"
+                className="flex items-center gap-2.5 bg-transparent border border-[#E31E2D] hover:bg-[#E31E2D] text-[#111111] dark:text-white hover:text-white px-6 py-3 rounded-sm transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.97] text-sm font-semibold group"
               >
                 <span className="text-base">{spot.icon}</span>
                 <span>{spot.label}</span>

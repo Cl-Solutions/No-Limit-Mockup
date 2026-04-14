@@ -59,8 +59,8 @@ export default function Process() {
                   transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="relative mb-5">
-                    <div className="w-16 h-16 lg:w-14 lg:h-14 rounded-full bg-white dark:bg-[#111] border-2 border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-[#E31E2D] group-hover:bg-[#E31E2D]/10 transition-all duration-400 relative z-10">
-                      <Icon size={20} className="text-black/30 dark:text-white/50 group-hover:text-[#E31E2D] transition-colors duration-300" />
+                    <div className="w-16 h-16 lg:w-14 lg:h-14 rounded-full bg-white dark:bg-[#111] border-2 border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-[#E31E2D] group-hover:bg-[#E31E2D]/10 transition-[border-color,background-color] duration-200 relative z-10">
+                      <Icon size={20} className="text-black/30 dark:text-white/50 group-hover:text-[#E31E2D] transition-colors duration-150" />
                     </div>
                     <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[#E31E2D] flex items-center justify-center z-20">
                       <span className="text-white text-[9px] font-black">{step.num}</span>

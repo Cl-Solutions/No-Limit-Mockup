@@ -64,9 +64,10 @@ export default function Team() {
                   Inhaber &amp; Fahrschullehrer
                 </p>
 
-                <blockquote className="border-l-2 border-[#E31E2D] pl-5 mb-8">
+                <blockquote className="relative mb-8 pl-10">
+                  <span aria-hidden="true" className="absolute left-0 top-[-0.1em] text-[#E31E2D] text-5xl font-black leading-none select-none opacity-40">"</span>
                   <p className="text-[#444444] dark:text-white/70 text-base leading-relaxed italic">
-                    "Ich freue mich, dich sicher, spaßig und mit Erfolg zum Führerschein zu begleiten."
+                    Ich freue mich, dich sicher, spaßig und mit Erfolg zum Führerschein zu begleiten.
                   </p>
                 </blockquote>
 

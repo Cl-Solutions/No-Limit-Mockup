@@ -56,7 +56,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
         </div>
         <button
           onClick={onClose}
-          className="mt-8 bg-[#E31E2D] text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-colors rounded-sm"
+          className="mt-8 bg-[#E31E2D] text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
         >
           Schließen
         </button>
@@ -107,7 +107,7 @@ function ImpressumModal({ onClose }: { onClose: () => void }) {
         </div>
         <button
           onClick={onClose}
-          className="mt-8 bg-[#E31E2D] text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-colors rounded-sm"
+          className="mt-8 bg-[#E31E2D] text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
         >
           Schließen
         </button>
@@ -146,7 +146,7 @@ export default function Footer() {
                   <button
                     key={link.href}
                     onClick={() => handleNav(link.href)}
-                    className="text-[#666666] dark:text-gray-300 hover:text-[#111111] dark:hover:text-white text-sm text-left transition-colors hover:pl-1 duration-200"
+                    className="text-[#666666] dark:text-gray-300 hover:text-[#111111] dark:hover:text-white text-sm text-left transition-colors duration-150"
                   >
                     {link.label}
                   </button>

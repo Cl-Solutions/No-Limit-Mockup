@@ -214,7 +214,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#E31E2D] text-white py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-all duration-300 hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] active:scale-[0.99] rounded-md flex items-center justify-center gap-3"
+                  className="w-full bg-[#E31E2D] text-white py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] active:scale-[0.97] rounded-md flex items-center justify-center gap-3"
                 >
                   <Send size={16} />
                   Nachricht senden

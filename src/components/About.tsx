@@ -68,7 +68,7 @@ function StatCard({ stat, animDelay, inView }: StatCardProps) {
     >
       {/* Outer glow border */}
       <div
-        className="absolute inset-0 rounded-sm pointer-events-none transition-opacity duration-500"
+        className="absolute inset-0 rounded-sm pointer-events-none transition-opacity duration-300"
         style={{
           opacity: hovered ? 1 : 0,
           background: `radial-gradient(300px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.5), transparent 60%)`,
@@ -80,7 +80,7 @@ function StatCard({ stat, animDelay, inView }: StatCardProps) {
 
         {/* Inner spotlight */}
         <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
           style={{
             opacity: hovered ? 1 : 0,
             background: `radial-gradient(250px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.08), transparent 60%)`,
@@ -89,7 +89,7 @@ function StatCard({ stat, animDelay, inView }: StatCardProps) {
 
         {/* Top edge glow */}
         <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-500"
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-300"
           style={{
             opacity: hovered ? 1 : 0,
             background: `radial-gradient(150px circle at ${mouse.x}px 0px, rgba(227,30,45,0.9), transparent 70%)`,
@@ -140,9 +140,12 @@ export default function About() {
               <strong className="text-[#111111] dark:text-white">Etem Bardakcioglu</strong> ist seit 2005 als Fahrlehrer tätig —
               mit dem Ziel, jeden Fahrschüler sicher, effizient und erfolgreich zum Führerschein zu begleiten.
             </p>
-            <p className="text-[#444444] dark:text-gray-300 text-base leading-relaxed mb-10 italic border-l-2 border-[#E31E2D] pl-4">
-              "Ob talentiert oder nicht — am Ende wirst auch Du den Führerschein glücklich in den Händen halten."
-            </p>
+            <blockquote className="relative mb-10 pl-10">
+              <span aria-hidden="true" className="absolute left-0 top-[-0.1em] text-[#E31E2D] text-5xl font-black leading-none select-none opacity-40">"</span>
+              <p className="text-[#444444] dark:text-gray-300 text-base leading-relaxed italic">
+                Ob talentiert oder nicht — am Ende wirst auch Du den Führerschein glücklich in den Händen halten.
+              </p>
+            </blockquote>
 
             <ul className="space-y-3">
               {highlights.map((item, i) => (

@@ -58,7 +58,7 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
     >
       {/* Outer glow border */}
       <div
-        className="absolute inset-0 rounded-sm pointer-events-none transition-opacity duration-500"
+        className="absolute inset-0 rounded-sm pointer-events-none transition-opacity duration-300"
         style={{
           opacity: hovered ? 1 : 0,
           background: `radial-gradient(350px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.5), transparent 60%)`,
@@ -70,7 +70,7 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
 
         {/* Inner spotlight */}
         <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
           style={{
             opacity: hovered ? 1 : 0,
             background: `radial-gradient(400px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.07), transparent 55%)`,
@@ -79,7 +79,7 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
 
         {/* Top edge glow */}
         <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-500"
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-300"
           style={{
             opacity: hovered ? 1 : 0,
             background: `radial-gradient(200px circle at ${mouse.x}px 0px, rgba(227,30,45,0.9), transparent 70%)`,
@@ -87,7 +87,7 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
         />
 
         <div className="relative z-10">
-          <div className="w-14 h-14 bg-[#E31E2D]/10 border border-[#E31E2D]/20 rounded-sm flex items-center justify-center mb-8 transition-all duration-300"
+          <div className="w-14 h-14 bg-[#E31E2D]/10 border border-[#E31E2D]/20 rounded-sm flex items-center justify-center mb-8 transition-[background-color] duration-200"
             style={{ background: hovered ? 'rgba(227,30,45,0.2)' : undefined }}>
             <Icon size={24} className="text-[#E31E2D]" />
           </div>

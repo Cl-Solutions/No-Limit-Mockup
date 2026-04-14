@@ -45,7 +45,7 @@ export default function Hours() {
           {locations.map((loc, i) => (
             <motion.div
               key={i}
-              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm p-6 md:p-10 relative overflow-hidden group hover:border-[#E31E2D]/50 transition-all duration-500"
+              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm p-6 md:p-10 relative overflow-hidden group hover:border-[#E31E2D]/50 transition-[border-color,box-shadow] duration-300"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 + i * 0.15 }}
@@ -106,7 +106,7 @@ export default function Hours() {
             href="http://fs-nolimit.de/Anmeldeformular.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-[#E31E2D] text-white px-5 sm:px-7 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-all duration-300 rounded-sm hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] sm:whitespace-nowrap shrink-0 active:scale-95 w-full sm:w-auto justify-center"
+            className="flex items-center gap-3 bg-[#E31E2D] text-white px-5 sm:px-7 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] sm:whitespace-nowrap shrink-0 active:scale-[0.97] w-full sm:w-auto justify-center"
           >
             <Download size={16} />
             Anmeldeformular (PDF)

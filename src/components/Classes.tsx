@@ -131,7 +131,7 @@ function GlowCard({ cls, index }: GlowCardProps) {
     >
       {/* Outer glow border layer */}
       <div
-        className="absolute inset-0 rounded-sm transition-opacity duration-500 pointer-events-none"
+        className="absolute inset-0 rounded-sm transition-opacity duration-300 pointer-events-none"
         style={{
           opacity: hovered ? 1 : 0,
           background: `radial-gradient(350px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.5), transparent 60%)`,
@@ -143,7 +143,7 @@ function GlowCard({ cls, index }: GlowCardProps) {
 
         {/* Inner spotlight */}
         <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
           style={{
             opacity: hovered ? 1 : 0,
             background: `radial-gradient(400px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.08), transparent 55%)`,
@@ -152,7 +152,7 @@ function GlowCard({ cls, index }: GlowCardProps) {
 
         {/* Top edge glow line */}
         <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-500"
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-300"
           style={{
             opacity: hovered ? 1 : 0,
             background: `radial-gradient(200px circle at ${mouse.x}px 0px, rgba(227,30,45,0.8), transparent 70%)`,
@@ -222,7 +222,7 @@ export default function Classes() {
                 <button
                   key={f}
                   onClick={() => setActive(f)}
-                  className={`px-5 py-2 text-sm font-bold uppercase tracking-wider rounded-sm transition-all duration-300 ${
+                  className={`px-5 py-2 text-sm font-bold uppercase tracking-wider rounded-sm transition-[background-color,color,border-color,box-shadow,transform] duration-150 ease-out active:scale-[0.97] ${
                     active === f
                       ? 'bg-[#E31E2D] text-white shadow-[0_0_20px_rgba(227,30,45,0.4)]'
                       : 'border border-black/15 dark:border-white/15 text-[#444444] dark:text-white/60 hover:border-black/40 dark:hover:border-white/40 hover:text-[#111111] dark:hover:text-white'

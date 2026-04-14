@@ -149,13 +149,13 @@ export default function Hero() {
           >
             <button
               onClick={() => handleScroll('#kontakt')}
-              className="bg-[#E31E2D] text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-all duration-300 hover:shadow-[0_0_30px_rgba(227,30,45,0.5)] active:scale-95 rounded-sm"
+              className="bg-[#E31E2D] text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out hover:shadow-[0_0_30px_rgba(227,30,45,0.5)] active:scale-[0.97] rounded-sm"
             >
               Jetzt anmelden
             </button>
             <button
               onClick={() => handleScroll('#fuehrerscheine')}
-              className="border-2 border-black/20 dark:border-white/30 text-[#111111] dark:text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 active:scale-95 rounded-sm"
+              className="border-2 border-black/20 dark:border-white/30 text-[#111111] dark:text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/5 transition-[background-color,border-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
             >
               Führerscheine entdecken
             </button>
