@@ -111,7 +111,7 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
           <div className="mt-8 pt-6 border-t border-black/5 dark:border-white/5">
             <button
               onClick={() => {
-                const el = document.querySelector('#kontakt');
+                const el = document.querySelector('#oeffnungszeiten');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
               className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.2em] hover:text-red-400 transition-colors flex items-center gap-2 group/btn"

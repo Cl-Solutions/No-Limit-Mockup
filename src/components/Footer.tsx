@@ -8,8 +8,7 @@ const navLinks = [
   { label: 'Bewertungen', href: '#bewertungen' },
   { label: 'Seminare', href: '#seminare' },
   { label: 'Team', href: '#team' },
-  { label: 'Öffnungszeiten', href: '#oeffnungszeiten' },
-  { label: 'Kontakt', href: '#kontakt' },
+  { label: 'Anmelden', href: '#oeffnungszeiten' },
 ];
 
 const handleNav = (href: string) => {
@@ -138,9 +137,8 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
             <div>
-              <div className="flex flex-col items-start mb-4">
-                <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.2em]">Fahrschule</span>
-                <span className="text-[#111111] dark:text-white text-3xl font-black tracking-tight">NoLimit</span>
+              <div className="bg-white inline-block rounded-sm p-2.5 mb-4">
+                <img src="/logo.png" alt="Fahrschule NoLimit" className="h-12 w-auto" />
               </div>
               <p className="text-[#666666] dark:text-gray-400 text-sm leading-relaxed">
                 Deine Fahrschule in Mühlacker und Knittlingen seit 2008.

@@ -160,7 +160,7 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <button
-                onClick={() => handleScroll('#kontakt')}
+                onClick={() => handleScroll('#oeffnungszeiten')}
                 className="bg-[#E31E2D] text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out hover:shadow-[0_0_30px_rgba(227,30,45,0.5)] active:scale-[0.97] rounded-sm"
               >
                 Jetzt anmelden

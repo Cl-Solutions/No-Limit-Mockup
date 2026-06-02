@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { MapPin, Clock, Download } from 'lucide-react';
+import { MapPin, Clock, Download, Sparkles } from 'lucide-react';
 
 // Optional pro Standort: `image: "/standorte/muehlacker.jpg"` setzen, sobald
 // Gebäudefotos vorliegen — ohne Bild bleibt die Karte kompakt wie bisher.
@@ -15,18 +15,18 @@ interface Location {
 
 const locations: Location[] = [
   {
-    city: 'KNITTLINGEN',
-    address: 'Bahnhofstr. 4',
-    days: ['Montag', 'Mittwoch'],
-    hours: '18:00 – 19:30 Uhr',
-    registration: 'Anmeldung ab 17:45 Uhr',
-  },
-  {
     city: 'MÜHLACKER',
     address: 'Bahnhofstr. 71',
     days: ['Dienstag', 'Donnerstag'],
     hours: '18:00 – 19:30 Uhr',
     registration: 'Anmeldung ab 16:30 Uhr',
+  },
+  {
+    city: 'KNITTLINGEN',
+    address: 'Bahnhofstr. 4',
+    days: ['Montag', 'Mittwoch'],
+    hours: '18:00 – 19:30 Uhr',
+    registration: 'Anmeldung ab 17:45 Uhr',
   },
 ];
 
@@ -38,28 +38,61 @@ export default function Hours() {
     <section id="oeffnungszeiten" className="py-16 md:py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
-          className="mb-16"
+          className="mb-12 md:mb-14 max-w-2xl"
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="h-px w-8 bg-[#E31E2D]" />
-            <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Öffnungszeiten</span>
+            <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Anmelden</span>
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight">
-            Wann Du uns findest
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-4">
+            Komm einfach vorbei.
           </h2>
+          <p className="text-[#444444] dark:text-white/60 text-base md:text-lg leading-relaxed">
+            Die schnellste Anmeldung: <strong className="text-[#111111] dark:text-white">Di &amp; Do abends in Mühlacker</strong> direkt
+            in der Fahrschule vorbeikommen. Wir nehmen uns Zeit, beraten dich in Ruhe — unverbindlich.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        {/* Vorbeikommen-Highlight */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="bg-[#E31E2D] text-white rounded-sm p-6 md:p-10 mb-6 md:mb-8 relative overflow-hidden"
+        >
+          <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+          <div className="relative flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+            <Sparkles size={40} className="text-white shrink-0" strokeWidth={1.5} />
+            <div className="flex-1">
+              <h3 className="font-black text-xl md:text-2xl tracking-tight mb-1">Vorbeikommen &amp; anmelden</h3>
+              <p className="text-white/85 text-sm md:text-base leading-relaxed">
+                Mühlacker, Bahnhofstr. 71 — Dienstag &amp; Donnerstag ab 16:30 Uhr.
+                Kein Termin nötig, einfach reinkommen.
+              </p>
+            </div>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Bahnhofstr.+71+75417+M%C3%BChlacker"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-white text-[#E31E2D] px-6 py-3.5 font-bold uppercase tracking-[0.12em] text-sm hover:bg-white/90 transition-[background-color,transform] duration-150 ease-out rounded-sm shrink-0 active:scale-[0.97]"
+            >
+              <MapPin size={16} /> Route
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Standort-Karten — beide gleichwertig */}
+        <div className="grid md:grid-cols-2 gap-5 md:gap-6 mb-6 md:mb-8">
           {locations.map((loc, i) => (
             <motion.div
               key={i}
               className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm relative overflow-hidden group hover:border-[#E31E2D]/50 transition-[border-color,box-shadow] duration-300"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 + i * 0.15 }}
+              transition={{ duration: 0.7, delay: 0.2 + i * 0.12 }}
               style={{ boxShadow: '0 0 40px rgba(227,30,45,0.05)' }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#E31E2D]/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -73,7 +106,7 @@ export default function Hours() {
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-[#E31E2D]/60 via-[#E31E2D]/20 to-transparent" />
 
               <div className="relative z-10 p-6 md:p-10">
-                <div className="flex items-start gap-3 mb-7">
+                <div className="flex items-start gap-3 mb-6">
                   <div className="w-10 h-10 bg-[#E31E2D]/10 rounded-sm flex items-center justify-center mt-0.5">
                     <MapPin size={18} className="text-[#E31E2D]" />
                   </div>
@@ -83,7 +116,7 @@ export default function Hours() {
                   </div>
                 </div>
 
-                <div className="space-y-4 border-t border-black/5 dark:border-white/5 pt-7">
+                <div className="space-y-4 border-t border-black/5 dark:border-white/5 pt-6">
                   <div className="flex items-start gap-4">
                     <div className="flex gap-2 flex-wrap flex-1">
                       {loc.days.map((day) => (
@@ -108,16 +141,17 @@ export default function Hours() {
           ))}
         </div>
 
+        {/* Anmeldeformular-PDF */}
         <motion.div
-          className="bg-[#E31E2D]/5 border border-[#E31E2D]/20 rounded-sm p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+          className="bg-[#E31E2D]/5 border border-[#E31E2D]/20 rounded-sm p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
         >
           <div>
-            <h3 className="text-[#111111] dark:text-white font-bold text-xl mb-2">Vorab anmelden?</h3>
+            <h3 className="text-[#111111] dark:text-white font-bold text-lg md:text-xl mb-1.5">Anmeldeformular vorab ausfüllen</h3>
             <p className="text-[#444444] dark:text-gray-300 text-sm max-w-lg">
-              Füll das Anmeldeformular aus und bring es direkt mit in die Fahrschule.
+              Spart Zeit beim Vorbeikommen — Formular runterladen, ausfüllen und direkt mitbringen.
             </p>
           </div>
           <a
