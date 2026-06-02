@@ -4,9 +4,19 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'NoLimit', href: '#about' },
+  { label: 'Über uns', href: '#about' },
+  { label: 'Flotte', href: '#flotte' },
   { label: 'Führerscheine', href: '#fuehrerscheine' },
+  { label: 'Bewertungen', href: '#bewertungen' },
+  { label: 'Team', href: '#team' },
+  { label: 'Kontakt', href: '#kontakt' },
+];
+
+const mobileNavLinks = [
+  { label: 'Über uns', href: '#about' },
+  { label: 'Flotte & Standort', href: '#flotte' },
+  { label: 'Führerscheine', href: '#fuehrerscheine' },
+  { label: 'Bewertungen', href: '#bewertungen' },
   { label: 'Seminare', href: '#seminare' },
   { label: 'Team', href: '#team' },
   { label: 'Öffnungszeiten', href: '#oeffnungszeiten' },
@@ -41,7 +51,7 @@ export default function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between h-20">
         <button onClick={() => handleNav('#home')} className="flex flex-col items-start group">
           <span className="text-[#E31E2D] text-xs font-semibold uppercase tracking-[0.2em] leading-none group-hover:text-red-400 transition-colors">
             Fahrschule
@@ -104,10 +114,10 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden bg-white/98 dark:bg-[#0A0A0A]/98 backdrop-blur-md border-t border-black/5 dark:border-white/10"
+            className="lg:hidden bg-white/98 dark:bg-[#0A0A0A]/98 backdrop-blur-md border-t border-black/5 dark:border-white/10 max-h-[calc(100vh-5rem)] overflow-y-auto"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
+              {mobileNavLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNav(link.href)}

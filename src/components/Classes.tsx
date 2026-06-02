@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-type Category = 'Alle' | 'Zweirad' | 'Auto' | 'Lkw';
+type Category = 'Zweirad' | 'Auto' | 'Lkw';
 
 const classes = [
   {
@@ -57,7 +58,7 @@ const classes = [
     id: 'b-auto',
     name: 'B Automatik',
     title: 'PKW Automatik',
-    desc: 'Jetzt neu! Ausbildung auf modernem AMG-Automatikfahrzeug. Auch Anhänger.',
+    desc: 'Ausbildung auf modernem Automatikfahrzeug. Entspannt & komfortabel. Auch mit Anhänger.',
     category: 'Auto' as Category,
     badge: 'NEU',
   },
@@ -99,10 +100,14 @@ const filters: Category[] = ['Zweirad', 'Auto', 'Lkw'];
 
 interface GlowCardProps {
   cls: typeof classes[0];
-  index: number;
 }
 
-function GlowCard({ cls, index }: GlowCardProps) {
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 16, scale: 0.97 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
+};
+
+function GlowCard({ cls }: GlowCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
@@ -113,18 +118,24 @@ function GlowCard({ cls, index }: GlowCardProps) {
     setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
+  const handleClick = () => {
+    const el = document.querySelector('#kontakt');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.92 }}
-      transition={{ duration: 0.4, delay: index * 0.04 }}
+      variants={cardVariants}
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative rounded-sm overflow-hidden cursor-pointer flex flex-col"
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
+      aria-label={`${cls.name} — ${cls.title}: Jetzt anmelden`}
+      className="relative rounded-sm overflow-hidden cursor-pointer flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E31E2D] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0A0A0A]"
       style={{
         background: 'transparent',
       }}
@@ -198,7 +209,7 @@ export default function Classes() {
 
   return (
     <section id="fuehrerscheine" className="py-16 md:py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}
@@ -235,13 +246,22 @@ export default function Classes() {
           </div>
         </motion.div>
 
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((cls, i) => (
-              <GlowCard key={cls.id} cls={cls} index={i} />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch"
+            initial="hidden"
+            animate="show"
+            exit={{ opacity: 0, transition: { duration: 0.18 } }}
+            variants={{
+              show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
+            }}
+          >
+            {filtered.map((cls) => (
+              <GlowCard key={cls.id} cls={cls} />
             ))}
-          </AnimatePresence>
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

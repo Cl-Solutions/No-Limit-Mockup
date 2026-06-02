@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Star } from 'lucide-react';
 
 interface WordRevealProps {
   text: string;
@@ -62,27 +62,26 @@ export default function Hero() {
       {/* Sticky inner — stays pinned at top while scrolling through the container */}
       <div className="sticky top-0 h-screen overflow-hidden bg-black">
 
-        {/* ── Video background ── */}
+        {/* ── Video background (lokal, kein YouTube — sofortiger Start) ── */}
         <motion.div
           style={{ scale, borderRadius }}
           className="absolute inset-0 overflow-hidden bg-black"
         >
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/pivrzJQQWAg?autoplay=1&mute=1&loop=1&controls=0&playlist=pivrzJQQWAg&playsinline=1&rel=0&showinfo=0&disablekb=1&iv_load_policy=3"
-            title="NoLimit Background"
-            allow="autoplay; encrypted-media"
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              // Always cover the viewport regardless of aspect ratio
-              width: 'max(100%, 177.78vh)',
-              height: 'max(100%, 56.25vw)',
-              transform: 'translate(-50%, -50%)',
-              border: 'none',
-              pointerEvents: 'none',
-            }}
-          />
+          {/* Fallback gradient (sichtbar bis/falls kein Video lädt) */}
+          <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_70%_30%,rgba(227,30,45,0.22),transparent_60%),radial-gradient(80%_60%_at_15%_90%,rgba(227,30,45,0.12),transparent_55%)] bg-[#0A0A0A]" />
+
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/hero-poster.jpg"
+          >
+            <source src="/hero.webm" type="video/webm" />
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
 
           {/* Dark overlay */}
           <motion.div
@@ -97,22 +96,22 @@ export default function Hero() {
         {/* ── Hero content ── */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="relative z-10 flex flex-col justify-center h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16"
+          className="relative z-10 flex flex-col justify-center h-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-24 pb-16"
         >
           <div className="max-w-4xl">
             <motion.div
-              initial={{ opacity: 0, x: -60 }}
+              initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="flex items-center gap-3 mb-8"
+              className="flex items-center gap-3 mb-7"
             >
               <div className="h-px w-12 bg-[#E31E2D]" />
-              <span className="text-[#E31E2D] text-sm font-bold uppercase tracking-[0.25em]">
+              <span className="text-[#E31E2D] text-xs sm:text-sm font-bold uppercase tracking-[0.25em]">
                 Fahrschule NoLimit
               </span>
             </motion.div>
 
-            <h1 className="text-[clamp(2rem,9vw,8rem)] font-black leading-[0.95] tracking-tighter mb-10">
+            <h1 className="text-[clamp(2.5rem,11vw,8rem)] font-black leading-[0.95] tracking-tighter mb-8">
               <div className="mb-1">
                 <WordReveal text="Dein" className="text-white" baseDelay={0.25} />
               </div>
@@ -123,7 +122,7 @@ export default function Hero() {
                 <WordReveal text="Deine Freiheit." className="text-white" baseDelay={0.55} />
               </div>
               <div>
-                <WordReveal text="Keine Grenzen." className="text-white/25" baseDelay={0.75} />
+                <WordReveal text="Keine Grenzen." className="text-white/30" baseDelay={0.75} />
               </div>
             </h1>
 
@@ -131,15 +130,33 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 1.05 }}
-              className="text-white/65 text-base md:text-xl max-w-xl mb-8 md:mb-10 leading-relaxed"
+              className="text-white/70 text-base md:text-xl max-w-xl mb-7 leading-relaxed"
             >
-              Fahrschule NoLimit — Mühlacker &amp; Knittlingen seit 2008
+              Mühlacker &amp; Knittlingen — seit 2008 sicher zum Führerschein.
             </motion.p>
+
+            {/* Social proof direkt im Hero */}
+            <motion.button
+              onClick={() => handleScroll('#bewertungen')}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.15 }}
+              className="flex items-center gap-2.5 mb-9 group"
+            >
+              <div className="flex gap-0.5">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} size={16} className="text-[#E31E2D] fill-[#E31E2D]" />
+                ))}
+              </div>
+              <span className="text-white/70 text-sm group-hover:text-white transition-colors">
+                <strong className="text-white font-bold">4,8</strong> · 201 Bewertungen auf Google
+              </span>
+            </motion.button>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.2 }}
+              transition={{ duration: 0.7, delay: 1.25 }}
               className="flex flex-col sm:flex-row gap-4"
             >
               <button
@@ -161,7 +178,7 @@ export default function Hero() {
         {/* ── Scroll indicator ── */}
         <motion.button
           onClick={() => handleScroll('#about')}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors flex flex-col items-center gap-2 z-10"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors flex flex-col items-center gap-2 z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.6 }}

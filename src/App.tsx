@@ -2,9 +2,11 @@ import { ThemeProvider } from './context/ThemeContext';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
+import Fleet from './components/Fleet';
 import Process from './components/Process';
 import VehicleShowcase from './components/VehicleShowcase';
 import Classes from './components/Classes';
+import Reviews from './components/Reviews';
 import Seminars from './components/Seminars';
 import Team from './components/Team';
 import Hours from './components/Hours';
@@ -19,9 +21,11 @@ export default function App() {
         <main>
           <Hero />
           <About />
+          <Fleet />
           <Process />
           <VehicleShowcase />
           <Classes />
+          <Reviews />
           <Seminars />
           <Team />
           <Hours />

@@ -43,6 +43,27 @@
   }
 }
 
+/* ─── Scrollbar im Swipe-Karussell ausblenden ──────────── */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Reduced motion: ruhigere Seite für entsprechende Nutzer ─ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

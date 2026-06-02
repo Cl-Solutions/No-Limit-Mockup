@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useModalA11y } from '../hooks/useModalA11y';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'NoLimit', href: '#about' },
+  { label: 'Über uns', href: '#about' },
+  { label: 'Flotte', href: '#flotte' },
   { label: 'Führerscheine', href: '#fuehrerscheine' },
+  { label: 'Bewertungen', href: '#bewertungen' },
   { label: 'Seminare', href: '#seminare' },
   { label: 'Team', href: '#team' },
   { label: 'Öffnungszeiten', href: '#oeffnungszeiten' },
@@ -16,9 +18,13 @@ const handleNav = (href: string) => {
 };
 
 function DatenschutzModal({ onClose }: { onClose: () => void }) {
+  useModalA11y(true, onClose);
   return (
     <div
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Datenschutzerklärung"
       onClick={onClose}
     >
       <div
@@ -39,10 +45,9 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
             erforderlich ist. Ihre Daten werden nicht an Dritte weitergegeben.
           </p>
           <p>
-            <strong className="text-[#111111] dark:text-white">Kontaktformular:</strong><br />
-            Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem
-            Anfrageformular inklusive der von Ihnen angegebenen Kontaktdaten zwecks Bearbeitung der
-            Anfrage bei uns gespeichert.
+            <strong className="text-[#111111] dark:text-white">Kontaktaufnahme:</strong><br />
+            Wenn Sie uns per Telefon, E-Mail oder WhatsApp kontaktieren, werden Ihre Angaben
+            zwecks Bearbeitung der Anfrage bei uns gespeichert und nicht an Dritte weitergegeben.
           </p>
           <p>
             <strong className="text-[#111111] dark:text-white">Ihre Rechte:</strong><br />
@@ -66,9 +71,13 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
 }
 
 function ImpressumModal({ onClose }: { onClose: () => void }) {
+  useModalA11y(true, onClose);
   return (
     <div
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Impressum"
       onClick={onClose}
     >
       <div
@@ -126,7 +135,7 @@ export default function Footer() {
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
 
       <footer className="bg-[#F0F0F0] dark:bg-[#080808] border-t border-black/5 dark:border-white/5 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
             <div>
               <div className="flex flex-col items-start mb-4">

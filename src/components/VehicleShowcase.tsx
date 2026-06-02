@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight } from 'lucide-react';
+import { useModalA11y } from '../hooks/useModalA11y';
 
 interface HotspotInfo {
   id: string;
@@ -33,7 +34,7 @@ const hotspots: HotspotInfo[] = [
           'Bis zu 8 Sitzplätze (außer Fahrer)',
           'Anhänger bis 750 kg erlaubt',
           'Mindestalter: 18 Jahre | BF17 möglich ab 17 Jahren',
-          'Neu: Automatikausbildung auf modernem AMG verfügbar',
+          'Automatikausbildung auf modernem Fahrzeug verfügbar',
         ],
       },
     ],
@@ -110,9 +111,13 @@ const hotspots: HotspotInfo[] = [
 ];
 
 function Modal({ spot, onClose }: { spot: HotspotInfo; onClose: () => void }) {
+  useModalA11y(true, onClose);
   return (
     <motion.div
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={spot.title}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -203,8 +208,8 @@ export default function VehicleShowcase() {
         {active && <Modal spot={active} onClose={() => setActive(null)} />}
       </AnimatePresence>
 
-      <section className="py-20 bg-white dark:bg-[#0A0A0A] relative transition-colors duration-300" ref={ref}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-32 bg-white dark:bg-[#0A0A0A] relative transition-colors duration-300" ref={ref}>
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 40 }}

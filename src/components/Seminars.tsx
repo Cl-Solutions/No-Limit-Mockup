@@ -134,7 +134,7 @@ export default function Seminars() {
     <section id="seminare" className="py-16 md:py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-96 md:h-96 rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}

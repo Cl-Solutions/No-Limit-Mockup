@@ -2,7 +2,18 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { MapPin, Clock, Download } from 'lucide-react';
 
-const locations = [
+// Optional pro Standort: `image: "/standorte/muehlacker.jpg"` setzen, sobald
+// Gebäudefotos vorliegen — ohne Bild bleibt die Karte kompakt wie bisher.
+interface Location {
+  city: string;
+  address: string;
+  days: string[];
+  hours: string;
+  registration: string;
+  image?: string;
+}
+
+const locations: Location[] = [
   {
     city: 'KNITTLINGEN',
     address: 'Bahnhofstr. 4',
@@ -25,7 +36,7 @@ export default function Hours() {
 
   return (
     <section id="oeffnungszeiten" className="py-16 md:py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}
@@ -45,16 +56,23 @@ export default function Hours() {
           {locations.map((loc, i) => (
             <motion.div
               key={i}
-              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm p-6 md:p-10 relative overflow-hidden group hover:border-[#E31E2D]/50 transition-[border-color,box-shadow] duration-300"
+              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm relative overflow-hidden group hover:border-[#E31E2D]/50 transition-[border-color,box-shadow] duration-300"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 + i * 0.15 }}
               style={{ boxShadow: '0 0 40px rgba(227,30,45,0.05)' }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#E31E2D]/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              {/* Optionaler Gebäude-Foto-Slot — wird angezeigt, sobald `image` gesetzt ist */}
+              {loc.image && (
+                <div className="aspect-[16/10] overflow-hidden bg-black/3 dark:bg-white/3 border-b border-[#E31E2D]/15">
+                  <img src={loc.image} alt={`Fahrschule NoLimit ${loc.city}`} className="w-full h-full object-cover" />
+                </div>
+              )}
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-[#E31E2D]/60 via-[#E31E2D]/20 to-transparent" />
 
-              <div className="relative z-10">
+              <div className="relative z-10 p-6 md:p-10">
                 <div className="flex items-start gap-3 mb-7">
                   <div className="w-10 h-10 bg-[#E31E2D]/10 rounded-sm flex items-center justify-center mt-0.5">
                     <MapPin size={18} className="text-[#E31E2D]" />
