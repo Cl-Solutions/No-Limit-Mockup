@@ -325,7 +325,7 @@ export default function VehicleShowcase() {
               Welche Klasse passt zu dir?
             </h2>
             <p className="text-fg-secondary dark:text-gray-300 text-base max-w-md mx-auto">
-              Tippe auf ein Fahrzeug und entdecke alle passenden Führerscheinklassen — mit vollen Infos.
+              Wähle deine Fahrzeugklasse und entdecke alle Details — von Mindestalter bis Pflichtstunden.
             </p>
           </motion.div>
 
@@ -350,21 +350,15 @@ export default function VehicleShowcase() {
               />
             </picture>
 
-            {/* „Tippen!"-Hint-Badge zentral, mit dezenter Bounce-Animation */}
+            {/* „Tippen!"-Hint — nur Desktop, dezent oben rechts (auf Mobile wären die Buttons darunter primary CTA) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
+              className="hidden sm:flex absolute top-4 right-4 z-10 items-center gap-1.5 bg-brand text-white text-xs font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-lg pointer-events-none"
             >
-              <motion.div
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-                className="flex items-center gap-2 bg-brand text-white text-[11px] sm:text-sm font-black uppercase tracking-[0.2em] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
-              >
-                <Hand size={14} className="rotate-12" />
-                <span>Tippen für Infos</span>
-              </motion.div>
+              <Hand size={12} className="rotate-12" />
+              <span>Tippen für Infos</span>
             </motion.div>
 
             {categories.map((cat, idx) => (
@@ -380,25 +374,26 @@ export default function VehicleShowcase() {
                 }}
                 aria-label={`Führerscheinklassen für ${cat.label} anzeigen`}
               >
-                {/* Doppelter Pulsring für stärkeren „Klick mich"-Reiz */}
+                {/* Pulsring */}
                 <span
                   className="absolute inset-0 rounded-full bg-brand/40 animate-ping"
                   style={{ animationDelay: `${idx * 250}ms`, animationDuration: '1.8s' }}
                 />
                 <span
-                  className="absolute -inset-1.5 rounded-full bg-brand/15 animate-ping"
+                  className="hidden sm:block absolute -inset-1.5 rounded-full bg-brand/15 animate-ping"
                   style={{ animationDelay: `${idx * 250 + 400}ms`, animationDuration: '2.2s' }}
                 />
 
-                {/* Sichtbarer Hotspot — größer, mit weißem Ring */}
-                <span className="hotspot-inner relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-brand ring-2 ring-white shadow-[0_0_20px_rgba(227,30,45,0.9),0_2px_8px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out">
-                  <span className="text-white text-base sm:text-lg leading-none" aria-hidden="true">
+                {/* Sichtbarer Hotspot — auf Mobile kleiner Dot, auf Desktop großer Kreis mit Emoji */}
+                <span className="hotspot-inner relative flex h-5 w-5 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-brand ring-2 ring-white shadow-[0_0_14px_rgba(227,30,45,0.85),0_2px_6px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out">
+                  {/* Emoji NUR auf sm+ — auf Mobile reine Pulsing-Punkte */}
+                  <span className="hidden sm:inline text-white text-base sm:text-lg leading-none" aria-hidden="true">
                     {cat.icon}
                   </span>
                 </span>
 
-                {/* Label IMMER sichtbar, nicht nur on-hover (Mobile-First) */}
-                <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-white text-fg-primary text-[10px] sm:text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-lg pointer-events-none">
+                {/* Label NUR auf Desktop sichtbar — Mobile hat die Buttons direkt darunter */}
+                <span className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-white text-fg-primary text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-lg pointer-events-none">
                   {cat.label}
                   <span className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-white" />
                 </span>
