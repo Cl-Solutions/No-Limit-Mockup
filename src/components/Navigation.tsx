@@ -2,22 +2,22 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+// Reihenfolge folgt dem neuen Sektions-Flow auf der Seite (Trust → Service → Story → CTA).
 const navLinks = [
-  { label: 'Über uns', href: '#about' },
-  { label: 'Flotte', href: '#flotte' },
-  { label: 'Führerscheine', href: '#fuehrerscheine' },
   { label: 'Bewertungen', href: '#bewertungen' },
-  { label: 'Team', href: '#team' },
+  { label: 'Führerscheine', href: '#fuehrerscheine' },
+  { label: 'Flotte', href: '#flotte' },
+  { label: 'Über uns', href: '#about' },
   { label: 'Anmelden', href: '#oeffnungszeiten' },
 ];
 
 const mobileNavLinks = [
-  { label: 'Über uns', href: '#about' },
-  { label: 'Flotte', href: '#flotte' },
-  { label: 'Führerscheine', href: '#fuehrerscheine' },
   { label: 'Bewertungen', href: '#bewertungen' },
+  { label: 'Führerscheine', href: '#fuehrerscheine' },
+  { label: 'Flotte', href: '#flotte' },
+  { label: 'Über uns & Team', href: '#about' },
+  { label: 'Ablauf', href: '#ablauf' },
   { label: 'Seminare', href: '#seminare' },
-  { label: 'Team', href: '#team' },
   { label: 'Anmelden', href: '#oeffnungszeiten' },
 ];
 

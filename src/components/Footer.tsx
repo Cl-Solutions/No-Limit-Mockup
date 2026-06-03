@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useModalA11y } from '../hooks/useModalA11y';
 
 const navLinks = [
-  { label: 'Über uns', href: '#about' },
-  { label: 'Flotte', href: '#flotte' },
-  { label: 'Führerscheine', href: '#fuehrerscheine' },
   { label: 'Bewertungen', href: '#bewertungen' },
+  { label: 'Führerscheine', href: '#fuehrerscheine' },
+  { label: 'Flotte', href: '#flotte' },
+  { label: 'Über uns & Team', href: '#about' },
+  { label: 'Ablauf', href: '#ablauf' },
   { label: 'Seminare', href: '#seminare' },
-  { label: 'Team', href: '#team' },
   { label: 'Anmelden', href: '#oeffnungszeiten' },
 ];
 
