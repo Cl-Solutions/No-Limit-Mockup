@@ -21,3 +21,4 @@ dist-ssr/
 
 # Roh-Quellbilder (die fertigen Web-Assets liegen in /public/flotte/)
 /Flotte/
+/Logo.png

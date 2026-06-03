@@ -52,16 +52,16 @@ export default function Navigation() {
         <button
           onClick={() => handleNav('#home')}
           aria-label="Fahrschule NoLimit — zur Startseite"
-          className="flex items-center group bg-white rounded-sm px-2.5 py-1.5 shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:shadow-[0_0_20px_rgba(227,30,45,0.35)] transition-shadow"
+          className="flex items-center group transition-transform hover:scale-[1.03] active:scale-[0.98]"
         >
           <picture>
             <source srcSet="/logo.webp" type="image/webp" />
             <img
               src="/logo.png"
               alt="Fahrschule NoLimit"
-              className="h-10 sm:h-11 w-auto select-none"
-              width={248}
-              height={184}
+              className="h-9 sm:h-11 w-auto select-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
+              width={600}
+              height={258}
               draggable={false}
             />
           </picture>

@@ -210,10 +210,10 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
             <div>
-              <div className="bg-white inline-block rounded-sm p-2.5 mb-4">
+              <div className="inline-block mb-4">
                 <picture>
                   <source srcSet="/logo.webp" type="image/webp" />
-                  <img src="/logo.png" alt="Fahrschule NoLimit" className="h-12 w-auto" width={248} height={184} />
+                  <img src="/logo.png" alt="Fahrschule NoLimit" className="h-14 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]" width={600} height={258} />
                 </picture>
               </div>
               <p className="text-fg-muted dark:text-gray-400 text-sm leading-relaxed">
