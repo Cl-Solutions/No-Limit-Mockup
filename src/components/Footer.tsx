@@ -4,7 +4,7 @@ import { useModalA11y } from '../hooks/useModalA11y';
 const navLinks = [
   { label: 'Bewertungen', href: '#bewertungen' },
   { label: 'Führerscheine', href: '#fuehrerscheine' },
-  { label: 'Flotte', href: '#flotte' },
+  { label: 'Fahrzeuge', href: '#flotte' },
   { label: 'Über uns & Team', href: '#about' },
   { label: 'Ablauf', href: '#ablauf' },
   { label: 'Seminare', href: '#seminare' },

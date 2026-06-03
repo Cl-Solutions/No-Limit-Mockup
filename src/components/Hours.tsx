@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { MapPin, Clock, Download, Sparkles } from 'lucide-react';
+import { MapPin, Clock, Download, DoorOpen } from 'lucide-react';
 
 // Optional pro Standort: `image: "/standorte/muehlacker.jpg"` setzen, sobald
 // Gebäudefotos vorliegen — ohne Bild bleibt die Karte kompakt wie bisher.
@@ -37,6 +37,11 @@ export default function Hours() {
 
   return (
     <section id="oeffnungszeiten" className="py-16 md:py-32 bg-paper-subtle dark:bg-ink-subtle relative overflow-hidden transition-colors duration-300">
+      {/* Atmosphärischer Akzent für „Final-Sektion" */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 right-0 w-[34rem] h-[34rem] rounded-full bg-brand/8 blur-3xl translate-x-1/3" />
+        <div className="absolute -bottom-32 left-0 w-[24rem] h-[24rem] rounded-full bg-brand/5 blur-3xl -translate-x-1/3" />
+      </div>
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-12 md:mb-14 max-w-2xl"
@@ -62,14 +67,16 @@ export default function Hours() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-brand text-white rounded-sm p-6 md:p-8 mb-6 md:mb-8 relative overflow-hidden"
+          className="bg-gradient-to-br from-brand to-brand-dark text-white rounded-sm p-6 md:p-8 mb-6 md:mb-8 relative overflow-hidden shadow-[0_12px_40px_rgba(227,30,45,0.25)]"
         >
-          <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+          <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/15 blur-3xl pointer-events-none" />
           <div className="relative flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
-            <Sparkles size={36} className="text-white shrink-0" strokeWidth={1.5} />
+            <div className="w-14 h-14 md:w-16 md:h-16 bg-white/15 backdrop-blur-sm rounded-sm flex items-center justify-center shrink-0">
+              <DoorOpen size={28} className="text-white" strokeWidth={2} />
+            </div>
             <div className="flex-1">
-              <h3 className="font-black text-lg md:text-xl tracking-tight mb-1">Vorbeikommen &amp; anmelden</h3>
-              <p className="text-white/85 text-sm md:text-[15px] leading-relaxed">
+              <h3 className="font-black text-xl md:text-2xl tracking-tight mb-1.5 text-white">Vorbeikommen &amp; anmelden</h3>
+              <p className="text-white text-sm md:text-[15px] leading-relaxed font-medium">
                 Kein Termin nötig — komm während der Öffnungszeiten in einen unserer Standorte
                 und melde dich direkt an.
               </p>

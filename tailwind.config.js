@@ -10,6 +10,8 @@ export default {
           DEFAULT: '#E31E2D',
           dark: '#c0192a',
           hover: '#dc2626',
+          // Heller, lesbarer Akzent für kleine Texte auf dunklem Grund (WCAG-tauglich)
+          light: '#FF6B72',
         },
         // Hintergrundfarben — semantische Namen statt Hex-Reigen
         ink: {

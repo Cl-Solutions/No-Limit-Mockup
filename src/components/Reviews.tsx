@@ -44,24 +44,10 @@ const reviews: Review[] = [
     date: 'vor 5 Monaten',
   },
   {
-    name: 'Mahmut Sahin',
-    initial: 'MS',
-    color: '#7c3aed',
-    text: 'Die No Limit Fahrschule bietet eine sehr angenehme und motivierende Lernatmosphäre. Die Fahrlehrerinnen und Fahrlehrer bleiben ruhig, erklären verständlich und gehen individuell auf den Lernstand ein.',
-    date: 'vor 5 Monaten',
-  },
-  {
     name: 'Andi To',
     initial: 'AT',
     color: '#059669',
     text: 'Die No Limit Fahrschule bietet alles was man von einer Fahrschule erwartet. Es sind professionelle Fahrlehrer die sehr freundlich und sehr kompetent sind. Ich kann jedem empfehlen einen Führerschein bei No Limit zu machen.',
-    date: 'vor 3 Monaten',
-  },
-  {
-    name: 'Moritz Schneider',
-    initial: 'MO',
-    color: '#d97706',
-    text: 'Ich war schon bei 2 Fahrschulen davor angemeldet, doch hier hat alles am besten gepasst 👍 Mit Nico als Fahrlehrer wurde es nie langweilig bei den Fahrstunden.',
     date: 'vor 3 Monaten',
   },
 ];
@@ -129,7 +115,8 @@ export default function Reviews() {
 
   return (
     <section id="bewertungen" className="py-16 md:py-32 bg-white dark:bg-ink relative overflow-hidden transition-colors duration-300">
-      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[36rem] h-[36rem] rounded-full bg-brand/5 blur-3xl pointer-events-none -translate-y-1/3" />
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[36rem] h-[36rem] rounded-full bg-brand/8 blur-3xl pointer-events-none -translate-y-1/3" />
+      <div className="absolute right-0 bottom-0 w-[24rem] h-[24rem] rounded-full bg-brand/5 blur-3xl pointer-events-none translate-x-1/3 translate-y-1/3" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         {/* Kopf mit Gesamtbewertung */}

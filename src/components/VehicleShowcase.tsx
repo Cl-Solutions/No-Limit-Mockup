@@ -300,10 +300,16 @@ export default function VehicleShowcase() {
 
       <section
         id="fuehrerscheine"
-        className="py-16 md:py-32 bg-white dark:bg-ink relative transition-colors duration-300"
+        className="py-16 md:py-32 bg-white dark:bg-ink relative overflow-hidden transition-colors duration-300"
         ref={ref}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        {/* Subtile diagonale Akzent-Layer */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-0 w-[28rem] h-[28rem] rounded-full bg-brand/4 blur-3xl -translate-x-1/2" />
+          <div className="absolute bottom-1/4 right-0 w-[28rem] h-[28rem] rounded-full bg-brand/4 blur-3xl translate-x-1/2" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 40 }}
@@ -344,15 +350,21 @@ export default function VehicleShowcase() {
               />
             </picture>
 
-            {/* „Tippen!"-Hint-Badge oben rechts (verschwindet sobald ein Sheet offen war) */}
+            {/* „Tippen!"-Hint-Badge zentral, mit dezenter Bounce-Animation */}
             <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1.5 bg-brand text-white text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1.5 rounded-full shadow-lg pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
             >
-              <Hand size={12} className="rotate-12" />
-              <span>Tippen für Infos</span>
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                className="flex items-center gap-2 bg-brand text-white text-[11px] sm:text-sm font-black uppercase tracking-[0.2em] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
+              >
+                <Hand size={14} className="rotate-12" />
+                <span>Tippen für Infos</span>
+              </motion.div>
             </motion.div>
 
             {categories.map((cat, idx) => (

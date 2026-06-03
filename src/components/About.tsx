@@ -240,12 +240,14 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Weitere Team-Mitglieder (Platzhalter) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 max-w-5xl mt-4 md:mt-5">
+        <span className="block sm:hidden text-fg-subtle dark:text-white/35 text-xs uppercase tracking-[0.2em] mt-5 mb-2.5">← Wischen für mehr</span>
+
+        {/* Weitere Team-Mitglieder — Mobile als Swipe-Karussell, Desktop als Grid */}
+        <div className="no-scrollbar flex sm:grid sm:grid-cols-3 gap-4 md:gap-5 max-w-5xl sm:mt-4 md:mt-5 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 sm:mx-0 sm:px-0 pb-2 sm:pb-0">
           {teamMembers.map((m, i) => (
             <motion.div
               key={i}
-              className="bg-paper-inset dark:bg-ink-inset border border-black/8 dark:border-white/8 rounded-sm overflow-hidden group"
+              className="snap-start shrink-0 w-[78%] sm:w-auto bg-paper-inset dark:bg-ink-inset border border-black/8 dark:border-white/8 rounded-sm overflow-hidden group"
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}

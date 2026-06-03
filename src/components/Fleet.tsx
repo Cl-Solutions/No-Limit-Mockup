@@ -65,15 +65,15 @@ export default function Fleet() {
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="h-px w-8 bg-brand" />
-            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Flotte</span>
+            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Fahrzeuge</span>
           </div>
           <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-[1.05] tracking-tight mb-4">
-            Die modernste Flotte
+            Die modernsten Fahrzeuge
             <span className="text-brand"> der Region.</span>
           </h2>
           <p className="text-white/60 text-base md:text-lg leading-relaxed">
             Aktuelle Modelle, top gepflegt, für jede Klasse das passende Fahrzeug —
-            vom Automatik-Pkw über Motorräder bis zur kompletten Lkw-Flotte.
+            vom Automatik-Pkw über Motorräder bis zum schweren Lkw.
           </p>
         </motion.div>
 

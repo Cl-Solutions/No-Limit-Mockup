@@ -22,7 +22,7 @@ const seminars = [
     icon: AlertTriangle,
     title: 'ASF — Aufbauseminar',
     duration: 'Für Fahranfänger',
-    desc: 'Pflichtmaßnahme zur Führerscheinerhaltung für Fahranfänger mit A- oder B-Verstößen in der Probezeit. Jetzt Termin sichern.',
+    desc: 'Pflichtmaßnahme zur Führerscheinerhaltung für Fahranfänger mit einem A-Verstoß oder zwei B-Verstößen in der Probezeit. Jetzt Termin sichern.',
     tag: 'Probezeit',
   },
 ];

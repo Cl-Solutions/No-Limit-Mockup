@@ -140,12 +140,12 @@ export default function Process() {
                     : 'border-black/8 dark:border-white/8'
                 }`}>
                   {/* Phase-Counter oben */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-brand text-[10px] font-black uppercase tracking-[0.25em]">
-                      Phase {phase.num} / 04
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="inline-flex items-center gap-1.5 bg-brand/12 dark:bg-brand/15 text-brand dark:text-brand-light text-[10px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-sm">
+                      Phase {phase.num} <span className="text-brand/50 dark:text-brand-light/50">/</span> 04
                     </span>
                     {isFinal && (
-                      <span className="bg-brand text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-sm">
+                      <span className="bg-brand text-white text-[10px] font-black uppercase tracking-[0.15em] px-2.5 py-1 rounded-sm shadow-[0_0_14px_rgba(227,30,45,0.4)]">
                         Ziel
                       </span>
                     )}

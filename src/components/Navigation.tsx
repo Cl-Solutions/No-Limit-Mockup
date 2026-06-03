@@ -6,7 +6,7 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
   { label: 'Bewertungen', href: '#bewertungen' },
   { label: 'Führerscheine', href: '#fuehrerscheine' },
-  { label: 'Flotte', href: '#flotte' },
+  { label: 'Fahrzeuge', href: '#flotte' },
   { label: 'Über uns', href: '#about' },
   { label: 'Anmelden', href: '#oeffnungszeiten' },
 ];
@@ -14,7 +14,7 @@ const navLinks = [
 const mobileNavLinks = [
   { label: 'Bewertungen', href: '#bewertungen' },
   { label: 'Führerscheine', href: '#fuehrerscheine' },
-  { label: 'Flotte', href: '#flotte' },
+  { label: 'Fahrzeuge', href: '#flotte' },
   { label: 'Über uns & Team', href: '#about' },
   { label: 'Ablauf', href: '#ablauf' },
   { label: 'Seminare', href: '#seminare' },
