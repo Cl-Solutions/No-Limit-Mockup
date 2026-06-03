@@ -29,7 +29,7 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
         </button>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="text-[clamp(2.5rem,8vw,4rem)] font-black text-[#E31E2D] leading-none tracking-tighter">
+            <div className="text-[clamp(2.5rem,8vw,4rem)] font-black text-brand leading-none tracking-tighter">
               {cls.name}
             </div>
             <div className="text-white/85 font-bold text-base mt-1">{cls.title}</div>
@@ -54,7 +54,7 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
           <ul className="space-y-2">
             {cls.fahrzeuge.map((f, i) => (
               <li key={i} className="flex items-start gap-2.5 text-white/75 text-sm leading-relaxed">
-                <ChevronRight size={14} className="text-[#E31E2D] mt-0.5 shrink-0" />
+                <ChevronRight size={14} className="text-brand mt-0.5 shrink-0" />
                 <span>{f}</span>
               </li>
             ))}
@@ -96,7 +96,7 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
             <ul className="space-y-2">
               {cls.besonderheiten.map((b, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-white/75 text-sm leading-relaxed">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#E31E2D] shrink-0" />
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
                   <span>{b}</span>
                 </li>
               ))}
@@ -106,13 +106,13 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
       </div>
 
       {/* CTA */}
-      <div className="px-6 sm:px-8 py-5 border-t border-white/8 bg-[#0e0e0e] shrink-0">
+      <div className="px-6 sm:px-8 py-5 border-t border-white/8 bg-ink-inset shrink-0">
         <button
           onClick={() => {
             const el = document.querySelector('#oeffnungszeiten');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="w-full bg-[#E31E2D] text-white py-3.5 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_25px_rgba(227,30,45,0.4)] active:scale-[0.97]"
+          className="w-full bg-brand text-white py-3.5 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_25px_rgba(227,30,45,0.4)] active:scale-[0.97]"
         >
           Für {cls.name} anmelden
         </button>
@@ -144,7 +144,7 @@ function DetailSection({
 }) {
   return (
     <div>
-      <h4 className="flex items-center gap-2 text-[#E31E2D] text-xs font-black uppercase tracking-[0.2em] mb-3">
+      <h4 className="flex items-center gap-2 text-brand text-xs font-black uppercase tracking-[0.2em] mb-3">
         <Icon size={13} />
         {title}
       </h4>
@@ -192,7 +192,7 @@ function CategorySheet({
       <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" />
 
       <motion.div
-        className="relative z-10 w-full sm:max-w-xl bg-[#111] text-white rounded-t-2xl sm:rounded-sm overflow-hidden shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh]"
+        className="relative z-10 w-full sm:max-w-xl bg-ink-surface text-white rounded-t-2xl sm:rounded-sm overflow-hidden shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh]"
         initial={{ y: '100%', opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: '100%', opacity: 0 }}
@@ -204,7 +204,7 @@ function CategorySheet({
           <div className="w-10 h-1 bg-white/20 rounded-full" />
         </div>
 
-        <div className="h-1 bg-[#E31E2D]" />
+        <div className="h-1 bg-brand" />
 
         <AnimatePresence mode="wait" initial={false}>
           {activeClass ? (
@@ -231,7 +231,7 @@ function CategorySheet({
                   <span className="text-4xl leading-none">{cat.icon}</span>
                   <div>
                     {cat.badge && (
-                      <span className="bg-[#E31E2D] text-white text-[10px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-sm block w-fit mb-1.5">
+                      <span className="bg-brand text-white text-[10px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-sm block w-fit mb-1.5">
                         {cat.badge}
                       </span>
                     )}
@@ -252,23 +252,23 @@ function CategorySheet({
                     <button
                       key={id}
                       onClick={() => setActiveId(id)}
-                      className="text-left bg-white/3 border border-white/8 rounded-sm p-5 hover:border-[#E31E2D]/60 hover:bg-[#E31E2D]/5 transition-[border-color,background-color,transform] duration-150 group active:scale-[0.99]"
+                      className="text-left bg-white/3 border border-white/8 rounded-sm p-5 hover:border-brand/60 hover:bg-brand/5 transition-[border-color,background-color,transform] duration-150 group active:scale-[0.99]"
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div>
-                          <div className="text-[clamp(1.5rem,5vw,2rem)] font-black text-[#E31E2D] leading-none tracking-tighter">
+                          <div className="text-[clamp(1.5rem,5vw,2rem)] font-black text-brand leading-none tracking-tighter">
                             {cls.name}
                           </div>
                           <div className="text-white/85 text-sm font-medium mt-1">{cls.title}</div>
                         </div>
                         <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-sm shrink-0 ${
-                          cls.badge.startsWith('Schl') ? 'bg-[#E31E2D] text-white' : 'border border-white/15 text-white/65'
+                          cls.badge.startsWith('Schl') ? 'bg-brand text-white' : 'border border-white/15 text-white/65'
                         }`}>
                           {cls.badge}
                         </span>
                       </div>
                       <p className="text-white/55 text-[13px] leading-relaxed mb-4">{cls.summary}</p>
-                      <div className="flex items-center gap-1.5 text-[#E31E2D] text-[11px] font-bold uppercase tracking-[0.15em]">
+                      <div className="flex items-center gap-1.5 text-brand text-[11px] font-bold uppercase tracking-[0.15em]">
                         <span>Alle Details</span>
                         <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -300,7 +300,7 @@ export default function VehicleShowcase() {
 
       <section
         id="fuehrerscheine"
-        className="py-16 md:py-32 bg-white dark:bg-[#0A0A0A] relative transition-colors duration-300"
+        className="py-16 md:py-32 bg-white dark:bg-ink relative transition-colors duration-300"
         ref={ref}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -311,14 +311,14 @@ export default function VehicleShowcase() {
             transition={{ duration: 0.7 }}
           >
             <div className="flex items-center justify-center gap-3 mb-5">
-              <div className="h-px w-8 bg-[#E31E2D]" />
-              <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Führerscheine</span>
-              <div className="h-px w-8 bg-[#E31E2D]" />
+              <div className="h-px w-8 bg-brand" />
+              <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Führerscheine</span>
+              <div className="h-px w-8 bg-brand" />
             </div>
-            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-3">
+            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight mb-3">
               Welche Klasse passt zu dir?
             </h2>
-            <p className="text-[#444444] dark:text-gray-300 text-base max-w-md mx-auto">
+            <p className="text-fg-secondary dark:text-gray-300 text-base max-w-md mx-auto">
               Tippe auf ein Fahrzeug und entdecke alle passenden Führerscheinklassen — mit vollen Infos.
             </p>
           </motion.div>
@@ -335,6 +335,8 @@ export default function VehicleShowcase() {
               <img
                 src="/showcase.png"
                 alt="Fahrschule NoLimit Fahrzeuge"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto block"
                 width={1408}
                 height={628}
@@ -347,7 +349,7 @@ export default function VehicleShowcase() {
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1.5 bg-[#E31E2D] text-white text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1.5 rounded-full shadow-lg pointer-events-none"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1.5 bg-brand text-white text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1.5 rounded-full shadow-lg pointer-events-none"
             >
               <Hand size={12} className="rotate-12" />
               <span>Tippen für Infos</span>
@@ -368,23 +370,23 @@ export default function VehicleShowcase() {
               >
                 {/* Doppelter Pulsring für stärkeren „Klick mich"-Reiz */}
                 <span
-                  className="absolute inset-0 rounded-full bg-[#E31E2D]/40 animate-ping"
+                  className="absolute inset-0 rounded-full bg-brand/40 animate-ping"
                   style={{ animationDelay: `${idx * 250}ms`, animationDuration: '1.8s' }}
                 />
                 <span
-                  className="absolute -inset-1.5 rounded-full bg-[#E31E2D]/15 animate-ping"
+                  className="absolute -inset-1.5 rounded-full bg-brand/15 animate-ping"
                   style={{ animationDelay: `${idx * 250 + 400}ms`, animationDuration: '2.2s' }}
                 />
 
                 {/* Sichtbarer Hotspot — größer, mit weißem Ring */}
-                <span className="hotspot-inner relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#E31E2D] ring-2 ring-white shadow-[0_0_20px_rgba(227,30,45,0.9),0_2px_8px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out">
+                <span className="hotspot-inner relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-brand ring-2 ring-white shadow-[0_0_20px_rgba(227,30,45,0.9),0_2px_8px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out">
                   <span className="text-white text-base sm:text-lg leading-none" aria-hidden="true">
                     {cat.icon}
                   </span>
                 </span>
 
                 {/* Label IMMER sichtbar, nicht nur on-hover (Mobile-First) */}
-                <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-white text-[#111111] text-[10px] sm:text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-lg pointer-events-none">
+                <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-white text-fg-primary text-[10px] sm:text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-lg pointer-events-none">
                   {cat.label}
                   <span className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-white" />
                 </span>
@@ -403,7 +405,7 @@ export default function VehicleShowcase() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCat(cat)}
-                className="flex items-center justify-center gap-2.5 bg-transparent border border-[#E31E2D] hover:bg-[#E31E2D] text-[#111111] dark:text-white hover:text-white px-5 py-3.5 rounded-sm transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.97] text-sm font-bold group"
+                className="flex items-center justify-center gap-2.5 bg-transparent border border-brand hover:bg-brand text-fg-primary dark:text-white hover:text-white px-5 py-3.5 rounded-sm transition-[background-color,color,transform] duration-150 ease-out active:scale-[0.97] text-sm font-bold group"
               >
                 <span className="text-base">{cat.icon}</span>
                 <span>{cat.label}</span>

@@ -41,7 +41,7 @@ export default function Navigation() {
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
         scrolled
-          ? 'bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/5 shadow-2xl'
+          ? 'bg-ink/95 backdrop-blur-md border-b border-white/5 shadow-2xl'
           : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
@@ -75,13 +75,13 @@ export default function Navigation() {
               className="text-white/70 hover:text-white text-sm font-medium tracking-wide transition-colors duration-150 relative group"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#E31E2D] group-hover:w-full transition-[width] duration-200" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand group-hover:w-full transition-[width] duration-200" />
             </button>
           ))}
 
           <button
             onClick={() => handleNav('#oeffnungszeiten')}
-            className="anmelden-btn bg-[#E31E2D] text-white px-5 py-2 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97]"
+            className="anmelden-btn bg-brand text-white px-5 py-2 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97]"
           >
             Anmelden
           </button>
@@ -105,7 +105,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden bg-[#0A0A0A]/98 backdrop-blur-md border-t border-white/10 max-h-[calc(100vh-5rem)] overflow-y-auto"
+            className="lg:hidden bg-ink/98 backdrop-blur-md border-t border-white/10 max-h-[calc(100vh-5rem)] overflow-y-auto"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {mobileNavLinks.map((link) => (
@@ -119,7 +119,7 @@ export default function Navigation() {
               ))}
               <button
                 onClick={() => handleNav('#oeffnungszeiten')}
-                className="mt-4 bg-[#E31E2D] text-white py-3 font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
+                className="mt-4 bg-brand text-white py-3 font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
               >
                 Jetzt anmelden
               </button>

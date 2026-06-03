@@ -27,17 +27,17 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 rounded-sm max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-10"
+        className="bg-white dark:bg-ink-surface border border-black/10 dark:border-white/10 rounded-sm max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-10"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-[#111111] dark:text-white font-black text-2xl mb-2">Datenschutzerklärung</h2>
-        <p className="text-[#666666] dark:text-white/40 text-xs mb-6">
+        <h2 className="text-fg-primary dark:text-white font-black text-2xl mb-2">Datenschutzerklärung</h2>
+        <p className="text-fg-muted dark:text-white/40 text-xs mb-6">
           Übernommen aus den Angaben der Fahrschule NoLimit, an diese Website angepasst.
         </p>
 
-        <div className="text-[#444444] dark:text-white/65 text-sm leading-relaxed space-y-5">
+        <div className="text-fg-secondary dark:text-white/65 text-sm leading-relaxed space-y-5">
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">1. Verantwortlicher</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">1. Verantwortlicher</h3>
             <p>
               Fahrschule NoLimit · Inh. Etem Bardakcioglu<br />
               Bahnhofstr. 71, 75417 Mühlacker<br />
@@ -47,7 +47,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
           </section>
 
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">2. Allgemeines zur Datenverarbeitung</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">2. Allgemeines zur Datenverarbeitung</h3>
             <p>
               Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst.
               Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen
@@ -66,7 +66,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
           </section>
 
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">3. Rechtsgrundlagen der Verarbeitung</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">3. Rechtsgrundlagen der Verarbeitung</h3>
             <p>
               Soweit wir eine Einwilligung einholen, dient Art. 6 Abs. 1 lit. a DSGVO als Rechtsgrundlage.
               Für die Verarbeitung zur Erfüllung eines Vertrages gilt Art. 6 Abs. 1 lit. b DSGVO.
@@ -76,7 +76,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
           </section>
 
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">4. Server-Logfiles</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">4. Server-Logfiles</h3>
             <p>
               Beim Aufruf unserer Seite erfasst unser Provider automatisch folgende Daten in Server-Logfiles:
               Browsertyp und -version, Betriebssystem, Referrer-URL, gekürzte IP-Adresse sowie Datum und
@@ -86,7 +86,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
           </section>
 
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">5. Kontaktaufnahme</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">5. Kontaktaufnahme</h3>
             <p>
               Wenn Sie uns per Telefon, E-Mail oder WhatsApp kontaktieren, werden Ihre Angaben zur
               Bearbeitung der Anfrage gespeichert und nicht an Dritte weitergegeben. Es erfolgt kein
@@ -95,18 +95,18 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
           </section>
 
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">6. Eingebundene Drittinhalte</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">6. Eingebundene Drittinhalte</h3>
             <p>
               Diese Seite verlinkt auf Google Maps (Routenführung) und Google Reviews. Beim Klick auf
               einen externen Link werden Sie zur jeweiligen Seite von Google weitergeleitet. Auf den
               dortigen Datenschutz haben wir keinen Einfluss; siehe{' '}
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
-                className="text-[#E31E2D] underline hover:no-underline">policies.google.com/privacy</a>.
+                className="text-brand underline hover:no-underline">policies.google.com/privacy</a>.
             </p>
           </section>
 
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">7. Ihre Rechte</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">7. Ihre Rechte</h3>
             <p>
               Sie haben das Recht auf Auskunft über die bei uns gespeicherten personenbezogenen Daten
               (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung
@@ -116,7 +116,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
           </section>
 
           <section>
-            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">8. Widerspruch gegen Werbe-Mails</h3>
+            <h3 className="text-fg-primary dark:text-white font-bold text-base mb-2">8. Widerspruch gegen Werbe-Mails</h3>
             <p>
               Der Nutzung der im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur
               Übersendung von nicht ausdrücklich angeforderter Werbung wird hiermit widersprochen.
@@ -125,7 +125,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
             </p>
           </section>
 
-          <p className="text-[#999999] dark:text-white/30 text-xs pt-2 border-t border-black/5 dark:border-white/5">
+          <p className="text-fg-subtle dark:text-white/30 text-xs pt-2 border-t border-black/5 dark:border-white/5">
             Diese Datenschutzerklärung basiert auf der bestehenden Erklärung der Fahrschule NoLimit
             und wurde an die aktuelle Website angepasst. Bitte vor Live-Schaltung von einem Rechtsanwalt
             prüfen lassen.
@@ -133,7 +133,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
         </div>
         <button
           onClick={onClose}
-          className="mt-8 bg-[#E31E2D] text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
+          className="mt-8 bg-brand text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
         >
           Schließen
         </button>
@@ -153,42 +153,42 @@ function ImpressumModal({ onClose }: { onClose: () => void }) {
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 rounded-sm max-w-2xl w-full max-h-[80vh] overflow-y-auto p-10"
+        className="bg-white dark:bg-ink-surface border border-black/10 dark:border-white/10 rounded-sm max-w-2xl w-full max-h-[80vh] overflow-y-auto p-10"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-[#111111] dark:text-white font-black text-2xl mb-6">Impressum</h2>
-        <div className="text-[#444444] dark:text-white/60 text-sm leading-relaxed space-y-4">
+        <h2 className="text-fg-primary dark:text-white font-black text-2xl mb-6">Impressum</h2>
+        <div className="text-fg-secondary dark:text-white/60 text-sm leading-relaxed space-y-4">
           <p>
-            <strong className="text-[#111111] dark:text-white">Angaben gemäß § 5 TMG:</strong><br />
+            <strong className="text-fg-primary dark:text-white">Angaben gemäß § 5 TMG:</strong><br />
             Fahrschule NoLimit<br />
             Inh. Etem Bardakcioglu<br />
             Bahnhofstr. 71<br />
             75417 Mühlacker
           </p>
           <p>
-            <strong className="text-[#111111] dark:text-white">Kontakt:</strong><br />
+            <strong className="text-fg-primary dark:text-white">Kontakt:</strong><br />
             Telefon: 07041 49 71 35<br />
             Mobil: 0176 247 246 35<br />
             Fax: 07041 146 289 5<br />
             E-Mail: info@fahrschule-nolimit.de
           </p>
           <p>
-            <strong className="text-[#111111] dark:text-white">Berufsbezeichnung:</strong><br />
+            <strong className="text-fg-primary dark:text-white">Berufsbezeichnung:</strong><br />
             Fahrlehrer (verliehen in der Bundesrepublik Deutschland)
           </p>
           <p>
-            <strong className="text-[#111111] dark:text-white">Haftung für Inhalte:</strong><br />
+            <strong className="text-fg-primary dark:text-white">Haftung für Inhalte:</strong><br />
             Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt.
             Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine
             Gewähr übernehmen.
           </p>
-          <p className="text-[#999999] dark:text-white/30 text-xs">
+          <p className="text-fg-subtle dark:text-white/30 text-xs">
             Stand: 2025 — Dies ist ein Platzhalter-Impressum.
           </p>
         </div>
         <button
           onClick={onClose}
-          className="mt-8 bg-[#E31E2D] text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
+          className="mt-8 bg-brand text-white px-6 py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-600 transition-[background-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
         >
           Schließen
         </button>
@@ -206,7 +206,7 @@ export default function Footer() {
       {showDatenschutz && <DatenschutzModal onClose={() => setShowDatenschutz(false)} />}
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
 
-      <footer className="bg-[#F0F0F0] dark:bg-[#080808] border-t border-black/5 dark:border-white/5 transition-colors duration-300">
+      <footer className="bg-paper-muted dark:bg-ink border-t border-black/5 dark:border-white/5 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
             <div>
@@ -216,20 +216,20 @@ export default function Footer() {
                   <img src="/logo.png" alt="Fahrschule NoLimit" className="h-12 w-auto" width={248} height={184} />
                 </picture>
               </div>
-              <p className="text-[#666666] dark:text-gray-400 text-sm leading-relaxed">
+              <p className="text-fg-muted dark:text-gray-400 text-sm leading-relaxed">
                 Deine Fahrschule in Mühlacker und Knittlingen seit 2008.
                 Inh. Etem Bardakcioglu.
               </p>
             </div>
 
             <div>
-              <h4 className="text-[#111111] dark:text-white font-bold text-xs uppercase tracking-[0.2em] mb-5">Navigation</h4>
+              <h4 className="text-fg-primary dark:text-white font-bold text-xs uppercase tracking-[0.2em] mb-5">Navigation</h4>
               <div className="grid grid-cols-2 gap-2">
                 {navLinks.map((link) => (
                   <button
                     key={link.href}
                     onClick={() => handleNav(link.href)}
-                    className="text-[#666666] dark:text-gray-300 hover:text-[#111111] dark:hover:text-white text-sm text-left transition-colors duration-150"
+                    className="text-fg-muted dark:text-gray-300 hover:text-fg-primary dark:hover:text-white text-sm text-left transition-colors duration-150"
                   >
                     {link.label}
                   </button>
@@ -238,11 +238,11 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 className="text-[#111111] dark:text-white font-bold text-xs uppercase tracking-[0.2em] mb-5">Kontakt</h4>
-              <div className="space-y-3 text-sm text-[#666666] dark:text-gray-400">
-                <p><a href="tel:017624724635" className="hover:text-[#111111] dark:hover:text-white transition-colors">0176 247 246 35</a></p>
-                <p><a href="tel:07041497135" className="hover:text-[#111111] dark:hover:text-white transition-colors">07041 49 71 35</a></p>
-                <p><a href="mailto:info@fahrschule-nolimit.de" className="hover:text-[#111111] dark:hover:text-white transition-colors">info@fahrschule-nolimit.de</a></p>
+              <h4 className="text-fg-primary dark:text-white font-bold text-xs uppercase tracking-[0.2em] mb-5">Kontakt</h4>
+              <div className="space-y-3 text-sm text-fg-muted dark:text-gray-400">
+                <p><a href="tel:017624724635" className="hover:text-fg-primary dark:hover:text-white transition-colors">0176 247 246 35</a></p>
+                <p><a href="tel:07041497135" className="hover:text-fg-primary dark:hover:text-white transition-colors">07041 49 71 35</a></p>
+                <p><a href="mailto:info@fahrschule-nolimit.de" className="hover:text-fg-primary dark:hover:text-white transition-colors">info@fahrschule-nolimit.de</a></p>
                 <p>Bahnhofstr. 71, Mühlacker</p>
                 <p>Bahnhofstr. 4, Knittlingen</p>
               </div>

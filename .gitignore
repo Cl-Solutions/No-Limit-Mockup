@@ -18,3 +18,6 @@ dist-ssr/
 # Roh-Quellvideos (das fertige Hero-Video liegt in /public)
 *.mov
 *.MOV
+
+# Roh-Quellbilder (die fertigen Web-Assets liegen in /public/flotte/)
+/Flotte/

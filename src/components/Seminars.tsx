@@ -66,7 +66,7 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
       />
 
       {/* Card body */}
-      <div className="relative m-[1px] rounded-sm bg-white dark:bg-[#141414] p-6 md:p-10 overflow-hidden">
+      <div className="relative m-[1px] rounded-sm bg-white dark:bg-ink-surface p-6 md:p-10 overflow-hidden">
 
         {/* Inner spotlight */}
         <div
@@ -87,24 +87,24 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
         />
 
         <div className="relative z-10">
-          <div className="w-14 h-14 bg-[#E31E2D]/10 border border-[#E31E2D]/20 rounded-sm flex items-center justify-center mb-8 transition-[background-color] duration-200"
+          <div className="w-14 h-14 bg-brand/10 border border-brand/20 rounded-sm flex items-center justify-center mb-8 transition-[background-color] duration-200"
             style={{ background: hovered ? 'rgba(227,30,45,0.2)' : undefined }}>
-            <Icon size={24} className="text-[#E31E2D]" />
+            <Icon size={24} className="text-brand" />
           </div>
 
-          <span className="text-[#E31E2D] text-[10px] font-black uppercase tracking-[0.3em] mb-3 block">
+          <span className="text-brand text-[10px] font-black uppercase tracking-[0.3em] mb-3 block">
             {s.tag}
           </span>
 
-          <h3 className="text-[#111111] dark:text-white font-black text-xl leading-tight tracking-tight mb-3">
+          <h3 className="text-fg-primary dark:text-white font-black text-xl leading-tight tracking-tight mb-3">
             {s.title}
           </h3>
 
-          <div className="text-[#666666] dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-5">
+          <div className="text-fg-muted dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-5">
             {s.duration}
           </div>
 
-          <p className="text-[#444444] dark:text-gray-300 text-sm leading-relaxed">
+          <p className="text-fg-secondary dark:text-gray-300 text-sm leading-relaxed">
             {s.desc}
           </p>
 
@@ -114,7 +114,7 @@ function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
                 const el = document.querySelector('#oeffnungszeiten');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.2em] hover:text-red-400 transition-colors flex items-center gap-2 group/btn"
+              className="text-brand text-xs font-bold uppercase tracking-[0.2em] hover:text-red-400 transition-colors flex items-center gap-2 group/btn"
             >
               <span>Termin anfragen</span>
               <span className={`transition-transform duration-300 ${hovered ? 'translate-x-1' : ''}`}>→</span>
@@ -131,8 +131,8 @@ export default function Seminars() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="seminare" className="py-16 md:py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-96 md:h-96 rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none" />
+    <section id="seminare" className="py-16 md:py-32 bg-paper-subtle dark:bg-ink-subtle relative overflow-hidden transition-colors duration-300">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-96 md:h-96 rounded-full bg-brand/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
@@ -142,13 +142,13 @@ export default function Seminars() {
           transition={{ duration: 0.7 }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-[#E31E2D]" />
-            <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Seminare</span>
+            <div className="h-px w-8 bg-brand" />
+            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Seminare</span>
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-3">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight mb-3">
             Mehr als nur der Führerschein
           </h2>
-          <p className="text-[#444444] dark:text-gray-300 text-lg max-w-xl">
+          <p className="text-fg-secondary dark:text-gray-300 text-lg max-w-xl">
             Professionelle Weiterbildungen und Pflichtmaßnahmen aus einer Hand.
           </p>
         </motion.div>

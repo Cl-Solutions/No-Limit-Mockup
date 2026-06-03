@@ -26,7 +26,7 @@ function MediaTile({
   if (src) {
     return (
       <div className={`relative overflow-hidden rounded-sm ${className}`}>
-        <img src={src} alt={label} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={src} alt={label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
       </div>
     );
   }
@@ -37,7 +37,7 @@ function MediaTile({
       } ${className}`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,rgba(227,30,45,0.12),transparent_55%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <Icon size={40} className="text-[#E31E2D]/70 relative z-10" strokeWidth={1.5} />
+      <Icon size={40} className="text-brand/70 relative z-10" strokeWidth={1.5} />
       <span className="text-white/35 text-xs font-medium uppercase tracking-[0.2em] relative z-10">{label}</span>
       {!hideTag && (
         <span className="absolute bottom-2.5 right-3 flex items-center gap-1 text-white/20 text-[10px] uppercase tracking-wider">
@@ -53,8 +53,8 @@ export default function Fleet() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="flotte" className="py-16 md:py-32 bg-[#0A0A0A] relative overflow-hidden">
-      <div className="absolute right-0 top-0 w-[40rem] h-[40rem] rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none -translate-y-1/3 translate-x-1/4" />
+    <section id="flotte" className="py-16 md:py-32 bg-ink relative overflow-hidden">
+      <div className="absolute right-0 top-0 w-[40rem] h-[40rem] rounded-full bg-brand/5 blur-3xl pointer-events-none -translate-y-1/3 translate-x-1/4" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
@@ -64,12 +64,12 @@ export default function Fleet() {
           transition={{ duration: 0.7 }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-[#E31E2D]" />
-            <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Flotte</span>
+            <div className="h-px w-8 bg-brand" />
+            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Flotte</span>
           </div>
           <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-white leading-[1.05] tracking-tight mb-4">
             Die modernste Flotte
-            <span className="text-[#E31E2D]"> der Region.</span>
+            <span className="text-brand"> der Region.</span>
           </h2>
           <p className="text-white/60 text-base md:text-lg leading-relaxed">
             Aktuelle Modelle, top gepflegt, für jede Klasse das passende Fahrzeug —
@@ -87,33 +87,42 @@ export default function Fleet() {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="relative h-full min-h-[280px] lg:min-h-[420px]">
-              <MediaTile icon={Car} label="Unsere Pkw-Flotte" className="h-full w-full" align="top" hideTag />
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
+              <MediaTile icon={Car} label="Unsere Pkw-Flotte" src="/flotte/pkw-tag.webp" className="h-full w-full" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none">
                 <h3 className="text-white font-black text-xl md:text-2xl tracking-tight">
                   Lernen auf den schönsten Autos
                 </h3>
-                <p className="text-white/60 text-sm mt-1.5">
+                <p className="text-white/80 text-sm mt-1.5">
                   Aktuelle Pkw-Modelle, viele in Automatik &mdash; komfortabel und sicher.
                 </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Zweirad */}
+          {/* Motorrad */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
           >
-            <MediaTile icon={Bike} label="Motorräder &amp; Roller" className="h-40 lg:h-[202px] w-full" />
+            <MediaTile icon={Bike} label="Motorräder &amp; Roller" src="/flotte/motorrad.webp" className="h-40 lg:h-[202px] w-full" />
+            <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
+              <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Motorräder</span>
+            </div>
           </motion.div>
+
           {/* Lkw */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            className="relative"
           >
-            <MediaTile icon={Truck} label="Lkw &amp; Anhänger" className="h-40 lg:h-[202px] w-full" />
+            <MediaTile icon={Truck} label="Lkw &amp; Anhänger" src="/flotte/lkw.webp" className="h-40 lg:h-[202px] w-full" />
+            <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
+              <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Lkw &amp; Anhänger</span>
+            </div>
           </motion.div>
         </div>
       </div>

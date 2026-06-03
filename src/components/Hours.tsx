@@ -20,6 +20,7 @@ const locations: Location[] = [
     days: ['Dienstag', 'Donnerstag'],
     hours: '18:00 – 19:30 Uhr',
     registration: 'Anmeldung ab 16:30 Uhr',
+    image: '/flotte/standort-muehlacker.webp',
   },
   {
     city: 'KNITTLINGEN',
@@ -35,7 +36,7 @@ export default function Hours() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="oeffnungszeiten" className="py-16 md:py-32 bg-[#F8F8F8] dark:bg-[#0D0D0D] relative overflow-hidden transition-colors duration-300">
+    <section id="oeffnungszeiten" className="py-16 md:py-32 bg-paper-subtle dark:bg-ink-subtle relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           className="mb-12 md:mb-14 max-w-2xl"
@@ -44,13 +45,13 @@ export default function Hours() {
           transition={{ duration: 0.7 }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-[#E31E2D]" />
-            <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Anmelden</span>
+            <div className="h-px w-8 bg-brand" />
+            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Anmelden</span>
           </div>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight mb-4">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight mb-4">
             Komm einfach vorbei.
           </h2>
-          <p className="text-[#444444] dark:text-white/60 text-base md:text-lg leading-relaxed">
+          <p className="text-fg-secondary dark:text-white/60 text-base md:text-lg leading-relaxed">
             Anmeldung am einfachsten persönlich vor Ort — wir nehmen uns Zeit, beraten dich in Ruhe und unverbindlich.
             Die genauen Öffnungszeiten je Standort findest du direkt unten.
           </p>
@@ -61,7 +62,7 @@ export default function Hours() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-[#E31E2D] text-white rounded-sm p-6 md:p-8 mb-6 md:mb-8 relative overflow-hidden"
+          className="bg-brand text-white rounded-sm p-6 md:p-8 mb-6 md:mb-8 relative overflow-hidden"
         >
           <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/10 blur-3xl pointer-events-none" />
           <div className="relative flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
@@ -77,7 +78,7 @@ export default function Hours() {
               href="https://www.google.com/maps/search/?api=1&query=Bahnhofstr.+71+75417+M%C3%BChlacker"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-white text-[#E31E2D] px-5 py-3 font-bold uppercase tracking-[0.12em] text-sm hover:bg-white/90 transition-[background-color,transform] duration-150 ease-out rounded-sm shrink-0 active:scale-[0.97]"
+              className="flex items-center justify-center gap-2 bg-white text-brand px-5 py-3 font-bold uppercase tracking-[0.12em] text-sm hover:bg-white/90 transition-[background-color,transform] duration-150 ease-out rounded-sm shrink-0 active:scale-[0.97]"
             >
               <MapPin size={16} /> Route
             </a>
@@ -89,30 +90,30 @@ export default function Hours() {
           {locations.map((loc, i) => (
             <motion.div
               key={i}
-              className="bg-white dark:bg-[#111] border border-[#E31E2D]/20 rounded-sm relative overflow-hidden group hover:border-[#E31E2D]/50 transition-[border-color,box-shadow] duration-300"
+              className="bg-white dark:bg-ink-surface border border-brand/20 rounded-sm relative overflow-hidden group hover:border-brand/50 transition-[border-color,box-shadow] duration-300"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + i * 0.12 }}
               style={{ boxShadow: '0 0 40px rgba(227,30,45,0.05)' }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#E31E2D]/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               {/* Optionaler Gebäude-Foto-Slot — wird angezeigt, sobald `image` gesetzt ist */}
               {loc.image && (
-                <div className="aspect-[16/10] overflow-hidden bg-black/3 dark:bg-white/3 border-b border-[#E31E2D]/15">
-                  <img src={loc.image} alt={`Fahrschule NoLimit ${loc.city}`} className="w-full h-full object-cover" />
+                <div className="aspect-[16/10] overflow-hidden bg-black/3 dark:bg-white/3 border-b border-brand/15">
+                  <img src={loc.image} alt={`Fahrschule NoLimit ${loc.city}`} loading="lazy" className="w-full h-full object-cover" />
                 </div>
               )}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-[#E31E2D]/60 via-[#E31E2D]/20 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-brand/60 via-brand/20 to-transparent" />
 
               <div className="relative z-10 p-6 md:p-10">
                 <div className="flex items-start gap-3 mb-6">
-                  <div className="w-10 h-10 bg-[#E31E2D]/10 rounded-sm flex items-center justify-center mt-0.5">
-                    <MapPin size={18} className="text-[#E31E2D]" />
+                  <div className="w-10 h-10 bg-brand/10 rounded-sm flex items-center justify-center mt-0.5">
+                    <MapPin size={18} className="text-brand" />
                   </div>
                   <div>
-                    <h3 className="text-[#111111] dark:text-white font-black text-2xl tracking-tight">{loc.city}</h3>
-                    <p className="text-[#666666] dark:text-gray-400 text-sm mt-0.5">{loc.address}</p>
+                    <h3 className="text-fg-primary dark:text-white font-black text-2xl tracking-tight">{loc.city}</h3>
+                    <p className="text-fg-muted dark:text-gray-400 text-sm mt-0.5">{loc.address}</p>
                   </div>
                 </div>
 
@@ -120,7 +121,7 @@ export default function Hours() {
                   <div className="flex items-start gap-4">
                     <div className="flex gap-2 flex-wrap flex-1">
                       {loc.days.map((day) => (
-                        <span key={day} className="bg-[#E31E2D]/10 text-[#E31E2D] text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm">
+                        <span key={day} className="bg-brand/10 text-brand text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm">
                           {day}
                         </span>
                       ))}
@@ -129,11 +130,11 @@ export default function Hours() {
 
                   <div className="flex items-center gap-3">
                     <Clock size={16} className="text-black/20 dark:text-white/30 shrink-0" />
-                    <span className="text-[#111111] dark:text-white font-bold text-lg">{loc.hours}</span>
+                    <span className="text-fg-primary dark:text-white font-bold text-lg">{loc.hours}</span>
                   </div>
 
                   <div className="bg-black/3 dark:bg-white/3 rounded-sm px-4 py-3">
-                    <p className="text-[#444444] dark:text-gray-300 text-sm">{loc.registration}</p>
+                    <p className="text-fg-secondary dark:text-gray-300 text-sm">{loc.registration}</p>
                   </div>
                 </div>
               </div>
@@ -143,14 +144,14 @@ export default function Hours() {
 
         {/* Anmeldeformular-PDF */}
         <motion.div
-          className="bg-[#E31E2D]/5 border border-[#E31E2D]/20 rounded-sm p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
+          className="bg-brand/5 border border-brand/20 rounded-sm p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
           <div>
-            <h3 className="text-[#111111] dark:text-white font-bold text-lg md:text-xl mb-1.5">Anmeldeformular vorab ausfüllen</h3>
-            <p className="text-[#444444] dark:text-gray-300 text-sm max-w-lg">
+            <h3 className="text-fg-primary dark:text-white font-bold text-lg md:text-xl mb-1.5">Anmeldeformular vorab ausfüllen</h3>
+            <p className="text-fg-secondary dark:text-gray-300 text-sm max-w-lg">
               Spart Zeit beim Vorbeikommen — Formular runterladen, ausfüllen und direkt mitbringen.
             </p>
           </div>
@@ -158,7 +159,7 @@ export default function Hours() {
             href="http://fs-nolimit.de/Anmeldeformular.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-[#E31E2D] text-white px-5 sm:px-7 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] sm:whitespace-nowrap shrink-0 active:scale-[0.97] w-full sm:w-auto justify-center"
+            className="flex items-center gap-3 bg-brand text-white px-5 sm:px-7 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] sm:whitespace-nowrap shrink-0 active:scale-[0.97] w-full sm:w-auto justify-center"
           >
             <Download size={16} />
             Anmeldeformular (PDF)

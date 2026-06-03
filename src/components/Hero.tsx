@@ -57,11 +57,11 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[#0A0A0A]">
+    <section id="home" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-ink">
       {/* ── Background media layer ── */}
       <div className="absolute inset-0">
         {/* Fallback gradient bis Video geladen */}
-        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_70%_30%,rgba(227,30,45,0.22),transparent_60%),radial-gradient(80%_60%_at_15%_90%,rgba(227,30,45,0.12),transparent_55%)] bg-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_70%_30%,rgba(227,30,45,0.22),transparent_60%),radial-gradient(80%_60%_at_15%_90%,rgba(227,30,45,0.12),transparent_55%)] bg-ink" />
 
         <video
           ref={videoRef}
@@ -83,7 +83,7 @@ export default function Hero() {
 
         {/* Subtiler roter Glow */}
         <motion.div
-          className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-[#E31E2D]/10 blur-3xl"
+          className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-brand/10 blur-3xl"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -97,8 +97,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="flex items-center gap-3 mb-7"
           >
-            <div className="h-px w-12 bg-[#E31E2D]" />
-            <span className="text-[#E31E2D] text-xs sm:text-sm font-bold uppercase tracking-[0.25em]">
+            <div className="h-px w-12 bg-brand" />
+            <span className="text-brand text-xs sm:text-sm font-bold uppercase tracking-[0.25em]">
               Fahrschule NoLimit
             </span>
           </motion.div>
@@ -108,7 +108,7 @@ export default function Hero() {
               <WordReveal text="Dein" className="text-white" baseDelay={0.25} />
             </div>
             <div className="mb-1">
-              <WordReveal text="Führerschein." className="text-[#E31E2D]" baseDelay={0.4} />
+              <WordReveal text="Führerschein." className="text-brand" baseDelay={0.4} />
             </div>
             <div className="mb-1">
               <WordReveal text="Deine Freiheit." className="text-white" baseDelay={0.55} />
@@ -136,7 +136,7 @@ export default function Hero() {
           >
             <div className="flex gap-0.5">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} size={16} className="text-[#E31E2D] fill-[#E31E2D]" />
+                <Star key={i} size={16} className="text-brand fill-brand" />
               ))}
             </div>
             <span className="text-white/70 text-sm group-hover:text-white transition-colors">
@@ -152,7 +152,7 @@ export default function Hero() {
           >
             <button
               onClick={() => handleScroll('#oeffnungszeiten')}
-              className="bg-[#E31E2D] text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out hover:shadow-[0_0_30px_rgba(227,30,45,0.5)] active:scale-[0.97] rounded-sm"
+              className="bg-brand text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out hover:shadow-[0_0_30px_rgba(227,30,45,0.5)] active:scale-[0.97] rounded-sm"
             >
               Jetzt anmelden
             </button>
@@ -179,7 +179,7 @@ export default function Hero() {
         {muted ? (
           <VolumeX size={16} className="text-white/80 group-hover:text-white transition-colors" />
         ) : (
-          <Volume2 size={16} className="text-[#E31E2D]" />
+          <Volume2 size={16} className="text-brand" />
         )}
         <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/80 group-hover:text-white transition-colors">
           {muted ? 'Ton an' : 'Ton aus'}

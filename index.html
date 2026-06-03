@@ -27,6 +27,82 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Fahrschule NoLimit — Mühlacker & Knittlingen" />
     <meta name="twitter:image" content="/og-image.jpg" />
+
+    <!-- Structured Data: DrivingSchool (für Google Knowledge Panel / lokales SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "DrivingSchool",
+      "name": "Fahrschule NoLimit",
+      "alternateName": "Fahrschule NoLimit Mühlacker",
+      "description": "Fahrschule in Mühlacker & Knittlingen seit 2008. Alle Führerscheinklassen von Mofa bis Lkw, moderne Fahrzeugflotte.",
+      "url": "https://www.fahrschule-nolimit.de/",
+      "logo": "https://www.fahrschule-nolimit.de/logo.png",
+      "image": "https://www.fahrschule-nolimit.de/og-image.jpg",
+      "telephone": "+49-7041-497135",
+      "email": "info@fahrschule-nolimit.de",
+      "founder": { "@type": "Person", "name": "Etem Bardakcioglu" },
+      "foundingDate": "2008",
+      "priceRange": "€€",
+      "areaServed": ["Mühlacker", "Knittlingen", "Enzkreis"],
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Bahnhofstr. 71",
+          "postalCode": "75417",
+          "addressLocality": "Mühlacker",
+          "addressRegion": "BW",
+          "addressCountry": "DE"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Bahnhofstr. 4",
+          "addressLocality": "Knittlingen",
+          "addressRegion": "BW",
+          "addressCountry": "DE"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Tuesday", "Thursday"],
+          "opens": "16:30",
+          "closes": "19:30",
+          "validFrom": "2008-01-01"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Wednesday"],
+          "opens": "17:45",
+          "closes": "19:30",
+          "validFrom": "2011-01-01"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "201",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "sameAs": [
+        "https://www.facebook.com/people/Fahrschule-NoLimit-M%C3%BChlacker/100063694523011/",
+        "https://share.google/nNvluDwMGCzvPHidI"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Führerscheinklassen",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klasse B (Pkw)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klasse B197 (Automatik)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klasse BE (Anhänger)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klasse A / A2 / A1 (Motorrad)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klasse AM / Mofa (Roller)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klasse C / C1 / CE / C1E (Lkw)" } }
+        ]
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

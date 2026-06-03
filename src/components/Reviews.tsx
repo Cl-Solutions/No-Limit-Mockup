@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Star, Quote, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -70,7 +70,7 @@ function Stars({ size = 14 }: { size?: number }) {
   return (
     <div className="flex gap-0.5" aria-label="5 von 5 Sternen">
       {[1, 2, 3, 4, 5].map((i) => (
-        <Star key={i} size={size} className="text-[#E31E2D] fill-[#E31E2D]" />
+        <Star key={i} size={size} className="text-brand fill-brand" />
       ))}
     </div>
   );
@@ -80,6 +80,29 @@ export default function Reviews() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const trackRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  // Tracking welche Karte gerade „im Fokus" ist (für Pagination-Dots + aria-current)
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    let rafId = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const card = track.querySelector<HTMLElement>('[data-card]');
+        if (!card) return;
+        const stride = card.offsetWidth + 16;
+        const idx = Math.round(track.scrollLeft / stride);
+        setActiveIdx(Math.min(Math.max(idx, 0), reviews.length - 1));
+      });
+    };
+    track.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      track.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   const scrollByCard = (dir: 1 | -1) => {
     const track = trackRef.current;
@@ -89,9 +112,24 @@ export default function Reviews() {
     track.scrollBy({ left: dir * amount, behavior: 'smooth' });
   };
 
+  const scrollToCard = (idx: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector<HTMLElement>('[data-card]');
+    const stride = card ? card.offsetWidth + 16 : 340;
+    track.scrollTo({ left: idx * stride, behavior: 'smooth' });
+  };
+
+  const handleTrackKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); scrollByCard(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollByCard(-1); }
+    else if (e.key === 'Home') { e.preventDefault(); scrollToCard(0); }
+    else if (e.key === 'End') { e.preventDefault(); scrollToCard(reviews.length - 1); }
+  };
+
   return (
-    <section id="bewertungen" className="py-16 md:py-32 bg-white dark:bg-[#0A0A0A] relative overflow-hidden transition-colors duration-300">
-      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[36rem] h-[36rem] rounded-full bg-[#E31E2D]/5 blur-3xl pointer-events-none -translate-y-1/3" />
+    <section id="bewertungen" className="py-16 md:py-32 bg-white dark:bg-ink relative overflow-hidden transition-colors duration-300">
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[36rem] h-[36rem] rounded-full bg-brand/5 blur-3xl pointer-events-none -translate-y-1/3" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
         {/* Kopf mit Gesamtbewertung */}
@@ -103,45 +141,45 @@ export default function Reviews() {
         >
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-[#E31E2D]" />
-              <span className="text-[#E31E2D] text-xs font-bold uppercase tracking-[0.3em]">Bewertungen</span>
+              <div className="h-px w-8 bg-brand" />
+              <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Bewertungen</span>
             </div>
-            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-[#111111] dark:text-white leading-tight tracking-tight">
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight">
               Das sagen unsere Fahrschüler
             </h2>
           </div>
 
-          <div className="flex items-center gap-5 bg-[#F8F8F8] dark:bg-[#111] border border-black/8 dark:border-white/8 rounded-sm px-6 py-5 shrink-0">
+          <div className="flex items-center gap-5 bg-paper-subtle dark:bg-ink-surface border border-black/8 dark:border-white/8 rounded-sm px-6 py-5 shrink-0">
             <div className="text-center">
-              <div className="text-[#111111] dark:text-white text-5xl font-black leading-none tabular-nums">{RATING}</div>
+              <div className="text-fg-primary dark:text-white text-5xl font-black leading-none tabular-nums">{RATING}</div>
               <div className="mt-2 flex justify-center"><Stars size={15} /></div>
             </div>
             <div className="h-12 w-px bg-black/10 dark:bg-white/10" />
             <div>
-              <div className="flex items-center gap-1.5 text-[#111111] dark:text-white font-bold text-sm">
+              <div className="flex items-center gap-1.5 text-fg-primary dark:text-white font-bold text-sm">
                 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1Z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84Z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38Z"/></svg>
                 Google Bewertungen
               </div>
-              <div className="text-[#666666] dark:text-white/45 text-xs mt-1">aus {REVIEW_COUNT} Bewertungen</div>
+              <div className="text-fg-muted dark:text-white/45 text-xs mt-1">aus {REVIEW_COUNT} Bewertungen</div>
             </div>
           </div>
         </motion.div>
 
         {/* Swipe-Hinweis + Desktop-Pfeile */}
         <div className="flex items-center justify-between mb-4">
-          <span className="text-[#999999] dark:text-white/35 text-xs uppercase tracking-[0.2em]">← Wischen für mehr</span>
+          <span className="text-fg-subtle dark:text-white/35 text-xs uppercase tracking-[0.2em]">← Wischen für mehr</span>
           <div className="hidden md:flex gap-2">
             <button
               onClick={() => scrollByCard(-1)}
               aria-label="Vorherige Bewertungen"
-              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-[#444444] dark:text-white/60 hover:border-[#E31E2D] hover:text-[#E31E2D] transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/60 hover:border-brand hover:text-brand transition-colors"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={() => scrollByCard(1)}
               aria-label="Weitere Bewertungen"
-              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-[#444444] dark:text-white/60 hover:border-[#E31E2D] hover:text-[#E31E2D] transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/60 hover:border-brand hover:text-brand transition-colors"
             >
               <ChevronRight size={18} />
             </button>
@@ -151,7 +189,12 @@ export default function Reviews() {
         {/* Swipe-Karussell */}
         <motion.div
           ref={trackRef}
-          className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 sm:mx-0 sm:px-0 pb-2"
+          role="region"
+          aria-roledescription="Karussell"
+          aria-label="Google Bewertungen — Pfeiltasten zum Wechseln"
+          tabIndex={0}
+          onKeyDown={handleTrackKeyDown}
+          className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 sm:mx-0 sm:px-0 pb-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-ink rounded-sm"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
@@ -160,28 +203,51 @@ export default function Reviews() {
             <div
               key={i}
               data-card
-              className="snap-start shrink-0 w-[82%] sm:w-[340px] bg-[#F8F8F8] dark:bg-[#111] border border-black/8 dark:border-white/8 rounded-sm p-6 flex flex-col"
+              role="group"
+              aria-roledescription="Bewertung"
+              aria-label={`Bewertung ${i + 1} von ${reviews.length} — ${r.name}`}
+              aria-current={i === activeIdx ? 'true' : undefined}
+              className="snap-start shrink-0 w-[82%] sm:w-[340px] bg-paper-subtle dark:bg-ink-surface border border-black/8 dark:border-white/8 rounded-sm p-6 flex flex-col"
             >
-              <Quote size={28} className="text-[#E31E2D]/15 self-end -mb-3" />
+              <Quote size={28} className="text-brand/15 self-end -mb-3" aria-hidden="true" />
               <Stars />
-              <p className="text-[#444444] dark:text-white/70 text-sm leading-relaxed mt-4 mb-6 flex-1">
+              <p className="text-fg-secondary dark:text-white/70 text-sm leading-relaxed mt-4 mb-6 flex-1">
                 {r.text}
               </p>
               <div className="flex items-center gap-3 pt-4 border-t border-black/5 dark:border-white/5">
                 <div
+                  aria-hidden="true"
                   className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"
                   style={{ backgroundColor: r.color }}
                 >
                   {r.initial}
                 </div>
                 <div>
-                  <div className="text-[#111111] dark:text-white font-bold text-sm">{r.name}</div>
-                  <div className="text-[#999999] dark:text-white/35 text-xs">{r.date}</div>
+                  <div className="text-fg-primary dark:text-white font-bold text-sm">{r.name}</div>
+                  <div className="text-fg-subtle dark:text-white/35 text-xs">{r.date}</div>
                 </div>
               </div>
             </div>
           ))}
         </motion.div>
+
+        {/* Pagination-Dots */}
+        <div className="flex justify-center gap-2 mt-5" role="tablist" aria-label="Bewertung wählen">
+          {reviews.map((_, i) => (
+            <button
+              key={i}
+              role="tab"
+              aria-label={`Zu Bewertung ${i + 1} springen`}
+              aria-selected={i === activeIdx}
+              onClick={() => scrollToCard(i)}
+              className={`h-2 rounded-full transition-all duration-200 ${
+                i === activeIdx
+                  ? 'w-6 bg-brand'
+                  : 'w-2 bg-black/15 dark:bg-white/20 hover:bg-black/30 dark:hover:bg-white/40'
+              }`}
+            />
+          ))}
+        </div>
 
         <motion.div
           className="mt-10 flex justify-center"
@@ -193,7 +259,7 @@ export default function Reviews() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 border border-black/15 dark:border-white/15 text-[#111111] dark:text-white px-7 py-3.5 rounded-sm text-sm font-bold hover:border-[#E31E2D] hover:text-[#E31E2D] transition-colors duration-150"
+            className="flex items-center gap-2.5 border border-black/15 dark:border-white/15 text-fg-primary dark:text-white px-7 py-3.5 rounded-sm text-sm font-bold hover:border-brand hover:text-brand transition-colors duration-150"
           >
             Alle Bewertungen auf Google ansehen
             <ExternalLink size={15} />
