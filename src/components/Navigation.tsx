@@ -54,12 +54,17 @@ export default function Navigation() {
           aria-label="Fahrschule NoLimit — zur Startseite"
           className="flex items-center group bg-white rounded-sm px-2.5 py-1.5 shadow-[0_0_0_1px_rgba(255,255,255,0.08)] hover:shadow-[0_0_20px_rgba(227,30,45,0.35)] transition-shadow"
         >
-          <img
-            src="/logo.png"
-            alt="Fahrschule NoLimit"
-            className="h-10 sm:h-11 w-auto select-none"
-            draggable={false}
-          />
+          <picture>
+            <source srcSet="/logo.webp" type="image/webp" />
+            <img
+              src="/logo.png"
+              alt="Fahrschule NoLimit"
+              className="h-10 sm:h-11 w-auto select-none"
+              width={248}
+              height={184}
+              draggable={false}
+            />
+          </picture>
         </button>
 
         <nav className="hidden lg:flex items-center gap-8">

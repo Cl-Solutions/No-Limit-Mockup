@@ -330,12 +330,17 @@ export default function VehicleShowcase() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <img
-              src="/showcase.png"
-              alt="Fahrschule NoLimit Fahrzeuge"
-              className="w-full h-auto block"
-              draggable={false}
-            />
+            <picture>
+              <source srcSet="/showcase.webp" type="image/webp" />
+              <img
+                src="/showcase.png"
+                alt="Fahrschule NoLimit Fahrzeuge"
+                className="w-full h-auto block"
+                width={1408}
+                height={628}
+                draggable={false}
+              />
+            </picture>
 
             {/* „Tippen!"-Hint-Badge oben rechts (verschwindet sobald ein Sheet offen war) */}
             <motion.div

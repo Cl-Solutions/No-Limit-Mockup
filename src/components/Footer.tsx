@@ -211,7 +211,10 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
             <div>
               <div className="bg-white inline-block rounded-sm p-2.5 mb-4">
-                <img src="/logo.png" alt="Fahrschule NoLimit" className="h-12 w-auto" />
+                <picture>
+                  <source srcSet="/logo.webp" type="image/webp" />
+                  <img src="/logo.png" alt="Fahrschule NoLimit" className="h-12 w-auto" width={248} height={184} />
+                </picture>
               </div>
               <p className="text-[#666666] dark:text-gray-400 text-sm leading-relaxed">
                 Deine Fahrschule in Mühlacker und Knittlingen seit 2008.
@@ -237,8 +240,9 @@ export default function Footer() {
             <div>
               <h4 className="text-[#111111] dark:text-white font-bold text-xs uppercase tracking-[0.2em] mb-5">Kontakt</h4>
               <div className="space-y-3 text-sm text-[#666666] dark:text-gray-400">
-                <p>0176 247 246 35</p>
-                <p>info@fahrschule-nolimit.de</p>
+                <p><a href="tel:017624724635" className="hover:text-[#111111] dark:hover:text-white transition-colors">0176 247 246 35</a></p>
+                <p><a href="tel:07041497135" className="hover:text-[#111111] dark:hover:text-white transition-colors">07041 49 71 35</a></p>
+                <p><a href="mailto:info@fahrschule-nolimit.de" className="hover:text-[#111111] dark:hover:text-white transition-colors">info@fahrschule-nolimit.de</a></p>
                 <p>Bahnhofstr. 71, Mühlacker</p>
                 <p>Bahnhofstr. 4, Knittlingen</p>
               </div>

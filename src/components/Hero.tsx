@@ -70,7 +70,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster="/hero-poster.jpg"
         >
           <source src="/hero.webm" type="video/webm" />
