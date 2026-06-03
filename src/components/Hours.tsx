@@ -51,33 +51,33 @@ export default function Hours() {
             Komm einfach vorbei.
           </h2>
           <p className="text-[#444444] dark:text-white/60 text-base md:text-lg leading-relaxed">
-            Die schnellste Anmeldung: <strong className="text-[#111111] dark:text-white">Di &amp; Do abends in Mühlacker</strong> direkt
-            in der Fahrschule vorbeikommen. Wir nehmen uns Zeit, beraten dich in Ruhe — unverbindlich.
+            Anmeldung am einfachsten persönlich vor Ort — wir nehmen uns Zeit, beraten dich in Ruhe und unverbindlich.
+            Die genauen Öffnungszeiten je Standort findest du direkt unten.
           </p>
         </motion.div>
 
-        {/* Vorbeikommen-Highlight */}
+        {/* Vorbeikommen-Highlight (kompakt — Details stehen in den Karten darunter) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-[#E31E2D] text-white rounded-sm p-6 md:p-10 mb-6 md:mb-8 relative overflow-hidden"
+          className="bg-[#E31E2D] text-white rounded-sm p-6 md:p-8 mb-6 md:mb-8 relative overflow-hidden"
         >
           <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-white/10 blur-3xl pointer-events-none" />
-          <div className="relative flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-            <Sparkles size={40} className="text-white shrink-0" strokeWidth={1.5} />
+          <div className="relative flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <Sparkles size={36} className="text-white shrink-0" strokeWidth={1.5} />
             <div className="flex-1">
-              <h3 className="font-black text-xl md:text-2xl tracking-tight mb-1">Vorbeikommen &amp; anmelden</h3>
-              <p className="text-white/85 text-sm md:text-base leading-relaxed">
-                Mühlacker, Bahnhofstr. 71 — Dienstag &amp; Donnerstag ab 16:30 Uhr.
-                Kein Termin nötig, einfach reinkommen.
+              <h3 className="font-black text-lg md:text-xl tracking-tight mb-1">Vorbeikommen &amp; anmelden</h3>
+              <p className="text-white/85 text-sm md:text-[15px] leading-relaxed">
+                Kein Termin nötig — komm während der Öffnungszeiten in einen unserer Standorte
+                und melde dich direkt an.
               </p>
             </div>
             <a
               href="https://www.google.com/maps/search/?api=1&query=Bahnhofstr.+71+75417+M%C3%BChlacker"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-white text-[#E31E2D] px-6 py-3.5 font-bold uppercase tracking-[0.12em] text-sm hover:bg-white/90 transition-[background-color,transform] duration-150 ease-out rounded-sm shrink-0 active:scale-[0.97]"
+              className="flex items-center justify-center gap-2 bg-white text-[#E31E2D] px-5 py-3 font-bold uppercase tracking-[0.12em] text-sm hover:bg-white/90 transition-[background-color,transform] duration-150 ease-out rounded-sm shrink-0 active:scale-[0.97]"
             >
               <MapPin size={16} /> Route
             </a>

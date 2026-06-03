@@ -306,6 +306,7 @@ export interface CategoryInfo {
   hotspot: { x: number; y: number };  // Position auf dem Showcase-Bild (%)
 }
 
+// Hotspot-Koordinaten: % auf /public/showcase.png (1408 × 628, ohne Watermark).
 export const categories: CategoryInfo[] = [
   {
     id: 'auto',
@@ -315,7 +316,7 @@ export const categories: CategoryInfo[] = [
     classIds: ['b', 'b-auto', 'be'],
     badge: 'Am beliebtesten',
     intro: 'Vom klassischen B-Schein bis zum großen Anhänger — alles, was du auf der Straße brauchst.',
-    hotspot: { x: 13.5, y: 67 },
+    hotspot: { x: 13.5, y: 78 },
   },
   {
     id: 'motorrad',
@@ -324,7 +325,7 @@ export const categories: CategoryInfo[] = [
     category: 'Zweirad',
     classIds: ['a2', 'a'],
     intro: 'Das echte Motorradfahren — von A2 (mittlere Klasse) bis A (alle Maschinen).',
-    hotspot: { x: 35, y: 61 },
+    hotspot: { x: 35, y: 70 },
   },
   {
     id: 'roller',
@@ -333,7 +334,7 @@ export const categories: CategoryInfo[] = [
     category: 'Zweirad',
     classIds: ['mofa', 'am', 'a1'],
     intro: 'Klein, leicht, mobil — vom Mofa über Roller bis zum 125er.',
-    hotspot: { x: 62.5, y: 67 },
+    hotspot: { x: 62.5, y: 78 },
   },
   {
     id: 'lkw',
@@ -342,7 +343,7 @@ export const categories: CategoryInfo[] = [
     category: 'Lkw',
     classIds: ['c1', 'c1e', 'c', 'ce'],
     intro: 'Von 3,5 t bis Sattelzug — alle Lkw-Klassen für Beruf und Privat.',
-    hotspot: { x: 82, y: 46 },
+    hotspot: { x: 82, y: 50 },
   },
 ];
 

@@ -20,42 +20,115 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
   useModalA11y(true, onClose);
   return (
     <div
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-6"
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-label="Datenschutzerklärung"
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 rounded-sm max-w-2xl w-full max-h-[80vh] overflow-y-auto p-10"
+        className="bg-white dark:bg-[#111] border border-black/10 dark:border-white/10 rounded-sm max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-10"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-[#111111] dark:text-white font-black text-2xl mb-6">Datenschutzerklärung</h2>
-        <div className="text-[#444444] dark:text-white/60 text-sm leading-relaxed space-y-4">
-          <p>
-            <strong className="text-[#111111] dark:text-white">Verantwortlicher:</strong><br />
-            Fahrschule NoLimit | Inh. Etem Bardakcioglu<br />
-            Bahnhofstr. 71, Mühlacker<br />
-            info@fahrschule-nolimit.de
-          </p>
-          <p>
-            <strong className="text-[#111111] dark:text-white">Erhebung personenbezogener Daten:</strong><br />
-            Personenbezogene Daten werden nur erhoben, soweit dies für die Nutzung unserer Angebote
-            erforderlich ist. Ihre Daten werden nicht an Dritte weitergegeben.
-          </p>
-          <p>
-            <strong className="text-[#111111] dark:text-white">Kontaktaufnahme:</strong><br />
-            Wenn Sie uns per Telefon, E-Mail oder WhatsApp kontaktieren, werden Ihre Angaben
-            zwecks Bearbeitung der Anfrage bei uns gespeichert und nicht an Dritte weitergegeben.
-          </p>
-          <p>
-            <strong className="text-[#111111] dark:text-white">Ihre Rechte:</strong><br />
-            Sie haben das Recht auf Auskunft über die bei uns gespeicherten personenbezogenen Daten
-            sowie das Recht auf Berichtigung, Löschung oder Einschränkung der Verarbeitung.
-          </p>
-          <p className="text-[#999999] dark:text-white/30 text-xs">
-            Stand: 2025 — Diese Datenschutzerklärung ist ein Platzhalter.
-            Bitte lassen Sie diese durch einen Rechtsanwalt prüfen und anpassen.
+        <h2 className="text-[#111111] dark:text-white font-black text-2xl mb-2">Datenschutzerklärung</h2>
+        <p className="text-[#666666] dark:text-white/40 text-xs mb-6">
+          Übernommen aus den Angaben der Fahrschule NoLimit, an diese Website angepasst.
+        </p>
+
+        <div className="text-[#444444] dark:text-white/65 text-sm leading-relaxed space-y-5">
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">1. Verantwortlicher</h3>
+            <p>
+              Fahrschule NoLimit · Inh. Etem Bardakcioglu<br />
+              Bahnhofstr. 71, 75417 Mühlacker<br />
+              Telefon: 07041 49 71 35 · Mobil: 0176 247 246 35<br />
+              E-Mail: info@fahrschule-nolimit.de
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">2. Allgemeines zur Datenverarbeitung</h3>
+            <p>
+              Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst.
+              Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen
+              Datenschutzvorschriften, insbesondere der DSGVO.
+            </p>
+            <p className="mt-2">
+              Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich.
+              Soweit personenbezogene Daten erhoben werden, erfolgt dies stets auf freiwilliger Basis.
+              Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.
+            </p>
+            <p className="mt-2">
+              Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation
+              per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem
+              Zugriff durch Dritte ist nicht möglich.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">3. Rechtsgrundlagen der Verarbeitung</h3>
+            <p>
+              Soweit wir eine Einwilligung einholen, dient Art. 6 Abs. 1 lit. a DSGVO als Rechtsgrundlage.
+              Für die Verarbeitung zur Erfüllung eines Vertrages gilt Art. 6 Abs. 1 lit. b DSGVO.
+              Für rechtliche Verpflichtungen gilt Art. 6 Abs. 1 lit. c DSGVO. Liegt unser berechtigtes
+              Interesse vor, ist Art. 6 Abs. 1 lit. f DSGVO Rechtsgrundlage.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">4. Server-Logfiles</h3>
+            <p>
+              Beim Aufruf unserer Seite erfasst unser Provider automatisch folgende Daten in Server-Logfiles:
+              Browsertyp und -version, Betriebssystem, Referrer-URL, gekürzte IP-Adresse sowie Datum und
+              Uhrzeit des Zugriffs. Diese Daten sind nicht bestimmten Personen zuordenbar; eine Zusammenführung
+              mit anderen Datenquellen erfolgt nicht. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">5. Kontaktaufnahme</h3>
+            <p>
+              Wenn Sie uns per Telefon, E-Mail oder WhatsApp kontaktieren, werden Ihre Angaben zur
+              Bearbeitung der Anfrage gespeichert und nicht an Dritte weitergegeben. Es erfolgt kein
+              automatisierter Versand an externe Systeme.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">6. Eingebundene Drittinhalte</h3>
+            <p>
+              Diese Seite verlinkt auf Google Maps (Routenführung) und Google Reviews. Beim Klick auf
+              einen externen Link werden Sie zur jeweiligen Seite von Google weitergeleitet. Auf den
+              dortigen Datenschutz haben wir keinen Einfluss; siehe{' '}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
+                className="text-[#E31E2D] underline hover:no-underline">policies.google.com/privacy</a>.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">7. Ihre Rechte</h3>
+            <p>
+              Sie haben das Recht auf Auskunft über die bei uns gespeicherten personenbezogenen Daten
+              (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung
+              (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21). Außerdem steht Ihnen
+              ein Beschwerderecht bei einer Aufsichtsbehörde zu.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-[#111111] dark:text-white font-bold text-base mb-2">8. Widerspruch gegen Werbe-Mails</h3>
+            <p>
+              Der Nutzung der im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur
+              Übersendung von nicht ausdrücklich angeforderter Werbung wird hiermit widersprochen.
+              Die Betreiber behalten sich rechtliche Schritte im Falle unverlangter Zusendung von
+              Werbeinformationen, etwa durch Spam-E-Mails, ausdrücklich vor.
+            </p>
+          </section>
+
+          <p className="text-[#999999] dark:text-white/30 text-xs pt-2 border-t border-black/5 dark:border-white/5">
+            Diese Datenschutzerklärung basiert auf der bestehenden Erklärung der Fahrschule NoLimit
+            und wurde an die aktuelle Website angepasst. Bitte vor Live-Schaltung von einem Rechtsanwalt
+            prüfen lassen.
           </p>
         </div>
         <button

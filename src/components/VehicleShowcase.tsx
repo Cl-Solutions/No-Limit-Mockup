@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, ChevronLeft, BookOpen, Car, Clock, Users, Award } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, BookOpen, Car, Clock, Users, Award, Hand } from 'lucide-react';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { categories, getClass, type CategoryInfo, type LicenseClass } from '../data/licenseClasses';
 
@@ -17,10 +17,10 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -30 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col h-full"
+      className="flex-1 min-h-0 flex flex-col"
     >
       {/* Detail-Kopf */}
-      <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-white/8">
+      <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-white/8 shrink-0">
         <button
           onClick={onBack}
           className="flex items-center gap-1.5 text-white/50 hover:text-white text-xs font-bold uppercase tracking-[0.15em] mb-4 transition-colors"
@@ -106,7 +106,7 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
       </div>
 
       {/* CTA */}
-      <div className="px-6 sm:px-8 py-5 border-t border-white/8 bg-[#0e0e0e]">
+      <div className="px-6 sm:px-8 py-5 border-t border-white/8 bg-[#0e0e0e] shrink-0">
         <button
           onClick={() => {
             const el = document.querySelector('#oeffnungszeiten');
@@ -206,7 +206,7 @@ function CategorySheet({
 
         <div className="h-1 bg-[#E31E2D]" />
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           {activeClass ? (
             <ClassDetail key="detail" cls={activeClass} onBack={() => setActiveId(null)} />
           ) : (
@@ -216,10 +216,10 @@ function CategorySheet({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col h-full"
+              className="flex-1 min-h-0 flex flex-col"
             >
               {/* Kategorie-Kopf */}
-              <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-white/8 relative">
+              <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-white/8 relative shrink-0">
                 <button
                   onClick={onClose}
                   className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center text-white/45 hover:text-white hover:bg-white/8 rounded-sm transition-colors"
@@ -331,13 +331,24 @@ export default function VehicleShowcase() {
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <img
-              src="/Gemini_Generated_Image_fvyunyfvyunyfvyu.png"
+              src="/showcase.png"
               alt="Fahrschule NoLimit Fahrzeuge"
               className="w-full h-auto block"
               draggable={false}
             />
 
-            {categories.map((cat) => (
+            {/* „Tippen!"-Hint-Badge oben rechts (verschwindet sobald ein Sheet offen war) */}
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1.5 bg-[#E31E2D] text-white text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] px-2.5 sm:px-3 py-1.5 rounded-full shadow-lg pointer-events-none"
+            >
+              <Hand size={12} className="rotate-12" />
+              <span>Tippen für Infos</span>
+            </motion.div>
+
+            {categories.map((cat, idx) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCat(cat)}
@@ -350,13 +361,27 @@ export default function VehicleShowcase() {
                 }}
                 aria-label={`Führerscheinklassen für ${cat.label} anzeigen`}
               >
-                <span className="absolute inset-0 rounded-full bg-[#E31E2D]/30 animate-ping" />
-                <span className="hotspot-inner relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-[#E31E2D] shadow-[0_0_14px_rgba(227,30,45,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_22px_rgba(227,30,45,1)] transition-[transform,box-shadow] duration-150 ease-out">
-                  <span className="w-2.5 h-2.5 rounded-full bg-white" />
+                {/* Doppelter Pulsring für stärkeren „Klick mich"-Reiz */}
+                <span
+                  className="absolute inset-0 rounded-full bg-[#E31E2D]/40 animate-ping"
+                  style={{ animationDelay: `${idx * 250}ms`, animationDuration: '1.8s' }}
+                />
+                <span
+                  className="absolute -inset-1.5 rounded-full bg-[#E31E2D]/15 animate-ping"
+                  style={{ animationDelay: `${idx * 250 + 400}ms`, animationDuration: '2.2s' }}
+                />
+
+                {/* Sichtbarer Hotspot — größer, mit weißem Ring */}
+                <span className="hotspot-inner relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#E31E2D] ring-2 ring-white shadow-[0_0_20px_rgba(227,30,45,0.9),0_2px_8px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out">
+                  <span className="text-white text-base sm:text-lg leading-none" aria-hidden="true">
+                    {cat.icon}
+                  </span>
                 </span>
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 whitespace-nowrap bg-white dark:bg-[#1a1a1a] text-[#111111] dark:text-white text-xs sm:text-sm font-bold px-2.5 py-1.5 rounded-sm border border-[#E31E2D]/30 opacity-0 group-hover:opacity-100 pointer-events-none transition-[opacity,transform] duration-150 ease-out translate-y-1 group-hover:translate-y-0 shadow-lg">
+
+                {/* Label IMMER sichtbar, nicht nur on-hover (Mobile-First) */}
+                <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-white text-[#111111] text-[10px] sm:text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-lg pointer-events-none">
                   {cat.label}
-                  <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white dark:border-t-[#1a1a1a]" />
+                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-white" />
                 </span>
               </button>
             ))}
