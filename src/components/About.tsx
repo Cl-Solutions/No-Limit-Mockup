@@ -49,12 +49,12 @@ interface Member {
   photo?: string;
 }
 
-// Alle Fahrlehrer:innen — Fotos werden nach und nach ergänzt.
-// Reihenfolge wie von Etem geliefert.
+// Alle Fahrlehrer:innen — Reihenfolge: zuerst die mit Foto (Hasan, Pablo),
+// dann der Rest. Fotos für die anderen werden nach und nach ergänzt.
 const teamMembers: Member[] = [
   { name: 'Hasan', role: 'Fahrlehrer', photo: '/team/hasan.webp' },
-  { name: 'Nicole', role: 'Fahrlehrerin' },
   { name: 'Pablo', role: 'Fahrlehrer', photo: '/team/pablo.webp' },
+  { name: 'Nicole', role: 'Fahrlehrerin' },
   { name: 'Nicolas', role: 'Fahrlehrer' },
   { name: 'Anja', role: 'Fahrlehrerin' },
   { name: 'Mustafa', role: 'Fahrlehrer' },
