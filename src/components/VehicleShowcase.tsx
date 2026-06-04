@@ -7,7 +7,7 @@ import { categories, getClass, type CategoryInfo, type LicenseClass } from '../d
 /* ─────────────────────────────────────────────────────────────
    Klassen-Detail-Karte (innerhalb des Sheets)
    ───────────────────────────────────────────────────────────── */
-function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void }) {
+function ClassDetail({ cls, onBack, onClose }: { cls: LicenseClass; onBack: () => void; onClose: () => void }) {
   const sf = cls.praxis.sonderfahrten;
   const totalSF = sf ? sf.ueberland + sf.autobahn + sf.nacht : 0;
 
@@ -21,12 +21,22 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
     >
       {/* Detail-Kopf */}
       <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-white/8 shrink-0">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-1.5 text-white/50 hover:text-white text-xs font-bold uppercase tracking-[0.15em] mb-4 transition-colors"
-        >
-          <ChevronLeft size={14} /> Zurück
-        </button>
+        {/* Top row: Zurück links, Schließen rechts — beide klar erkennbar */}
+        <div className="flex items-center justify-between mb-4">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-1.5 text-white/65 hover:text-white text-xs font-bold uppercase tracking-[0.15em] transition-colors"
+          >
+            <ChevronLeft size={14} /> Übersicht
+          </button>
+          <button
+            onClick={onClose}
+            aria-label="Schließen"
+            className="w-8 h-8 -mr-2 flex items-center justify-center text-white/65 hover:text-white hover:bg-white/8 rounded-sm transition-colors"
+          >
+            <X size={18} />
+          </button>
+        </div>
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="text-[clamp(2.5rem,8vw,4rem)] font-black text-brand leading-none tracking-tighter">
@@ -109,8 +119,12 @@ function ClassDetail({ cls, onBack }: { cls: LicenseClass; onBack: () => void })
       <div className="px-6 sm:px-8 py-5 border-t border-white/8 bg-ink-inset shrink-0">
         <button
           onClick={() => {
-            const el = document.querySelector('#oeffnungszeiten');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            onClose();
+            // Kurzer Delay damit das Sheet-Exit-Animate sauber durchläuft, bevor wir scrollen
+            setTimeout(() => {
+              const el = document.querySelector('#oeffnungszeiten');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 220);
           }}
           className="w-full bg-brand text-white py-3.5 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_25px_rgba(227,30,45,0.4)] active:scale-[0.97]"
         >
@@ -199,16 +213,11 @@ function CategorySheet({
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Grab-Indicator (mobile) */}
-        <div className="sm:hidden flex justify-center pt-2 pb-1">
-          <div className="w-10 h-1 bg-white/20 rounded-full" />
-        </div>
-
         <div className="h-1 bg-brand" />
 
         <AnimatePresence mode="wait" initial={false}>
           {activeClass ? (
-            <ClassDetail key="detail" cls={activeClass} onBack={() => setActiveId(null)} />
+            <ClassDetail key="detail" cls={activeClass} onBack={() => setActiveId(null)} onClose={onClose} />
           ) : (
             <motion.div
               key="overview"
