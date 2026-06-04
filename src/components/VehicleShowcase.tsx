@@ -390,33 +390,24 @@ export default function VehicleShowcase() {
                   cursor: 'pointer',
                 }}
                 aria-label={`Führerscheinklassen für ${cat.label} anzeigen`}
-                animate={{ scale: [1, 1.12, 1] }}
+                animate={{ scale: [1, 1.06, 1] }}
                 transition={{
-                  duration: 1.8,
+                  duration: 2.4,
                   repeat: Infinity,
                   ease: 'easeInOut',
-                  delay: idx * 0.18,
+                  delay: idx * 0.22,
                 }}
               >
-                {/* Pulsring */}
+                {/* Pulsring — dezent */}
                 <span
-                  className="absolute inset-0 rounded-full bg-brand/40 animate-ping"
-                  style={{ animationDelay: `${idx * 250}ms`, animationDuration: '1.8s' }}
-                />
-                <span
-                  className="hidden sm:block absolute -inset-1.5 rounded-full bg-brand/15 animate-ping"
-                  style={{ animationDelay: `${idx * 250 + 400}ms`, animationDuration: '2.2s' }}
+                  className="absolute inset-0 rounded-full bg-brand/35 animate-ping"
+                  style={{ animationDelay: `${idx * 300}ms`, animationDuration: '2.4s' }}
                 />
 
-                {/* Sichtbarer Hotspot — auf Mobile kleiner Dot, auf Desktop großer Kreis mit Emoji */}
-                <span className="hotspot-inner relative flex h-5 w-5 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-brand ring-2 ring-white shadow-[0_0_14px_rgba(227,30,45,0.85),0_2px_6px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out">
-                  {/* Emoji NUR auf sm+ — auf Mobile reine Pulsing-Punkte */}
-                  <span className="hidden sm:inline text-white text-base sm:text-lg leading-none" aria-hidden="true">
-                    {cat.icon}
-                  </span>
-                </span>
+                {/* Sichtbarer Hotspot — nur Punkt, keine Emoji */}
+                <span className="hotspot-inner relative flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-brand ring-2 ring-white shadow-[0_0_12px_rgba(227,30,45,0.8),0_2px_6px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out" />
 
-                {/* Label NUR auf Desktop sichtbar — Mobile hat die Buttons direkt darunter */}
+                {/* Label — auf Desktop sichtbar unter dem Punkt */}
                 <span className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-white text-fg-primary text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-lg pointer-events-none">
                   {cat.label}
                   <span className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-white" />
