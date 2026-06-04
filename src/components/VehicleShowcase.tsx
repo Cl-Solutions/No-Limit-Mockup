@@ -370,12 +370,13 @@ export default function VehicleShowcase() {
               />
             </picture>
 
-            {/* „Tippen!"-Hint — oben mittig im Bild, statisch (nicht klickbar, daher keine Bounce) */}
+            {/* „Tippen!"-Hint — oben mittig im Bild, statisch. Mobile: kompakt. Desktop: gleicher Look, etwas größer. */}
             <div
-              className="hidden sm:flex absolute top-4 left-1/2 -translate-x-1/2 z-10 items-center gap-2 bg-brand text-white text-xs font-black uppercase tracking-[0.2em] px-3.5 py-2 rounded-full shadow-[0_4px_18px_rgba(0,0,0,0.45)] pointer-events-none"
+              className="absolute top-2.5 sm:top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 sm:gap-2 bg-brand text-white text-[10px] sm:text-xs font-black uppercase tracking-[0.18em] sm:tracking-[0.2em] px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full shadow-[0_4px_18px_rgba(0,0,0,0.45)] pointer-events-none whitespace-nowrap"
             >
-              <Hand size={13} className="rotate-12" />
-              <span>Tippen für Infos</span>
+              <Hand size={11} className="sm:hidden rotate-12" />
+              <Hand size={13} className="hidden sm:block rotate-12" />
+              <span>Tippe auf einen Punkt</span>
             </div>
 
             {categories.map((cat, idx) => (
