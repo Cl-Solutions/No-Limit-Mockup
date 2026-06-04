@@ -2,8 +2,11 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { MapPin, Clock, Download, DoorOpen } from 'lucide-react';
 
-// Optional pro Standort: `image: "/standorte/muehlacker.jpg"` setzen, sobald
-// Gebäudefotos vorliegen — ohne Bild bleibt die Karte kompakt wie bisher.
+// Google-Eintrag der Fahrschule (Hauptsitz Mühlacker) — zeigt Bewertungen,
+// Fotos und Öffnungszeiten. Von dort kann der Nutzer mit einem Klick die
+// Route starten.
+const GOOGLE_PROFIL_URL = 'https://share.google/nNvluDwMGCzvPHidI';
+
 interface Location {
   city: string;
   address: string;
@@ -11,6 +14,8 @@ interface Location {
   hours: string;
   registration: string;
   image?: string;
+  // mapsUrl: bevorzugt der Google-Profil-Link der Fahrschule; sonst Adress-Suche
+  mapsUrl: string;
 }
 
 const locations: Location[] = [
@@ -21,6 +26,7 @@ const locations: Location[] = [
     hours: '18:00 – 19:30 Uhr',
     registration: 'Anmeldung ab 16:30 Uhr',
     image: '/flotte/standort-muehlacker.webp',
+    mapsUrl: GOOGLE_PROFIL_URL,
   },
   {
     city: 'KNITTLINGEN',
@@ -28,6 +34,8 @@ const locations: Location[] = [
     days: ['Montag', 'Mittwoch'],
     hours: '18:00 – 19:30 Uhr',
     registration: 'Anmeldung ab 17:45 Uhr',
+    image: '/flotte/standort-knittlingen.webp',
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Bahnhofstr.+4+Knittlingen',
   },
 ];
 
@@ -82,7 +90,7 @@ export default function Hours() {
               </p>
             </div>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Bahnhofstr.+71+75417+M%C3%BChlacker"
+              href={GOOGLE_PROFIL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 bg-white text-brand px-5 py-3 font-bold uppercase tracking-[0.12em] text-sm hover:bg-white/90 transition-[background-color,transform] duration-150 ease-out rounded-sm shrink-0 active:scale-[0.97]"
@@ -92,12 +100,16 @@ export default function Hours() {
           </div>
         </motion.div>
 
-        {/* Standort-Karten — beide gleichwertig */}
+        {/* Standort-Karten — beide gleichwertig, ganze Karte ist Link zur Route */}
         <div className="grid md:grid-cols-2 gap-5 md:gap-6 mb-6 md:mb-8">
           {locations.map((loc, i) => (
-            <motion.div
+            <motion.a
               key={i}
-              className="bg-white dark:bg-ink-surface border border-brand/20 rounded-sm relative overflow-hidden group hover:border-brand/50 transition-[border-color,box-shadow] duration-300"
+              href={loc.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Route zum Standort ${loc.city} öffnen`}
+              className="bg-white dark:bg-ink-surface border border-brand/20 rounded-sm relative overflow-hidden group hover:border-brand/50 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + i * 0.12 }}
@@ -105,23 +117,27 @@ export default function Hours() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-brand/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Optionaler Gebäude-Foto-Slot — wird angezeigt, sobald `image` gesetzt ist */}
               {loc.image && (
                 <div className="aspect-[16/10] overflow-hidden bg-black/3 dark:bg-white/3 border-b border-brand/15">
-                  <img src={loc.image} alt={`Fahrschule NoLimit ${loc.city}`} loading="lazy" className="w-full h-full object-cover" />
+                  <img src={loc.image} alt={`Fahrschule NoLimit ${loc.city}`} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
                 </div>
               )}
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-brand/60 via-brand/20 to-transparent" />
 
               <div className="relative z-10 p-6 md:p-10">
-                <div className="flex items-start gap-3 mb-6">
-                  <div className="w-10 h-10 bg-brand/10 rounded-sm flex items-center justify-center mt-0.5">
-                    <MapPin size={18} className="text-brand" />
+                <div className="flex items-start justify-between gap-3 mb-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-brand/10 rounded-sm flex items-center justify-center mt-0.5">
+                      <MapPin size={18} className="text-brand" />
+                    </div>
+                    <div>
+                      <h3 className="text-fg-primary dark:text-white font-black text-2xl tracking-tight">{loc.city}</h3>
+                      <p className="text-fg-muted dark:text-gray-400 text-sm mt-0.5">{loc.address}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-fg-primary dark:text-white font-black text-2xl tracking-tight">{loc.city}</h3>
-                    <p className="text-fg-muted dark:text-gray-400 text-sm mt-0.5">{loc.address}</p>
-                  </div>
+                  <span className="text-brand text-xs font-black uppercase tracking-wider flex items-center gap-1 mt-2 shrink-0 group-hover:translate-x-0.5 transition-transform">
+                    Route <span aria-hidden="true">→</span>
+                  </span>
                 </div>
 
                 <div className="space-y-4 border-t border-black/5 dark:border-white/5 pt-6">
@@ -145,7 +161,7 @@ export default function Hours() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
 

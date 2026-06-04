@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { CheckCircle, Award, Star, User, ImageIcon } from 'lucide-react';
+import { CheckCircle, Award, User, ImageIcon } from 'lucide-react';
 
 /* ─────────────────────────────────────────────────────────────
    Stats + Highlights + Team — alles in einer „Über uns"-Sektion.
@@ -49,10 +49,10 @@ interface Member {
   photo?: string;
 }
 
-// Team-Mitglieder. Restliche Plätze als Platzhalter bis weitere Fotos vorliegen.
+// Team-Mitglieder. Restlicher Platz als Platzhalter bis weitere Fotos vorliegen.
 const teamMembers: Member[] = [
-  { name: 'Hasan Bardakcioglu', role: 'Fahrlehrer', photo: '/team/hasan.webp' },
-  { name: 'Name folgt', role: 'Fahrlehrer' },
+  { name: 'Hasan', role: 'Fahrlehrer', photo: '/team/hasan.webp' },
+  { name: 'Pablo', role: 'Fahrlehrer', photo: '/team/pablo.webp' },
   { name: 'Name folgt', role: 'Büro & Anmeldung' },
 ];
 
@@ -199,20 +199,15 @@ export default function About() {
                   <div className="absolute bottom-8 left-8 w-16 h-16 rounded-full border border-brand" />
                 </div>
                 <div className="relative z-10 flex flex-col items-center">
-                  <div className="w-36 h-36 rounded-full border-4 border-brand mb-6 shadow-[0_0_40px_rgba(227,30,45,0.3)] overflow-hidden">
+                  <div className="w-36 h-36 rounded-full border-4 border-brand shadow-[0_0_40px_rgba(227,30,45,0.3)] overflow-hidden">
                     <img
                       src="/team/etem.webp"
                       alt="Etem Bardakcioglu, Inhaber der Fahrschule NoLimit"
                       width={144}
                       height={144}
                       loading="lazy"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
                     />
-                  </div>
-                  <div className="flex gap-1" aria-hidden="true">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} size={14} className="text-brand fill-brand" />
-                    ))}
                   </div>
                 </div>
               </div>
