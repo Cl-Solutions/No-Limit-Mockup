@@ -136,7 +136,7 @@ export default function Hours() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Clock size={16} className="text-black/20 dark:text-white/30 shrink-0" />
+                    <Clock size={16} className="text-black/40 dark:text-white/55 shrink-0" aria-hidden="true" />
                     <span className="text-fg-primary dark:text-white font-bold text-lg">{loc.hours}</span>
                   </div>
 

@@ -79,7 +79,7 @@ export default function Hero() {
 
         {/* Scrims für Lesbarkeit über Video */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
 
         {/* Subtiler roter Glow */}
         <motion.div
@@ -114,7 +114,9 @@ export default function Hero() {
               <WordReveal text="Deine Freiheit." className="text-white" baseDelay={0.55} />
             </div>
             <div>
-              <WordReveal text="Keine Grenzen." className="text-white/30" baseDelay={0.75} />
+              <span aria-hidden="true">
+                <WordReveal text="Keine Grenzen." className="text-white/30" baseDelay={0.75} />
+              </span>
             </div>
           </h1>
 
@@ -158,7 +160,7 @@ export default function Hero() {
             </button>
             <button
               onClick={() => handleScroll('#fuehrerscheine')}
-              className="border-2 border-white/30 text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:border-white hover:bg-white/10 transition-[background-color,border-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
+              className="border-2 border-white/50 text-white px-8 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:border-white hover:bg-white/10 transition-[background-color,border-color,transform] duration-150 ease-out active:scale-[0.97] rounded-sm"
             >
               Führerscheine entdecken
             </button>

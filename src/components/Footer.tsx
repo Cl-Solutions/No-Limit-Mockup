@@ -125,7 +125,7 @@ function DatenschutzModal({ onClose }: { onClose: () => void }) {
             </p>
           </section>
 
-          <p className="text-fg-subtle dark:text-white/30 text-xs pt-2 border-t border-black/5 dark:border-white/5">
+          <p className="text-fg-muted dark:text-white/55 text-xs pt-2 border-t border-black/5 dark:border-white/5">
             Diese Datenschutzerklärung basiert auf der bestehenden Erklärung der Fahrschule NoLimit
             und wurde an die aktuelle Website angepasst. Bitte vor Live-Schaltung von einem Rechtsanwalt
             prüfen lassen.
@@ -182,7 +182,7 @@ function ImpressumModal({ onClose }: { onClose: () => void }) {
             Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine
             Gewähr übernehmen.
           </p>
-          <p className="text-fg-subtle dark:text-white/30 text-xs">
+          <p className="text-fg-muted dark:text-white/55 text-xs">
             Stand: 2025 — Dies ist ein Platzhalter-Impressum.
           </p>
         </div>
@@ -249,7 +249,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-black/10 dark:border-[#2a2a2a] flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="pt-8 border-t border-black/10 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-black/25 dark:text-white/25 text-xs text-center md:text-left">
               © 2025 Fahrschule NoLimit | Inh. Etem Bardakcioglu
             </p>

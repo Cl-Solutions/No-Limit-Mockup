@@ -38,7 +38,7 @@ function MediaTile({
     >
       <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_50%_0%,rgba(227,30,45,0.12),transparent_55%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <Icon size={40} className="text-brand/70 relative z-10" strokeWidth={1.5} />
-      <span className="text-white/35 text-xs font-medium uppercase tracking-[0.2em] relative z-10">{label}</span>
+      <span className="text-white/55 text-xs font-medium uppercase tracking-[0.2em] relative z-10">{label}</span>
       {!hideTag && (
         <span className="absolute bottom-2.5 right-3 flex items-center gap-1 text-white/20 text-[10px] uppercase tracking-wider">
           <ImageIcon size={11} /> Foto folgt

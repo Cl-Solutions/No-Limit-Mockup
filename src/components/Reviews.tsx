@@ -154,7 +154,7 @@ export default function Reviews() {
 
         {/* Swipe-Hinweis + Desktop-Pfeile */}
         <div className="flex items-center justify-between mb-4">
-          <span className="text-fg-subtle dark:text-white/35 text-xs uppercase tracking-[0.2em]">← Wischen für mehr</span>
+          <span className="text-fg-subtle dark:text-white/55 text-xs uppercase tracking-[0.2em]">← Wischen für mehr</span>
           <div className="hidden md:flex gap-2">
             <button
               onClick={() => scrollByCard(-1)}
@@ -211,7 +211,7 @@ export default function Reviews() {
                 </div>
                 <div>
                   <div className="text-fg-primary dark:text-white font-bold text-sm">{r.name}</div>
-                  <div className="text-fg-subtle dark:text-white/35 text-xs">{r.date}</div>
+                  <div className="text-fg-subtle dark:text-white/55 text-xs">{r.date}</div>
                 </div>
               </div>
             </div>
