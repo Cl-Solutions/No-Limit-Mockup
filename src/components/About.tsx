@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { CheckCircle, Award, User, ImageIcon } from 'lucide-react';
+import { CheckCircle, Award, User, ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 
 /* ─────────────────────────────────────────────────────────────
    Stats + Highlights + Team — alles in einer „Über uns"-Sektion.
@@ -118,7 +118,16 @@ function StatCard({ stat, animDelay, inView }: { stat: typeof stats[0]; animDela
 
 export default function About() {
   const sectionRef = useRef(null);
+  const teamTrackRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  const scrollTeam = (dir: 1 | -1) => {
+    const track = teamTrackRef.current;
+    if (!track) return;
+    const card = track.querySelector<HTMLElement>('[data-team-card]');
+    const amount = card ? card.offsetWidth + 16 : track.clientWidth * 0.7;
+    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  };
 
   return (
     <section id="about" className="py-16 md:py-32 bg-white dark:bg-ink relative overflow-hidden transition-colors duration-300" ref={sectionRef}>
@@ -174,18 +183,40 @@ export default function About() {
 
         {/* ─── Block 2: Inhaber + Team ─── */}
         <motion.div
-          className="mb-10 md:mb-14"
+          className="mb-10 md:mb-14 flex items-end justify-between gap-4"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-brand" />
-            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Dein Team</span>
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px w-8 bg-brand" />
+              <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Dein Team</span>
+            </div>
+            <h3 className="text-[clamp(1.75rem,4vw,2.5rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight">
+              Die Menschen hinter NoLimit
+            </h3>
           </div>
-          <h3 className="text-[clamp(1.75rem,4vw,2.5rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight">
-            Die Menschen hinter NoLimit
-          </h3>
+
+          {/* Pfeil-Buttons zum Durchklicken (Desktop) */}
+          <div className="hidden sm:flex gap-2 shrink-0 pb-1">
+            <button
+              type="button"
+              onClick={() => scrollTeam(-1)}
+              aria-label="Vorheriges Team-Mitglied"
+              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/65 hover:border-brand hover:text-brand transition-colors"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTeam(1)}
+              aria-label="Nächstes Team-Mitglied"
+              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/65 hover:border-brand hover:text-brand transition-colors"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </motion.div>
 
         {/* Inhaber-Karte */}
@@ -203,12 +234,12 @@ export default function About() {
                   <div className="absolute bottom-8 left-8 w-16 h-16 rounded-full border border-brand" />
                 </div>
                 <div className="relative z-10 flex flex-col items-center">
-                  <div className="w-36 h-36 rounded-full border-4 border-brand shadow-[0_0_40px_rgba(227,30,45,0.3)] overflow-hidden">
+                  <div className="w-44 h-44 md:w-52 md:h-52 lg:w-56 lg:h-56 rounded-full border-4 border-brand shadow-[0_0_40px_rgba(227,30,45,0.3)] overflow-hidden">
                     <img
                       src="/team/etem.webp"
                       alt="Etem Bardakcioglu, Inhaber der Fahrschule NoLimit"
-                      width={144}
-                      height={144}
+                      width={224}
+                      height={224}
                       loading="lazy"
                       className="w-full h-full object-cover object-top"
                     />
@@ -246,17 +277,21 @@ export default function About() {
           </div>
         </motion.div>
 
-        <span className="block sm:hidden text-fg-subtle dark:text-white/55 text-xs uppercase tracking-[0.2em] mt-5 mb-2.5">← Wischen für mehr</span>
+        <span className="block sm:hidden text-fg-subtle dark:text-white/55 text-xs uppercase tracking-[0.2em] mt-5 mb-2.5" aria-hidden="true">← Wischen für mehr</span>
 
-        {/* Weitere Team-Mitglieder — Mobile als Swipe-Karussell, Desktop als Grid */}
-        <div className="no-scrollbar flex sm:grid sm:grid-cols-3 gap-4 md:gap-5 max-w-5xl sm:mt-4 md:mt-5 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 sm:mx-0 sm:px-0 pb-2 sm:pb-0">
+        {/* Team-Mitglieder — horizontales Karussell auf allen Viewports */}
+        <div
+          ref={teamTrackRef}
+          className="no-scrollbar flex gap-4 md:gap-5 mt-2 md:mt-5 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 sm:mx-0 sm:px-0 pb-2 scroll-pl-5 sm:scroll-pl-0"
+        >
           {teamMembers.map((m, i) => (
             <motion.div
               key={i}
-              className="snap-start shrink-0 w-[78%] sm:w-auto bg-paper-inset dark:bg-ink-inset border border-black/8 dark:border-white/8 rounded-sm overflow-hidden group"
-              initial={{ opacity: 0, y: 30 }}
+              data-team-card
+              className="snap-start shrink-0 w-[78%] sm:w-[260px] md:w-[280px] bg-paper-inset dark:bg-ink-inset border border-black/8 dark:border-white/8 rounded-sm overflow-hidden group"
+              initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 + i * 0.1 }}
+              transition={{ duration: 0.7, delay: 0.5 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="relative aspect-[4/3] bg-gradient-to-br from-paper-muted to-paper-inset dark:from-ink-surface dark:to-ink-subtle flex flex-col items-center justify-center gap-2">
                 {m.photo ? (
