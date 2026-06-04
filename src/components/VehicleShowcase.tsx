@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { X, ChevronRight, ChevronLeft, BookOpen, Car, Clock, Users, Award, Hand } from 'lucide-react';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { categories, getClass, type CategoryInfo, type LicenseClass } from '../data/licenseClasses';
@@ -289,8 +289,17 @@ function CategorySheet({
    ───────────────────────────────────────────────────────────── */
 export default function VehicleShowcase() {
   const ref = useRef(null);
+  const imageRef = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [activeCat, setActiveCat] = useState<CategoryInfo | null>(null);
+  const reduce = useReducedMotion();
+
+  // Dezenter Scroll-Parallax aufs Hotspot-Bild — Hauch von Bewegung beim Scroll
+  const { scrollYProgress: imgProgress } = useScroll({
+    target: imageRef,
+    offset: ['start end', 'end start'],
+  });
+  const imgY = useTransform(imgProgress, [0, 1], reduce ? [0, 0] : [-12, 12]);
 
   return (
     <>
@@ -329,12 +338,14 @@ export default function VehicleShowcase() {
             </p>
           </motion.div>
 
-          {/* Hotspot-Bild */}
+          {/* Hotspot-Bild — sanfter Reveal + dezenter Scroll-Parallax */}
           <motion.div
+            ref={imageRef}
             className="relative rounded-sm overflow-hidden border border-black/8 dark:border-white/8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            style={{ y: imgY }}
           >
             <picture>
               <source srcSet="/showcase.webp" type="image/webp" />
