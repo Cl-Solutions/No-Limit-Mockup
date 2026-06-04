@@ -370,26 +370,16 @@ export default function VehicleShowcase() {
               />
             </picture>
 
-            {/* „Tippen!"-Hint — nur Desktop, dezent oben rechts (auf Mobile wären die Buttons darunter primary CTA) */}
-            {/* „Tippen!"-Hint zentral mit dezenter Bounce — nur Desktop, auf Mobile sind die Buttons unten primary CTA */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="hidden sm:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
+            {/* „Tippen!"-Hint — oben mittig im Bild, statisch (nicht klickbar, daher keine Bounce) */}
+            <div
+              className="hidden sm:flex absolute top-4 left-1/2 -translate-x-1/2 z-10 items-center gap-2 bg-brand text-white text-xs font-black uppercase tracking-[0.2em] px-3.5 py-2 rounded-full shadow-[0_4px_18px_rgba(0,0,0,0.45)] pointer-events-none"
             >
-              <motion.div
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-                className="flex items-center gap-2 bg-brand text-white text-sm font-black uppercase tracking-[0.2em] px-4 py-2.5 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
-              >
-                <Hand size={14} className="rotate-12" />
-                <span>Tippen für Infos</span>
-              </motion.div>
-            </motion.div>
+              <Hand size={13} className="rotate-12" />
+              <span>Tippen für Infos</span>
+            </div>
 
             {categories.map((cat, idx) => (
-              <button
+              <motion.button
                 key={cat.id}
                 onClick={() => setActiveCat(cat)}
                 className="absolute group"
@@ -400,6 +390,13 @@ export default function VehicleShowcase() {
                   cursor: 'pointer',
                 }}
                 aria-label={`Führerscheinklassen für ${cat.label} anzeigen`}
+                animate={{ scale: [1, 1.12, 1] }}
+                transition={{
+                  duration: 1.8,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: idx * 0.18,
+                }}
               >
                 {/* Pulsring */}
                 <span
@@ -424,7 +421,7 @@ export default function VehicleShowcase() {
                   {cat.label}
                   <span className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-white" />
                 </span>
-              </button>
+              </motion.button>
             ))}
           </motion.div>
 
