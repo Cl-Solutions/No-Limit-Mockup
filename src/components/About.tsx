@@ -49,11 +49,15 @@ interface Member {
   photo?: string;
 }
 
-// Team-Mitglieder. Restlicher Platz als Platzhalter bis weitere Fotos vorliegen.
+// Alle Fahrlehrer:innen — Fotos werden nach und nach ergänzt.
+// Reihenfolge wie von Etem geliefert.
 const teamMembers: Member[] = [
   { name: 'Hasan', role: 'Fahrlehrer', photo: '/team/hasan.webp' },
+  { name: 'Nicole', role: 'Fahrlehrerin' },
   { name: 'Pablo', role: 'Fahrlehrer', photo: '/team/pablo.webp' },
-  { name: 'Name folgt', role: 'Büro & Anmeldung' },
+  { name: 'Nicolas', role: 'Fahrlehrer' },
+  { name: 'Anja', role: 'Fahrlehrerin' },
+  { name: 'Mustafa', role: 'Fahrlehrer' },
 ];
 
 function StatCard({ stat, animDelay, inView }: { stat: typeof stats[0]; animDelay: number; inView: boolean }) {
