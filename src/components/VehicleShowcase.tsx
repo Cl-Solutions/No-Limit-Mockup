@@ -331,7 +331,7 @@ export default function VehicleShowcase() {
               <div className="h-px w-8 bg-brand" />
             </div>
             <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight mb-3">
-              Welche Klasse passt zu dir?
+              Welchen Führerschein willst du machen?
             </h2>
             <p className="text-fg-secondary dark:text-gray-300 text-base max-w-md mx-auto">
               Wähle deine Fahrzeugklasse und entdecke alle Details — von Mindestalter bis Pflichtstunden.
@@ -362,14 +362,21 @@ export default function VehicleShowcase() {
             </picture>
 
             {/* „Tippen!"-Hint — nur Desktop, dezent oben rechts (auf Mobile wären die Buttons darunter primary CTA) */}
+            {/* „Tippen!"-Hint zentral mit dezenter Bounce — nur Desktop, auf Mobile sind die Buttons unten primary CTA */}
             <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="hidden sm:flex absolute top-4 right-4 z-10 items-center gap-1.5 bg-brand text-white text-xs font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-lg pointer-events-none"
+              className="hidden sm:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
             >
-              <Hand size={12} className="rotate-12" />
-              <span>Tippen für Infos</span>
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                className="flex items-center gap-2 bg-brand text-white text-sm font-black uppercase tracking-[0.2em] px-4 py-2.5 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
+              >
+                <Hand size={14} className="rotate-12" />
+                <span>Tippen für Infos</span>
+              </motion.div>
             </motion.div>
 
             {categories.map((cat, idx) => (

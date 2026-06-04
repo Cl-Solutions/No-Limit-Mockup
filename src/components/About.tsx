@@ -183,40 +183,18 @@ export default function About() {
 
         {/* ─── Block 2: Inhaber + Team ─── */}
         <motion.div
-          className="mb-10 md:mb-14 flex items-end justify-between gap-4"
+          className="mb-10 md:mb-14"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-px w-8 bg-brand" />
-              <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Dein Team</span>
-            </div>
-            <h3 className="text-[clamp(1.75rem,4vw,2.5rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight">
-              Die Menschen hinter NoLimit
-            </h3>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-brand" />
+            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Dein Team</span>
           </div>
-
-          {/* Pfeil-Buttons zum Durchklicken (Desktop) */}
-          <div className="hidden sm:flex gap-2 shrink-0 pb-1">
-            <button
-              type="button"
-              onClick={() => scrollTeam(-1)}
-              aria-label="Vorheriges Team-Mitglied"
-              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/65 hover:border-brand hover:text-brand transition-colors"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTeam(1)}
-              aria-label="Nächstes Team-Mitglied"
-              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/65 hover:border-brand hover:text-brand transition-colors"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+          <h3 className="text-[clamp(1.75rem,4vw,2.5rem)] font-black text-fg-primary dark:text-white leading-tight tracking-tight">
+            Die Menschen hinter NoLimit
+          </h3>
         </motion.div>
 
         {/* Inhaber-Karte */}
@@ -277,7 +255,29 @@ export default function About() {
           </div>
         </motion.div>
 
-        <span className="block sm:hidden text-fg-subtle dark:text-white/55 text-xs uppercase tracking-[0.2em] mt-5 mb-2.5" aria-hidden="true">← Wischen für mehr</span>
+        {/* Mobile-Hinweis + Desktop-Pfeil-Buttons direkt überm Karussell */}
+        <div className="flex items-center justify-between mt-5 mb-2.5 gap-3">
+          <span className="block sm:hidden text-fg-subtle dark:text-white/55 text-xs uppercase tracking-[0.2em]" aria-hidden="true">← Wischen für mehr</span>
+          <span className="hidden sm:block text-fg-subtle dark:text-white/55 text-xs uppercase tracking-[0.2em]" aria-hidden="true">Durchklicken</span>
+          <div className="hidden sm:flex gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => scrollTeam(-1)}
+              aria-label="Vorheriges Team-Mitglied"
+              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/65 hover:border-brand hover:text-brand transition-colors"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTeam(1)}
+              aria-label="Nächstes Team-Mitglied"
+              className="w-10 h-10 flex items-center justify-center rounded-sm border border-black/15 dark:border-white/15 text-fg-secondary dark:text-white/65 hover:border-brand hover:text-brand transition-colors"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
 
         {/* Team-Mitglieder — horizontales Karussell auf allen Viewports */}
         <div

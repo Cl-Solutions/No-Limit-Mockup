@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Truck, RefreshCw, AlertTriangle } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -34,93 +34,46 @@ interface SeminarCardProps {
 }
 
 function SeminarCard({ s, animDelay, inView }: SeminarCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [hovered, setHovered] = useState(false);
   const Icon = s.icon;
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: animDelay, ease: [0.16, 1, 0.3, 1] }}
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="relative rounded-sm overflow-hidden cursor-default"
+      transition={{ duration: 0.8, delay: animDelay, ease: [0.22, 1, 0.36, 1] }}
+      className="relative rounded-sm overflow-hidden cursor-default bg-white dark:bg-ink-surface border border-black/8 dark:border-white/8 p-6 md:p-10 group transition-[border-color,transform,box-shadow] duration-200 hover:border-brand/40 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(227,30,45,0.10)]"
     >
-      {/* Outer glow border */}
-      <div
-        className="absolute inset-0 rounded-sm pointer-events-none transition-opacity duration-300"
-        style={{
-          opacity: hovered ? 1 : 0,
-          background: `radial-gradient(350px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.5), transparent 60%)`,
-        }}
-      />
+      <div className="w-14 h-14 bg-brand/10 border border-brand/20 rounded-sm flex items-center justify-center mb-8 transition-colors duration-200 group-hover:bg-brand/20">
+        <Icon size={24} className="text-brand" />
+      </div>
 
-      {/* Card body */}
-      <div className="relative m-[1px] rounded-sm bg-white dark:bg-ink-surface p-6 md:p-10 overflow-hidden">
+      <span className="text-brand text-[10px] font-black uppercase tracking-[0.3em] mb-3 block">
+        {s.tag}
+      </span>
 
-        {/* Inner spotlight */}
-        <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-          style={{
-            opacity: hovered ? 1 : 0,
-            background: `radial-gradient(400px circle at ${mouse.x}px ${mouse.y}px, rgba(227,30,45,0.07), transparent 55%)`,
+      <h3 className="text-fg-primary dark:text-white font-black text-xl leading-tight tracking-tight mb-3">
+        {s.title}
+      </h3>
+
+      <div className="text-fg-muted dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-5">
+        {s.duration}
+      </div>
+
+      <p className="text-fg-secondary dark:text-gray-300 text-sm leading-relaxed">
+        {s.desc}
+      </p>
+
+      <div className="mt-8 pt-6 border-t border-black/5 dark:border-white/5">
+        <button
+          onClick={() => {
+            const el = document.querySelector('#oeffnungszeiten');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
-        />
-
-        {/* Top edge glow */}
-        <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-300"
-          style={{
-            opacity: hovered ? 1 : 0,
-            background: `radial-gradient(200px circle at ${mouse.x}px 0px, rgba(227,30,45,0.9), transparent 70%)`,
-          }}
-        />
-
-        <div className="relative z-10">
-          <div className="w-14 h-14 bg-brand/10 border border-brand/20 rounded-sm flex items-center justify-center mb-8 transition-[background-color] duration-200"
-            style={{ background: hovered ? 'rgba(227,30,45,0.2)' : undefined }}>
-            <Icon size={24} className="text-brand" />
-          </div>
-
-          <span className="text-brand text-[10px] font-black uppercase tracking-[0.3em] mb-3 block">
-            {s.tag}
-          </span>
-
-          <h3 className="text-fg-primary dark:text-white font-black text-xl leading-tight tracking-tight mb-3">
-            {s.title}
-          </h3>
-
-          <div className="text-fg-muted dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-5">
-            {s.duration}
-          </div>
-
-          <p className="text-fg-secondary dark:text-gray-300 text-sm leading-relaxed">
-            {s.desc}
-          </p>
-
-          <div className="mt-8 pt-6 border-t border-black/5 dark:border-white/5">
-            <button
-              onClick={() => {
-                const el = document.querySelector('#oeffnungszeiten');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="text-brand text-xs font-bold uppercase tracking-[0.2em] hover:text-red-400 transition-colors flex items-center gap-2 group/btn"
-            >
-              <span>Termin anfragen</span>
-              <span className={`transition-transform duration-300 ${hovered ? 'translate-x-1' : ''}`}>→</span>
-            </button>
-          </div>
-        </div>
+          className="text-brand text-xs font-bold uppercase tracking-[0.2em] hover:text-brand-light transition-colors flex items-center gap-2"
+        >
+          <span>Termin anfragen</span>
+          <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+        </button>
       </div>
     </motion.div>
   );
