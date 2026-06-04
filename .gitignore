@@ -19,6 +19,7 @@ dist-ssr/
 *.mov
 *.MOV
 
-# Roh-Quellbilder (die fertigen Web-Assets liegen in /public/flotte/)
+# Roh-Quellbilder (die fertigen Web-Assets liegen in /public/)
 /Flotte/
 /Logo.png
+/Team Bilder/
