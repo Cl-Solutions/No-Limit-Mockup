@@ -350,7 +350,7 @@ export default function VehicleShowcase() {
           {/* Hotspot-Bild — sanfter Reveal + dezenter Scroll-Parallax */}
           <motion.div
             ref={imageRef}
-            className="relative rounded-sm overflow-hidden border border-black/8 dark:border-white/8"
+            className="relative -mx-5 sm:mx-0 sm:rounded-sm overflow-hidden sm:border border-black/8 dark:border-white/8"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -372,9 +372,9 @@ export default function VehicleShowcase() {
 
             {/* „Tippen!"-Hint — oben mittig im Bild, statisch. Mobile: kompakt. Desktop: gleicher Look, etwas größer. */}
             <div
-              className="absolute top-2.5 sm:top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 sm:gap-2 bg-brand text-white text-[10px] sm:text-xs font-black uppercase tracking-[0.18em] sm:tracking-[0.2em] px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full shadow-[0_4px_18px_rgba(0,0,0,0.45)] pointer-events-none whitespace-nowrap"
+              className="absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1 sm:gap-2 bg-brand text-white text-[8px] sm:text-xs font-black uppercase tracking-[0.14em] sm:tracking-[0.2em] px-2 sm:px-3.5 py-1 sm:py-2 rounded-full shadow-[0_4px_18px_rgba(0,0,0,0.45)] pointer-events-none whitespace-nowrap"
             >
-              <Hand size={11} className="sm:hidden rotate-12" />
+              <Hand size={9} className="sm:hidden rotate-12" />
               <Hand size={13} className="hidden sm:block rotate-12" />
               <span>Tippe auf einen Punkt</span>
             </div>
