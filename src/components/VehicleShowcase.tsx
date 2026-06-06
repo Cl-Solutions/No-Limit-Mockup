@@ -357,7 +357,11 @@ export default function VehicleShowcase() {
             style={{ y: imgY }}
           >
             <picture>
-              <source srcSet="/showcase.webp" type="image/webp" />
+              <source
+                type="image/webp"
+                srcSet="/showcase-800.webp 800w, /showcase.webp 1408w"
+                sizes="(max-width: 640px) 100vw, 1280px"
+              />
               <img
                 src="/showcase.png"
                 alt="Fahrschule NoLimit Fahrzeuge"
