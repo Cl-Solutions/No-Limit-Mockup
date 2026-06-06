@@ -365,7 +365,7 @@ export default function VehicleShowcase() {
               <img
                 src="/showcase.png"
                 alt="Fahrschule NoLimit Fahrzeuge"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
                 className="w-full h-auto block"
                 width={1408}

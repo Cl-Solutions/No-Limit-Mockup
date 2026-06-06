@@ -2,10 +2,11 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { MapPin, Clock, Download, DoorOpen } from 'lucide-react';
 
-// Google-Eintrag der Fahrschule (Hauptsitz Mühlacker) — zeigt Bewertungen,
-// Fotos und Öffnungszeiten. Von dort kann der Nutzer mit einem Klick die
-// Route starten.
-const GOOGLE_PROFIL_URL = 'https://share.google/nNvluDwMGCzvPHidI';
+// Direkter Google-Maps-Link zum Standort Mühlacker. Das api=1-Such-Format
+// öffnet zuverlässig die Maps-App bzw. landet direkt auf dem richtigen
+// Eintrag — statt eines Kurzlinks, der erst im Browser hängenbleibt.
+const GOOGLE_PROFIL_URL =
+  'https://www.google.com/maps/search/?api=1&query=Fahrschule+NoLimit+Bahnhofstr.+71+M%C3%BChlacker';
 
 interface Location {
   city: string;
