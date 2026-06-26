@@ -180,7 +180,7 @@ export default function Hours() {
             </p>
           </div>
           <a
-            href="http://fs-nolimit.de/Anmeldeformular.pdf"
+            href="/Anmeldeformular.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 bg-brand text-white px-5 sm:px-7 py-4 font-bold uppercase tracking-[0.15em] text-sm hover:bg-red-600 transition-[background-color,box-shadow,transform] duration-150 ease-out rounded-sm hover:shadow-[0_0_30px_rgba(227,30,45,0.4)] sm:whitespace-nowrap shrink-0 active:scale-[0.97] w-full sm:w-auto justify-center"
