@@ -124,6 +124,19 @@ export default function Fleet() {
               <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Lkw &amp; Anhänger</span>
             </div>
           </motion.div>
+
+          {/* Flotten-Panorama — füllt die zweite Grid-Reihe neben dem Pkw-Hero */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="relative col-span-2"
+          >
+            <MediaTile icon={Car} label="Die ganze Flotte" src="/flotte/flotte-wide.webp" className="h-40 lg:h-[202px] w-full" />
+            <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
+              <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Die ganze Flotte</span>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
