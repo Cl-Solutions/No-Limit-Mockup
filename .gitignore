@@ -6,6 +6,8 @@ dist/
 dist-ssr/
 
 # Local env / editor
+.env
+.env.*
 *.local
 .DS_Store
 .vscode/*
