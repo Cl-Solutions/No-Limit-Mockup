@@ -1,8 +1,61 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Bike, Truck, Car, ImageIcon } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { Truck, Car, ImageIcon } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import VideoGallery from './VideoGallery';
+
+/**
+ * Kachel, die automatisch zwischen mehreren Fotos durchwischt.
+ * Der Streifen wird als Ganzes verschoben — kein Ein-/Ausblenden,
+ * sondern eine echte seitliche Bewegung. Steht still, solange die
+ * Sektion nicht im Blick ist oder der Nutzer wenig Bewegung will.
+ */
+function SlideTile({
+  slides,
+  label,
+  className = '',
+  interval = 5000,
+  active,
+}: {
+  slides: { src: string; srcMobile?: string }[];
+  label: string;
+  className?: string;
+  interval?: number;
+  active: boolean;
+}) {
+  const [idx, setIdx] = useState(0);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    if (!active || reduce || slides.length < 2) return;
+    const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), interval);
+    return () => clearInterval(id);
+  }, [active, reduce, slides.length, interval]);
+
+  return (
+    <div className={`relative overflow-hidden rounded-sm ${className}`}>
+      <div
+        className="flex h-full w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+        style={{ transform: `translateX(-${idx * 100}%)` }}
+      >
+        {slides.map((sl, i) => (
+          <picture key={sl.src} className="block h-full w-full shrink-0">
+            {sl.srcMobile && <source media="(max-width: 1023px)" srcSet={sl.srcMobile} />}
+            <img
+              src={sl.src}
+              alt={i === 0 ? label : ''}
+              aria-hidden={i === 0 ? undefined : true}
+              // Sobald die Sektion im Blick ist, alle Folien laden — sonst steht
+              // die zweite beim ersten Wechsel noch leer da.
+              loading={active ? 'eager' : 'lazy'}
+              className="h-full w-full object-cover"
+            />
+          </picture>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 /**
  * Bildplatzhalter — sobald echte Fotos vorliegen, einfach `src` setzen
@@ -117,7 +170,15 @@ export default function Fleet() {
             transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <MediaTile icon={Bike} label="Motorräder &amp; Roller" src="/flotte/motorrad.webp" srcMobile="/flotte/motorrad-sq.webp" className="h-40 lg:h-[202px] w-full" />
+            <SlideTile
+              label="Motorräder &amp; Roller"
+              active={inView}
+              className="h-40 lg:h-[202px] w-full"
+              slides={[
+                { src: '/flotte/motorrad.webp', srcMobile: '/flotte/motorrad-sq.webp' },
+                { src: '/flotte/motorrad-2.webp', srcMobile: '/flotte/motorrad-2-sq.webp' },
+              ]}
+            />
             <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
               <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Motorräder</span>
             </div>

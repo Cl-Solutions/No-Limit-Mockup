@@ -12,8 +12,10 @@ import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 interface Clip {
   src: string;
   poster: string;
-  title: string;
-  caption: string;
+  /** Ohne Titel bleibt die Karte unbeschriftet — fuer Clips, die
+   *  sich nicht sinnvoll voneinander unterscheiden lassen. */
+  title?: string;
+  caption?: string;
 }
 
 const clips: Clip[] = [
@@ -23,18 +25,8 @@ const clips: Clip[] = [
     title: 'Am Standort',
     caption: 'Die Flotte in Mühlacker',
   },
-  {
-    src: '/videos/fahrt.mp4',
-    poster: '/videos/fahrt-poster.webp',
-    title: 'Auf der Straße',
-    caption: 'Fahrschulwagen unterwegs',
-  },
-  {
-    src: '/videos/vorbeifahrt.mp4',
-    poster: '/videos/vorbeifahrt-poster.webp',
-    title: 'Vorbeifahrt',
-    caption: 'Fahrzeuge in Bewegung',
-  },
+  { src: '/videos/fahrt.mp4', poster: '/videos/fahrt-poster.webp' },
+  { src: '/videos/vorbeifahrt.mp4', poster: '/videos/vorbeifahrt-poster.webp' },
 ];
 
 export default function VideoGallery({ inView }: { inView: boolean }) {
@@ -178,7 +170,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
               loop
               playsInline
               preload="none"
-              aria-label={`${clip.title} — ${clip.caption}`}
+              aria-label={clip.title ? `${clip.title} — ${clip.caption}` : `Clip ${i + 1} aus dem Fuhrpark`}
               onClick={() => (i === activeIdx ? playActive() : scrollTo(i))}
               className="absolute inset-0 w-full h-full object-cover cursor-pointer"
             />
@@ -189,7 +181,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
               <button
                 type="button"
                 onClick={playActive}
-                aria-label={`${clip.title} abspielen`}
+                aria-label={clip.title ? `${clip.title} abspielen` : `Clip ${i + 1} abspielen`}
                 className="absolute inset-0 flex items-center justify-center bg-black/25 group"
               >
                 <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-white shadow-[0_4px_20px_rgba(0,0,0,0.5)] transition-transform duration-150 group-hover:scale-105 group-active:scale-95">
@@ -198,10 +190,12 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
               </button>
             )}
 
-            <div className="absolute inset-x-0 bottom-0 p-4 pointer-events-none">
-              <h4 className="text-white font-black text-sm tracking-tight">{clip.title}</h4>
-              <p className="text-white/70 text-xs mt-0.5">{clip.caption}</p>
-            </div>
+            {clip.title && (
+              <div className="absolute inset-x-0 bottom-0 p-4 pointer-events-none">
+                <h4 className="text-white font-black text-sm tracking-tight">{clip.title}</h4>
+                {clip.caption && <p className="text-white/70 text-xs mt-0.5">{clip.caption}</p>}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -211,7 +205,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
           <button
             key={clip.src}
             role="tab"
-            aria-label={`Zu ${clip.title} springen`}
+            aria-label={clip.title ? `Zu ${clip.title} springen` : `Zu Clip ${i + 1} springen`}
             aria-selected={i === activeIdx}
             onClick={() => scrollTo(i)}
             className={`h-2 rounded-full transition-all duration-200 ${
