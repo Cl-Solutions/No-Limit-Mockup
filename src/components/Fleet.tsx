@@ -1,7 +1,61 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Bike, Truck, Car, ImageIcon } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { Truck, Car, ImageIcon } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import VideoGallery from './VideoGallery';
+
+/**
+ * Kachel, die automatisch zwischen mehreren Fotos durchwischt.
+ * Der Streifen wird als Ganzes verschoben — kein Ein-/Ausblenden,
+ * sondern eine echte seitliche Bewegung. Steht still, solange die
+ * Sektion nicht im Blick ist oder der Nutzer wenig Bewegung will.
+ */
+function SlideTile({
+  slides,
+  label,
+  className = '',
+  interval = 5000,
+  active,
+}: {
+  slides: { src: string; srcMobile?: string }[];
+  label: string;
+  className?: string;
+  interval?: number;
+  active: boolean;
+}) {
+  const [idx, setIdx] = useState(0);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    if (!active || reduce || slides.length < 2) return;
+    const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), interval);
+    return () => clearInterval(id);
+  }, [active, reduce, slides.length, interval]);
+
+  return (
+    <div className={`relative overflow-hidden rounded-sm ${className}`}>
+      <div
+        className="flex h-full w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+        style={{ transform: `translateX(-${idx * 100}%)` }}
+      >
+        {slides.map((sl, i) => (
+          <picture key={sl.src} className="block h-full w-full shrink-0">
+            {sl.srcMobile && <source media="(max-width: 1023px)" srcSet={sl.srcMobile} />}
+            <img
+              src={sl.src}
+              alt={i === 0 ? label : ''}
+              aria-hidden={i === 0 ? undefined : true}
+              // Sobald die Sektion im Blick ist, alle Folien laden — sonst steht
+              // die zweite beim ersten Wechsel noch leer da.
+              loading={active ? 'eager' : 'lazy'}
+              className="h-full w-full object-cover"
+            />
+          </picture>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 /**
  * Bildplatzhalter — sobald echte Fotos vorliegen, einfach `src` setzen
@@ -12,6 +66,7 @@ function MediaTile({
   icon: Icon,
   label,
   src,
+  srcMobile,
   className = '',
   align = 'center',
   hideTag = false,
@@ -19,6 +74,9 @@ function MediaTile({
   icon: LucideIcon;
   label: string;
   src?: string;
+  /** Quadratischer Zuschnitt: unterhalb von lg sind die kleinen Kacheln 1:1,
+   *  der 3:2-Ausschnitt wuerde dort seitlich beschnitten. */
+  srcMobile?: string;
   className?: string;
   align?: 'center' | 'top';
   hideTag?: boolean;
@@ -26,7 +84,10 @@ function MediaTile({
   if (src) {
     return (
       <div className={`relative overflow-hidden rounded-sm ${className}`}>
-        <img src={src} alt={label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        <picture>
+          {srcMobile && <source media="(max-width: 1023px)" srcSet={srcMobile} />}
+          <img src={src} alt={label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        </picture>
       </div>
     );
   }
@@ -53,7 +114,7 @@ export default function Fleet() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="flotte" className="py-16 md:py-32 bg-ink relative overflow-hidden">
+    <div id="flotte" className="relative scroll-mt-24 mt-20 md:mt-28 pt-14 md:pt-20 border-t border-white/10">
       <div className="absolute right-0 top-0 w-[40rem] h-[40rem] rounded-full bg-brand/5 blur-3xl pointer-events-none -translate-y-1/3 translate-x-1/4" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
@@ -76,6 +137,9 @@ export default function Fleet() {
             vom Automatik-Pkw über Motorräder bis zum schweren Lkw.
           </p>
         </motion.div>
+
+        {/* Clips zuerst — der Standort-Clip ist das Erste in der Sektion */}
+        <VideoGallery inView={inView} />
 
         {/* Bento-Grid: 1 großes Flotten-Hero + 3 Detail-Kacheln */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -106,7 +170,15 @@ export default function Fleet() {
             transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <MediaTile icon={Bike} label="Motorräder &amp; Roller" src="/flotte/motorrad.webp" className="h-40 lg:h-[202px] w-full" />
+            <SlideTile
+              label="Motorräder &amp; Roller"
+              active={inView}
+              className="h-40 lg:h-[202px] w-full"
+              slides={[
+                { src: '/flotte/motorrad.webp', srcMobile: '/flotte/motorrad-sq.webp' },
+                { src: '/flotte/motorrad-2.webp', srcMobile: '/flotte/motorrad-2-sq.webp' },
+              ]}
+            />
             <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
               <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Motorräder</span>
             </div>
@@ -119,7 +191,7 @@ export default function Fleet() {
             transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <MediaTile icon={Truck} label="Lkw &amp; Anhänger" src="/flotte/lkw.webp" className="h-40 lg:h-[202px] w-full" />
+            <MediaTile icon={Truck} label="Lkw &amp; Anhänger" src="/flotte/lkw.webp" srcMobile="/flotte/lkw-sq.webp" className="h-40 lg:h-[202px] w-full" />
             <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
               <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Lkw &amp; Anhänger</span>
             </div>
@@ -138,7 +210,8 @@ export default function Fleet() {
             </div>
           </motion.div>
         </div>
+
       </div>
-    </section>
+    </div>
   );
 }
