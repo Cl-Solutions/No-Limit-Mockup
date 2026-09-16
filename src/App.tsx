@@ -2,7 +2,6 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Reviews from './components/Reviews';
 import VehicleShowcase from './components/VehicleShowcase';
-import Fleet from './components/Fleet';
 import About from './components/About';
 import Process from './components/Process';
 import Seminars from './components/Seminars';
@@ -26,7 +25,6 @@ export default function App() {
 
         {/* „Was bekomme ich?" */}
         <VehicleShowcase />
-        <Fleet />
 
         {/* „Wer macht das?" — Story + Stats + Team in einer Sektion */}
         <About />

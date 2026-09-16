@@ -61,7 +61,7 @@ export default function Fleet() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="flotte" className="py-16 md:py-32 bg-ink relative overflow-hidden">
+    <div id="flotte" className="relative scroll-mt-24 mt-20 md:mt-28 pt-14 md:pt-20 border-t border-white/10">
       <div className="absolute right-0 top-0 w-[40rem] h-[40rem] rounded-full bg-brand/5 blur-3xl pointer-events-none -translate-y-1/3 translate-x-1/4" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8" ref={ref}>
@@ -150,6 +150,6 @@ export default function Fleet() {
         {/* Video-Galerie — gehört inhaltlich zur Flotte, daher dieselbe Sektion */}
         <VideoGallery inView={inView} />
       </div>
-    </section>
+    </div>
   );
 }
