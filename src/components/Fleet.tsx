@@ -85,6 +85,9 @@ export default function Fleet() {
           </p>
         </motion.div>
 
+        {/* Clips zuerst — der Standort-Clip ist das Erste in der Sektion */}
+        <VideoGallery inView={inView} />
+
         {/* Bento-Grid: 1 großes Flotten-Hero + 3 Detail-Kacheln */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {/* Großer Flotten-Hero (Auto-Bild später hier) */}
@@ -147,8 +150,6 @@ export default function Fleet() {
           </motion.div>
         </div>
 
-        {/* Video-Galerie — gehört inhaltlich zur Flotte, daher dieselbe Sektion */}
-        <VideoGallery inView={inView} />
       </div>
     </div>
   );

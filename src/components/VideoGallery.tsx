@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { Volume2, VolumeX, Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 
 /* ─────────────────────────────────────────────────────────────
-   Video-Galerie im Coverflow: der mittlere Clip steht vorne und
-   spielt, die Nachbarn stehen kleiner und gedimmt daneben.
-   Wird innerhalb der Fahrzeug-Sektion gerendert, nicht als
-   eigene Sektion.
+   Clip-Galerie im Coverflow: der mittlere Clip steht vorne und
+   läuft, die Nachbarn stehen kleiner und gedimmt daneben.
+   Teil der Fahrzeug-Sektion, ohne eigene Überschrift.
+   Die Dateien haben keine Tonspur.
    ───────────────────────────────────────────────────────────── */
 
 interface Clip {
@@ -18,22 +18,22 @@ interface Clip {
 
 const clips: Clip[] = [
   {
+    src: '/videos/flotte.mp4',
+    poster: '/videos/flotte-poster.webp',
+    title: 'Am Standort',
+    caption: 'Die Flotte in Mühlacker',
+  },
+  {
     src: '/videos/fahrt.mp4',
     poster: '/videos/fahrt-poster.webp',
     title: 'Auf der Straße',
-    caption: 'Unterwegs mit dem Fahrschulwagen',
+    caption: 'Fahrschulwagen unterwegs',
   },
   {
     src: '/videos/vorbeifahrt.mp4',
     poster: '/videos/vorbeifahrt-poster.webp',
     title: 'Vorbeifahrt',
     caption: 'Fahrzeuge in Bewegung',
-  },
-  {
-    src: '/videos/flotte.mp4',
-    poster: '/videos/flotte-poster.webp',
-    title: 'Am Standort',
-    caption: 'Die Flotte in Mühlacker',
   },
 ];
 
@@ -42,16 +42,15 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [muted, setMuted] = useState(true);
   const [blocked, setBlocked] = useState(false);
   const reduce = useReducedMotion();
 
   // Abstand zur Track-Mitte bestimmt Größe und Deckkraft jeder Karte.
+  // Gemessen per Bounding-Rect: offsetLeft bezieht sich auf den nächsten
+  // positionierten Vorfahren, nicht auf den Track selbst.
   const update = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
-    // Per Bounding-Rect statt offsetLeft: offsetLeft bezieht sich auf den
-    // naechsten positionierten Vorfahren, nicht auf den Track selbst.
     const trackRect = track.getBoundingClientRect();
     const center = trackRect.left + trackRect.width / 2;
 
@@ -61,8 +60,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
     cardRefs.current.forEach((el, i) => {
       if (!el) return;
       const rect = el.getBoundingClientRect();
-      const cardCenter = rect.left + rect.width / 2;
-      const px = Math.abs(cardCenter - center);
+      const px = Math.abs(rect.left + rect.width / 2 - center);
       if (px < nearestDist) {
         nearestDist = px;
         nearest = i;
@@ -94,7 +92,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
     };
   }, [update]);
 
-  // Nur der vorderste Clip läuft — spart Datenvolumen und hält den Ton eindeutig.
+  // Nur der vorderste Clip läuft — die anderen bleiben stehen.
   useEffect(() => {
     if (!inView || reduce) return;
     videoRefs.current.forEach((video, i) => {
@@ -123,39 +121,24 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
     video.play().then(() => setBlocked(false)).catch(() => undefined);
   };
 
-  const toggleSound = () => {
-    const next = !muted;
-    setMuted(next);
-    videoRefs.current.forEach((v) => {
-      if (v) v.muted = next;
-    });
-    if (!next) playActive();
-  };
-
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight') { e.preventDefault(); scrollTo(activeIdx + 1); }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollTo(activeIdx - 1); }
   };
 
   return (
-    <div className="mt-14 md:mt-20">
-      <div className="flex items-end justify-between gap-4 mb-6">
-        <div>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-8 bg-brand" />
-            <span className="text-brand text-xs font-bold uppercase tracking-[0.3em]">Bewegtbild</span>
-          </div>
-          <h3 className="text-white font-black text-xl md:text-2xl tracking-tight">
-            Ein Blick in den Alltag
-          </h3>
-        </div>
-
+    <div className="mb-10 md:mb-14">
+      {/* Steuerzeile — bewusst ohne eigene Überschrift, die Sektion hat schon eine */}
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <span className="text-white/55 text-xs uppercase tracking-[0.2em]" aria-hidden="true">
+          ← Wischen für mehr
+        </span>
         <div className="hidden sm:flex gap-2 shrink-0">
           <button
             type="button"
             onClick={() => scrollTo(activeIdx - 1)}
             disabled={activeIdx === 0}
-            aria-label="Vorheriges Video"
+            aria-label="Vorheriger Clip"
             className="w-10 h-10 flex items-center justify-center rounded-sm border border-white/15 text-white/65 hover:border-brand hover:text-brand disabled:opacity-30 disabled:hover:border-white/15 disabled:hover:text-white/65 transition-colors"
           >
             <ChevronLeft size={18} />
@@ -164,7 +147,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
             type="button"
             onClick={() => scrollTo(activeIdx + 1)}
             disabled={activeIdx === clips.length - 1}
-            aria-label="Nächstes Video"
+            aria-label="Nächster Clip"
             className="w-10 h-10 flex items-center justify-center rounded-sm border border-white/15 text-white/65 hover:border-brand hover:text-brand disabled:opacity-30 disabled:hover:border-white/15 disabled:hover:text-white/65 transition-colors"
           >
             <ChevronRight size={18} />
@@ -176,7 +159,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
         ref={trackRef}
         role="region"
         aria-roledescription="Karussell"
-        aria-label="Videos — Pfeiltasten zum Wechseln"
+        aria-label="Clips aus dem Fuhrpark — Pfeiltasten zum Wechseln"
         tabIndex={0}
         onKeyDown={onKeyDown}
         className="no-scrollbar flex items-center gap-4 overflow-x-auto snap-x snap-mandatory -mx-5 px-[21vw] sm:mx-0 sm:px-[calc(50%-7.5rem)] py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-ink rounded-sm"
@@ -191,7 +174,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
               ref={(el) => { videoRefs.current[i] = el; }}
               src={clip.src}
               poster={clip.poster}
-              muted={muted}
+              muted
               loop
               playsInline
               preload="none"
@@ -215,18 +198,6 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
               </button>
             )}
 
-            {i === activeIdx && (
-              <button
-                type="button"
-                onClick={toggleSound}
-                aria-label={muted ? 'Ton einschalten' : 'Ton ausschalten'}
-                aria-pressed={!muted}
-                className="absolute top-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm hover:bg-black/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand transition-colors"
-              >
-                {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-              </button>
-            )}
-
             <div className="absolute inset-x-0 bottom-0 p-4 pointer-events-none">
               <h4 className="text-white font-black text-sm tracking-tight">{clip.title}</h4>
               <p className="text-white/70 text-xs mt-0.5">{clip.caption}</p>
@@ -235,7 +206,7 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
         ))}
       </div>
 
-      <div className="flex justify-center gap-2 mt-4" role="tablist" aria-label="Video wählen">
+      <div className="flex justify-center gap-2 mt-4" role="tablist" aria-label="Clip wählen">
         {clips.map((clip, i) => (
           <button
             key={clip.src}
