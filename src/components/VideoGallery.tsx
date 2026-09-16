@@ -24,6 +24,12 @@ const clips: Clip[] = [
     caption: 'Unterwegs mit dem Fahrschulwagen',
   },
   {
+    src: '/videos/vorbeifahrt.mp4',
+    poster: '/videos/vorbeifahrt-poster.webp',
+    title: 'Vorbeifahrt',
+    caption: 'Fahrzeuge in Bewegung',
+  },
+  {
     src: '/videos/flotte.mp4',
     poster: '/videos/flotte-poster.webp',
     title: 'Am Standort',
@@ -44,20 +50,24 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
   const update = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
-    const center = track.scrollLeft + track.clientWidth / 2;
+    // Per Bounding-Rect statt offsetLeft: offsetLeft bezieht sich auf den
+    // naechsten positionierten Vorfahren, nicht auf den Track selbst.
+    const trackRect = track.getBoundingClientRect();
+    const center = trackRect.left + trackRect.width / 2;
 
     let nearest = 0;
     let nearestDist = Infinity;
 
     cardRefs.current.forEach((el, i) => {
       if (!el) return;
-      const cardCenter = el.offsetLeft + el.offsetWidth / 2;
+      const rect = el.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
       const px = Math.abs(cardCenter - center);
       if (px < nearestDist) {
         nearestDist = px;
         nearest = i;
       }
-      const t = Math.min(px / el.offsetWidth, 1);
+      const t = Math.min(px / rect.width, 1);
       el.style.transform = reduce ? 'none' : `scale(${(1 - t * 0.16).toFixed(3)})`;
       el.style.opacity = `${(1 - t * 0.5).toFixed(3)}`;
     });
@@ -101,10 +111,10 @@ export default function VideoGallery({ inView }: { inView: boolean }) {
     const el = cardRefs.current[Math.min(Math.max(idx, 0), clips.length - 1)];
     const track = trackRef.current;
     if (!el || !track) return;
-    track.scrollTo({
-      left: el.offsetLeft + el.offsetWidth / 2 - track.clientWidth / 2,
-      behavior: 'smooth',
-    });
+    const trackRect = track.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
+    const delta = rect.left + rect.width / 2 - (trackRect.left + trackRect.width / 2);
+    track.scrollTo({ left: track.scrollLeft + delta, behavior: 'smooth' });
   };
 
   const playActive = () => {
