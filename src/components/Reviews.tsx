@@ -67,25 +67,40 @@ export default function Reviews() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
+  // Letzter tatsächlich anfahrbarer Index. Passen z. B. drei von vier Karten
+  // gleichzeitig ins Sichtfeld, endet der Scrollbereich bei 1 — für die übrigen
+  // Karten darf es keine Punkte geben, die ins Leere führen.
+  const [lastIdx, setLastIdx] = useState(0);
 
   // Tracking welche Karte gerade „im Fokus" ist (für Pagination-Dots + aria-current)
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
     let rafId = 0;
+
+    const measure = () => {
+      const card = track.querySelector<HTMLElement>('[data-card]');
+      if (!card) return;
+      const stride = card.offsetWidth + 16;
+      if (stride <= 0) return;
+      const maxIdx = Math.max(0, Math.round((track.scrollWidth - track.clientWidth) / stride));
+      setLastIdx(maxIdx);
+      setActiveIdx(Math.min(Math.max(Math.round(track.scrollLeft / stride), 0), maxIdx));
+    };
+
     const onScroll = () => {
       cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        const card = track.querySelector<HTMLElement>('[data-card]');
-        if (!card) return;
-        const stride = card.offsetWidth + 16;
-        const idx = Math.round(track.scrollLeft / stride);
-        setActiveIdx(Math.min(Math.max(idx, 0), reviews.length - 1));
-      });
+      rafId = requestAnimationFrame(measure);
     };
+
+    measure();
     track.addEventListener('scroll', onScroll, { passive: true });
+    // Kartenbreite und Sichtfeld ändern sich beim Resize — dann neu messen.
+    const ro = new ResizeObserver(measure);
+    ro.observe(track);
     return () => {
       track.removeEventListener('scroll', onScroll);
+      ro.disconnect();
       cancelAnimationFrame(rafId);
     };
   }, []);
@@ -103,14 +118,14 @@ export default function Reviews() {
     if (!track) return;
     const card = track.querySelector<HTMLElement>('[data-card]');
     const stride = card ? card.offsetWidth + 16 : 340;
-    track.scrollTo({ left: idx * stride, behavior: 'smooth' });
+    track.scrollTo({ left: Math.min(Math.max(idx, 0), lastIdx) * stride, behavior: 'smooth' });
   };
 
   const handleTrackKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight') { e.preventDefault(); scrollByCard(1); }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollByCard(-1); }
     else if (e.key === 'Home') { e.preventDefault(); scrollToCard(0); }
-    else if (e.key === 'End') { e.preventDefault(); scrollToCard(reviews.length - 1); }
+    else if (e.key === 'End') { e.preventDefault(); scrollToCard(lastIdx); }
   };
 
   return (
@@ -227,9 +242,9 @@ export default function Reviews() {
           ))}
         </motion.div>
 
-        {/* Pagination-Dots */}
-        <div className="flex justify-center gap-2 mt-5" role="tablist" aria-label="Bewertung wählen">
-          {reviews.map((_, i) => (
+        {/* Pagination-Dots — nur so viele, wie auch anfahrbar sind */}
+        <div className={`flex justify-center gap-2 mt-5 ${lastIdx === 0 ? 'hidden' : ''}`} role="tablist" aria-label="Bewertung wählen">
+          {Array.from({ length: lastIdx + 1 }, (_, i) => (
             <button
               key={i}
               role="tab"

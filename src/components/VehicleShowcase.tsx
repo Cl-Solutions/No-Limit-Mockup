@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useScroll, useTransform, useReducedMotion, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, ChevronLeft, BookOpen, Car, Clock, Users, Award, Hand } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, BookOpen, Car, Clock, Users, Award } from 'lucide-react';
 import { useModalA11y } from '../hooks/useModalA11y';
 import { categories, getClass, type CategoryInfo, type LicenseClass } from '../data/licenseClasses';
 
@@ -303,6 +303,58 @@ export default function VehicleShowcase() {
   const [activeCat, setActiveCat] = useState<CategoryInfo | null>(null);
   const reduce = useReducedMotion();
 
+  // Klassen-Karussell: wie viele Positionen anfahrbar sind, haengt davon ab,
+  // wie viele Slides gleichzeitig ins Sichtfeld passen.
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [lastIdx, setLastIdx] = useState(0);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    let rafId = 0;
+
+    const measure = () => {
+      const slide = track.querySelector<HTMLElement>('[data-slide]');
+      if (!slide) return;
+      const stride = slide.offsetWidth + 16;
+      if (stride <= 0) return;
+      const maxIdx = Math.max(0, Math.round((track.scrollWidth - track.clientWidth) / stride));
+      setLastIdx(maxIdx);
+      setActiveIdx(Math.min(Math.max(Math.round(track.scrollLeft / stride), 0), maxIdx));
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(measure);
+    };
+
+    measure();
+    track.addEventListener('scroll', onScroll, { passive: true });
+    const ro = new ResizeObserver(measure);
+    ro.observe(track);
+    return () => {
+      track.removeEventListener('scroll', onScroll);
+      ro.disconnect();
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  const scrollToSlide = (idx: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const slide = track.querySelector<HTMLElement>('[data-slide]');
+    const stride = slide ? slide.offsetWidth + 16 : 320;
+    track.scrollTo({ left: Math.min(Math.max(idx, 0), lastIdx) * stride, behavior: 'smooth' });
+  };
+
+  const handleTrackKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); scrollToSlide(activeIdx + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToSlide(activeIdx - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); scrollToSlide(0); }
+    else if (e.key === 'End') { e.preventDefault(); scrollToSlide(lastIdx); }
+  };
+
   // Dezenter Scroll-Parallax aufs Hotspot-Bild — Hauch von Bewegung beim Scroll
   const { scrollYProgress: imgProgress } = useScroll({
     target: imageRef,
@@ -347,78 +399,88 @@ export default function VehicleShowcase() {
             </p>
           </motion.div>
 
-          {/* Hotspot-Bild — sanfter Reveal + dezenter Scroll-Parallax */}
+          {/* Klassen-Karussell — ein echtes Foto je Fahrzeugklasse, wischbar */}
           <motion.div
             ref={imageRef}
-            className="relative -mx-5 sm:mx-0 sm:rounded-sm overflow-hidden sm:border border-black/8 dark:border-white/8"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             style={{ y: imgY }}
           >
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="/showcase-800.webp 800w, /showcase.webp 1408w"
-                sizes="(max-width: 640px) 100vw, 1280px"
-              />
-              <img
-                src="/showcase.png"
-                alt="Fahrschule NoLimit Fahrzeuge"
-                loading="eager"
-                decoding="async"
-                className="w-full h-auto block"
-                width={1408}
-                height={628}
-                draggable={false}
-              />
-            </picture>
-
-            {/* „Tippen!"-Hint — oben mittig im Bild, statisch. Mobile: kompakt. Desktop: gleicher Look, etwas größer. */}
             <div
-              className="absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1 sm:gap-2 bg-brand text-white text-[8px] sm:text-xs font-black uppercase tracking-[0.14em] sm:tracking-[0.2em] px-2 sm:px-3.5 py-1 sm:py-2 rounded-full shadow-[0_4px_18px_rgba(0,0,0,0.45)] pointer-events-none whitespace-nowrap"
+              ref={trackRef}
+              role="region"
+              aria-roledescription="Karussell"
+              aria-label="Fahrzeugklassen — Pfeiltasten zum Wechseln"
+              tabIndex={0}
+              onKeyDown={handleTrackKeyDown}
+              className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 sm:mx-0 sm:px-0 pb-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-ink rounded-sm"
             >
-              <Hand size={9} className="sm:hidden rotate-12" />
-              <Hand size={13} className="hidden sm:block rotate-12" />
-              <span>Tippe auf einen Punkt</span>
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  data-slide
+                  onClick={() => setActiveCat(cat)}
+                  aria-label={`Führerscheinklassen für ${cat.label} anzeigen`}
+                  className="group relative snap-start shrink-0 w-[86%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(40%-0.6rem)] aspect-[16/9] overflow-hidden rounded-sm border border-black/8 dark:border-white/10 text-left"
+                >
+                  <img
+                    src={cat.image}
+                    alt={`${cat.label} der Fahrschule NoLimit`}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    draggable={false}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+                  {cat.badge && (
+                    <span className="absolute top-3 left-3 bg-brand text-white text-[10px] font-black uppercase tracking-[0.14em] px-2.5 py-1 rounded-full">
+                      {cat.badge}
+                    </span>
+                  )}
+
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex items-end justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{cat.icon}</span>
+                        <h3 className="text-white font-black text-lg sm:text-xl tracking-tight">{cat.label}</h3>
+                      </div>
+                      <p className="text-white/70 text-xs mt-1">
+                        {cat.classIds.length} {cat.classIds.length === 1 ? 'Klasse' : 'Klassen'}
+                      </p>
+                    </div>
+                    <span className="flex items-center gap-1 text-white text-xs font-bold uppercase tracking-wider shrink-0">
+                      Details
+                      <ChevronRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                    </span>
+                  </div>
+                </button>
+              ))}
             </div>
 
-            {categories.map((cat, idx) => (
-              <motion.button
-                key={cat.id}
-                onClick={() => setActiveCat(cat)}
-                className="absolute group"
-                style={{
-                  left: `${cat.hotspot.x}%`,
-                  top: `${cat.hotspot.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  cursor: 'pointer',
-                }}
-                aria-label={`Führerscheinklassen für ${cat.label} anzeigen`}
-                animate={{ scale: [1, 1.06, 1] }}
-                transition={{
-                  duration: 2.4,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: idx * 0.22,
-                }}
-              >
-                {/* Pulsring — dezent */}
-                <span
-                  className="absolute inset-0 rounded-full bg-brand/35 animate-ping"
-                  style={{ animationDelay: `${idx * 300}ms`, animationDuration: '2.4s' }}
-                />
-
-                {/* Sichtbarer Hotspot — nur Punkt, keine Emoji */}
-                <span className="hotspot-inner relative flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-brand ring-2 ring-white shadow-[0_0_12px_rgba(227,30,45,0.8),0_2px_6px_rgba(0,0,0,0.4)] group-hover:scale-110 group-active:scale-95 transition-[transform] duration-150 ease-out" />
-
-                {/* Label — auf Desktop sichtbar unter dem Punkt */}
-                <span className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap bg-white text-fg-primary text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-lg pointer-events-none">
-                  {cat.label}
-                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-white" />
-                </span>
-              </motion.button>
-            ))}
+            {/* Wisch-Hinweis + Punkte */}
+            <div className="flex items-center justify-between gap-3 mt-3">
+              <span className="text-fg-subtle dark:text-white/55 text-xs uppercase tracking-[0.2em]" aria-hidden="true">
+                ← Wischen für mehr
+              </span>
+              <div className={`flex gap-2 ${lastIdx === 0 ? 'hidden' : ''}`} role="tablist" aria-label="Fahrzeugklasse wählen">
+                {Array.from({ length: lastIdx + 1 }, (_, i) => (
+                  <button
+                    key={i}
+                    role="tab"
+                    aria-label={`Zu Position ${i + 1} springen`}
+                    aria-selected={i === activeIdx}
+                    onClick={() => scrollToSlide(i)}
+                    className={`h-2 rounded-full transition-all duration-200 ${
+                      i === activeIdx
+                        ? 'w-6 bg-brand'
+                        : 'w-2 bg-black/15 dark:bg-white/20 hover:bg-black/30 dark:hover:bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           {/* Kategorie-Buttons (alternative zum Bild-Klick) */}

@@ -296,17 +296,18 @@ export const licenseClasses: LicenseClass[] = [
 
 // ─────────── Kategorien-Metadaten für den Showcase ───────────
 export interface CategoryInfo {
-  id: 'auto' | 'motorrad' | 'roller' | 'lkw';
+  id: 'auto' | 'zweirad' | 'lkw';
   label: string;
   icon: string;
   category: Category;
   classIds: string[];          // welche Klassen gehören in diese Kategorie-Ansicht
   intro: string;
   badge?: string;
-  hotspot: { x: number; y: number };  // Position auf dem Showcase-Bild (%)
+  image: string;               // echtes Foto dieser Klasse (16:9)
 }
 
-// Hotspot-Koordinaten: % auf /public/showcase.png (1408 × 628, ohne Watermark).
+// Je Kategorie ein echtes Foto aus dem Fuhrpark — ersetzt das frühere
+// KI-Sammelbild mit Hotspots.
 export const categories: CategoryInfo[] = [
   {
     id: 'auto',
@@ -316,25 +317,16 @@ export const categories: CategoryInfo[] = [
     classIds: ['b', 'b-auto', 'be'],
     badge: 'Am beliebtesten',
     intro: 'Vom klassischen B-Schein bis zum großen Anhänger — alles, was du auf der Straße brauchst.',
-    hotspot: { x: 13.5, y: 78 },
+    image: '/klassen/auto.webp',
   },
   {
-    id: 'motorrad',
-    label: 'Motorrad',
+    id: 'zweirad',
+    label: 'Motorrad & Roller',
     icon: '🏍️',
     category: 'Zweirad',
-    classIds: ['a2', 'a'],
-    intro: 'Das echte Motorradfahren — von A2 (mittlere Klasse) bis A (alle Maschinen).',
-    hotspot: { x: 35, y: 70 },
-  },
-  {
-    id: 'roller',
-    label: 'Roller / Moped',
-    icon: '🛵',
-    category: 'Zweirad',
-    classIds: ['mofa', 'am', 'a1'],
-    intro: 'Klein, leicht, mobil — vom Mofa über Roller bis zum 125er.',
-    hotspot: { x: 62.5, y: 78 },
+    classIds: ['mofa', 'am', 'a1', 'a2', 'a'],
+    intro: 'Vom Mofa über Roller und 125er bis zur offenen Maschine — alle Zweiradklassen auf einen Blick.',
+    image: '/klassen/motorrad.webp',
   },
   {
     id: 'lkw',
@@ -343,7 +335,7 @@ export const categories: CategoryInfo[] = [
     category: 'Lkw',
     classIds: ['c1', 'c1e', 'c', 'ce'],
     intro: 'Von 3,5 t bis Sattelzug — alle Lkw-Klassen für Beruf und Privat.',
-    hotspot: { x: 82, y: 50 },
+    image: '/klassen/lkw.webp',
   },
 ];
 

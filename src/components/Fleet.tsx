@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Bike, Truck, Car, ImageIcon } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import VideoGallery from './VideoGallery';
 
 /**
  * Bildplatzhalter — sobald echte Fotos vorliegen, einfach `src` setzen
@@ -12,6 +13,7 @@ function MediaTile({
   icon: Icon,
   label,
   src,
+  srcMobile,
   className = '',
   align = 'center',
   hideTag = false,
@@ -19,6 +21,9 @@ function MediaTile({
   icon: LucideIcon;
   label: string;
   src?: string;
+  /** Quadratischer Zuschnitt: unterhalb von lg sind die kleinen Kacheln 1:1,
+   *  der 3:2-Ausschnitt wuerde dort seitlich beschnitten. */
+  srcMobile?: string;
   className?: string;
   align?: 'center' | 'top';
   hideTag?: boolean;
@@ -26,7 +31,10 @@ function MediaTile({
   if (src) {
     return (
       <div className={`relative overflow-hidden rounded-sm ${className}`}>
-        <img src={src} alt={label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        <picture>
+          {srcMobile && <source media="(max-width: 1023px)" srcSet={srcMobile} />}
+          <img src={src} alt={label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        </picture>
       </div>
     );
   }
@@ -106,7 +114,7 @@ export default function Fleet() {
             transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <MediaTile icon={Bike} label="Motorräder &amp; Roller" src="/flotte/motorrad.webp" className="h-40 lg:h-[202px] w-full" />
+            <MediaTile icon={Bike} label="Motorräder &amp; Roller" src="/flotte/motorrad.webp" srcMobile="/flotte/motorrad-sq.webp" className="h-40 lg:h-[202px] w-full" />
             <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
               <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Motorräder</span>
             </div>
@@ -119,7 +127,7 @@ export default function Fleet() {
             transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <MediaTile icon={Truck} label="Lkw &amp; Anhänger" src="/flotte/lkw.webp" className="h-40 lg:h-[202px] w-full" />
+            <MediaTile icon={Truck} label="Lkw &amp; Anhänger" src="/flotte/lkw.webp" srcMobile="/flotte/lkw-sq.webp" className="h-40 lg:h-[202px] w-full" />
             <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black/85 to-transparent pointer-events-none">
               <span className="text-white text-xs sm:text-sm font-black uppercase tracking-wider">Lkw &amp; Anhänger</span>
             </div>
@@ -138,6 +146,9 @@ export default function Fleet() {
             </div>
           </motion.div>
         </div>
+
+        {/* Video-Galerie — gehört inhaltlich zur Flotte, daher dieselbe Sektion */}
+        <VideoGallery inView={inView} />
       </div>
     </section>
   );
